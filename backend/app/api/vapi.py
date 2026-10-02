@@ -91,6 +91,32 @@ async def handle_vapi_webhook(
                     contact_permission=args.get("contact_permission", True),
                     notes=args.get("notes", ""),
                 )
+            elif func_name == "update_qualification":
+                # Persist qualification fields extracted by Vapi's LLM into backend session
+                from app.api.agent import _sessions
+                from app.agents.base import VoiceAgent
+                session_id = args.get("session_id", call_id)
+                if session_id not in _sessions:
+                    _sessions[session_id] = VoiceAgent(call_id=session_id)
+                agent = _sessions[session_id]
+                updated_fields = {}
+                for field in ["business_type", "years_in_business", "monthly_revenue",
+                               "requested_amount", "loan_purpose"]:
+                    if args.get(field) is not None:
+                        f_obj = agent.qualification_manager.update_field(
+                            field, args[field], turn_index=agent.turn_index
+                        )
+                        updated_fields[field] = f_obj.value
+                tool_res = {
+                    "status": "updated",
+                    "session_id": session_id,
+                    "updated_fields": updated_fields,
+                    "qualification_state": agent.qualification_manager.state.to_dict(),
+                }
+                logger.info(
+                    "Vapi update_qualification",
+                    extra={"extra_data": {"call_id": call_id, "updated": updated_fields}},
+                )
             elif func_name == "escalate_to_human":
                 reason = args.get("reason", "Caller requested human assistance")
                 tool_res = escalate_to_human_tool(call_id=call_id, reason=reason)

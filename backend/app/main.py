@@ -54,6 +54,7 @@ from app.api.vapi import router as vapi_router
 from app.api.realtime import router as realtime_router
 from app.api.gemini import router as gemini_router
 from app.api.providers import router as providers_router
+from app.api.agent import router as agent_router
 
 app.include_router(kb_router, prefix="/api/v1/kb", tags=["Knowledge Base"])
 app.include_router(kb_router, prefix="/kb", tags=["Knowledge Base (Vapi)"])
@@ -64,6 +65,7 @@ app.include_router(gemini_router, prefix="/api/v1/gemini", tags=["Gemini Live Fa
 app.include_router(providers_router, prefix="/api/v1/providers", tags=["Provider Strategy"])
 app.include_router(realtime_router, prefix="/api/v1/realtime", tags=["Realtime Call Intelligence"])
 app.include_router(realtime_router, tags=["Realtime WebSocket"])
+app.include_router(agent_router, prefix="/api/v1/agent", tags=["Voice Agent"])
 
 from fastapi.staticfiles import StaticFiles
 from pathlib import Path

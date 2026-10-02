@@ -54,14 +54,43 @@ def get_vapi_tools() -> list[VapiFunctionTool]:
         VapiFunctionTool(
             function={
                 "name": "create_lead",
-                "description": "Creates a commercial loan lead record in the backend for underwriter follow-up.",
+                "description": "Creates a commercial loan lead record in the backend for underwriter follow-up. Call this when the applicant is eligible or consents to follow-up.",
                 "parameters": {
                     "type": "object",
                     "properties": {
-                        "contact_permission": {"type": "boolean", "description": "Caller agreed to be contacted."},
+                        "contact_permission": {"type": "boolean", "description": "Caller agreed to be contacted by a specialist."},
                         "notes": {"type": "string", "description": "Summary notes or special underwriter considerations."},
+                        "fields": {
+                            "type": "object",
+                            "description": "All collected qualification fields: business_type, years_in_business, monthly_revenue, requested_amount.",
+                            "properties": {
+                                "business_type": {"type": "string"},
+                                "years_in_business": {"type": "number"},
+                                "monthly_revenue": {"type": "number"},
+                                "requested_amount": {"type": "number"},
+                                "loan_purpose": {"type": "string"},
+                            },
+                        },
                     },
                     "required": ["contact_permission"],
+                },
+            }
+        ),
+        VapiFunctionTool(
+            function={
+                "name": "update_qualification",
+                "description": "Persists extracted qualification data to the backend session. Call this whenever you successfully extract one or more qualification fields from the caller.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "session_id": {"type": "string", "description": "The active backend session ID (call ID)."},
+                        "business_type": {"type": "string", "description": "Type of business: retail, restaurant, manufacturing, etc."},
+                        "years_in_business": {"type": "number", "description": "Operational years in business."},
+                        "monthly_revenue": {"type": "number", "description": "Average monthly revenue in dollars."},
+                        "requested_amount": {"type": "number", "description": "Loan amount requested in dollars."},
+                        "loan_purpose": {"type": "string", "description": "Purpose of the loan."},
+                    },
+                    "required": [],
                 },
             }
         ),

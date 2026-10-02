@@ -28,7 +28,7 @@ Financial services voice interactions (commercial lending, bancassurance, consum
 
 | Assessment Requirement | Module | Implementation | Evidence Artifact | Verification Status |
 |------------------------|--------|----------------|-------------------|---------------------|
-| **Q1: Grounded Voice Agent** | `backend/app/agents/` | Deterministic rules engine + Q2 search | `evidence/q1/calls/` | **PARTIAL — SIMULATION ONLY** |
+| **Q1: Grounded Voice Agent** | `backend/app/agents/` | Intelligence-driven conversational loop + Q2 search | `evidence/q1/calls/` | **IMPLEMENTING — LIVE VERIFICATION** |
 | **Q2: Production Knowledge Base** | `backend/app/kb/` | Ingestion, PII scrubbing, hybrid RRF | `evidence/q2/retrieval_results.json` | **PASS (PROTOTYPE STORE)** |
 | **Q3: Multilingual Voice Bots** | `backend/app/localization/` | PH Bancassurance & ID Multifinance | `evidence/q3/` | **PARTIAL — SIMULATION ONLY** |
 | **Q4: Real-Time Call Intelligence** | `backend/app/realtime/` | 1.0x WAV chunk streaming + Nudges | `evidence/q4/replay_results.json` | **PASS (REAL WAV REPLAY)** |
