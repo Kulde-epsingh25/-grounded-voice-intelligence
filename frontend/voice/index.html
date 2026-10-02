@@ -145,8 +145,11 @@
         </main>
     </div>
 
-    <!-- Vapi Web SDK script tag for live browser calling -->
-    <script src="https://cdn.jsdelivr.net/npm/@vapi-ai/web@latest/dist/vapi.min.js"></script>
-    <script src="app.js"></script>
+    <!-- Vapi Web SDK - loaded as ES module via esm.sh CDN -->
+    <script type="module">
+        import Vapi from 'https://esm.sh/@vapi-ai/web@2.7.1';
+        window.Vapi = Vapi;
+    </script>
+    <script src="app.js" defer></script>
 </body>
 </html>
