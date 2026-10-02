@@ -1,0 +1,8 @@
+{
+  "provider": "Vapi",
+  "service": "Voice AI Orchestration & Telephony Gateway",
+  "api_key_configured": false,
+  "execution_mode": "LOCAL_WEBHOOK_VERIFIED_TELEPHONY_NOT_LIVE",
+  "audit_finding": "VAPI_API_KEY is not provisioned. Assistant configurations (config/vapi_philippines.json and config/vapi_indonesia.json) and webhook handlers (POST /api/v1/vapi/webhook) are fully implemented and verified via automated HTTP tests. However, no outbound PSTN/SIP carrier phone calls were placed to real carrier phone numbers.",
+  "action_required_for_live": "Provision valid VAPI_API_KEY and VAPI_PUBLIC_KEY in .env, purchase a Vapi phone number, and assign assistant IDs."
+}

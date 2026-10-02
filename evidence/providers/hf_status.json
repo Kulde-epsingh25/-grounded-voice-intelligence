@@ -1,0 +1,8 @@
+{
+  "provider": "Hugging Face",
+  "service": "Inference Providers & Open Models (BGE-M3, Whisper, MMS-TTS)",
+  "api_token_configured": false,
+  "execution_mode": "DETERMINISTIC_FALLBACK_AND_MOCK",
+  "audit_finding": "Neither HF_TOKEN nor HUGGINGFACE_API_KEY was provisioned. Local PyTorch/Transformers packages are not installed in the Python 3.14 environment. As a result, BGE-M3 scores were computed via the deterministic fallback in HFInferenceClient.compute_similarity_bge, BGE Reranker scores were evaluated from scenario fixtures, Whisper Turbo transcriptions were evaluated on static scenario hypotheses, and MMS-TTS latency was referenced from the Meta VITS model card.",
+  "action_required_for_live": "Provision valid HF_TOKEN in .env for serverless Inference Providers, or install torch and transformers for local execution."
+}

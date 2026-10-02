@@ -1,0 +1,31 @@
+{
+  "scenario_id": "scenario-05",
+  "name": "Human Representative Escalation",
+  "description": "Customer requests to speak with a human underwriter. Agent triggers immediate escalation.",
+  "call_id": "sim-scenario-05",
+  "call_type": "SIMULATION \u2014 NOT LIVE CALL",
+  "final_state": "ESCALATION",
+  "qualification_state": {},
+  "qualification_status": "NEEDS_MORE_INFORMATION",
+  "lead_created": false,
+  "lead_record": null,
+  "escalated": true,
+  "transcript": [
+    {
+      "turn": 1,
+      "caller": "I need to speak with a human specialist to discuss a custom syndicate financing package.",
+      "agent": "I understand. I am transferring you to a lending specialist right now. Please hold on.",
+      "state_before": "GREETING",
+      "state_after": "ESCALATION",
+      "grounded": true,
+      "citations": [],
+      "actions": [
+        {
+          "action_type": "ESCALATE",
+          "parameters": {},
+          "result_summary": "requested"
+        }
+      ]
+    }
+  ]
+}

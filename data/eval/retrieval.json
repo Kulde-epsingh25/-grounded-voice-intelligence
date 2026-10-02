@@ -1,0 +1,58 @@
+[
+  {
+    "id": "eval_01",
+    "type": "product",
+    "question": "What is the maximum loan amount and interest rate for the Starter business loan?",
+    "expected_source": "sample_product.csv",
+    "expected_keywords": ["starter", "2000000", "12.5"],
+    "should_answer": true
+  },
+  {
+    "id": "eval_02",
+    "type": "policy",
+    "question": "What is the standard processing time for a loan application?",
+    "expected_source": "sample_faq.html",
+    "expected_keywords": ["processing", "5-7", "business days"],
+    "should_answer": true
+  },
+  {
+    "id": "eval_03",
+    "type": "qualification",
+    "question": "What is the minimum monthly revenue required for Starter loan eligibility?",
+    "expected_source": "sample_duplicate.txt",
+    "expected_keywords": ["500,000", "starter", "revenue"],
+    "should_answer": true
+  },
+  {
+    "id": "eval_04",
+    "type": "faq",
+    "question": "What documents are required to apply for a business loan?",
+    "expected_source": "sample_faq.html",
+    "expected_keywords": ["registration", "bank statements", "financial statements", "id"],
+    "should_answer": true
+  },
+  {
+    "id": "eval_05",
+    "type": "objection",
+    "question": "Why is there a requirement to be in business for at least 2 years?",
+    "expected_source": "sample_duplicate.txt",
+    "expected_keywords": ["2 years", "business", "starter"],
+    "should_answer": true
+  },
+  {
+    "id": "eval_06",
+    "type": "out_of_scope",
+    "question": "What is the weather forecast for Tokyo tomorrow?",
+    "expected_source": null,
+    "expected_keywords": [],
+    "should_answer": false
+  },
+  {
+    "id": "eval_07",
+    "type": "out_of_scope",
+    "question": "Can I finance a personal luxury yacht in Monaco with this loan?",
+    "expected_source": null,
+    "expected_keywords": [],
+    "should_answer": false
+  }
+]

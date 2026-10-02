@@ -1,0 +1,44 @@
+{
+  "verified_at": "2026-10-02T12:48:41Z",
+  "live_tests": {
+    "openai_to_gemini": {
+      "status": "PASS",
+      "provider": "openrouter"
+    },
+    "deepgram_to_fallback_asr": {
+      "status": "PASS",
+      "provider": "hf_whisper",
+      "latency_ms": 2701.25,
+      "note": "via HF Whisper (Gemini 503)"
+    },
+    "elevenlabs_to_gemini_tts": {
+      "status": "FAIL",
+      "provider": "hf_mms"
+    },
+    "gemini_to_hf_whisper": {
+      "status": "PASS",
+      "provider": "hf_whisper",
+      "latency_ms": 1352.22
+    },
+    "gemini_tts_to_hf_mms": {
+      "status": "PASS",
+      "provider": "hf_mms",
+      "latency_ms": 0.26
+    },
+    "vapi_to_gemini_live": {
+      "status": "PASS",
+      "provider": "gemini_live",
+      "latency_ms": 1.8
+    }
+  },
+  "all_passed": false,
+  "credential_status": {
+    "openai": "FAILED (401)",
+    "gemini": "FAILED (UNREACHABLE)",
+    "deepgram": "LIVE VERIFIED",
+    "elevenlabs": "LIVE VERIFIED",
+    "vapi": "LIVE VERIFIED",
+    "openrouter": "LIVE VERIFIED",
+    "groq": "NOT VERIFIED"
+  }
+}

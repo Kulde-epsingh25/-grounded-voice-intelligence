@@ -1,0 +1,10 @@
+{
+  "provider": "ElevenLabs",
+  "service": "Conversational Text-to-Speech (Multilingual v2)",
+  "api_key_configured": false,
+  "execution_mode": "CONFIGURED_ONLY",
+  "claim_audited": "ElevenLabs latency 220-240ms with superior conversational breathing",
+  "audit_finding": "ELEVENLABS_API_KEY is not provisioned. The TTS client in backend/app/integrations/tts/client.py executed in dry-run manifest mode, producing TTSSynthesisRecord objects with status 'CONFIGURED ONLY — NOT LIVE TESTED'. No audio synthesis API requests were transmitted to api.elevenlabs.io.",
+  "runtime_behavior": "Manifest records track intended voice IDs (Rachel 21m00Tcm4TlvDq8ikWAM and Domi AZnzlk1XvdvUeBnXmlld) and phoneme pronunciation notes without transmitting audio generation network requests.",
+  "action_required_for_live": "Provision valid ELEVENLABS_API_KEY in .env."
+}

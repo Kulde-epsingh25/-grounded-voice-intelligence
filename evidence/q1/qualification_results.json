@@ -1,0 +1,49 @@
+[
+  {
+    "scenario": "Cooperative Qualification",
+    "call_id": "sim-scenario-01",
+    "qualification_status": "ELIGIBLE",
+    "lead_created": true,
+    "state": {
+      "business_type": "retail",
+      "years_in_business": 3.0,
+      "monthly_revenue": 1200000.0,
+      "requested_amount": 2000000.0,
+      "loan_purpose": "inventory expansion",
+      "contact_permission": true
+    }
+  },
+  {
+    "scenario": "Customer Objection Handled via Q2",
+    "call_id": "sim-scenario-02",
+    "qualification_status": "NEEDS_MORE_INFORMATION",
+    "lead_created": false,
+    "state": {
+      "years_in_business": 3.0
+    }
+  },
+  {
+    "scenario": "Incomplete and Ambiguous Information",
+    "call_id": "sim-scenario-03",
+    "qualification_status": "NEEDS_MORE_INFORMATION",
+    "lead_created": false,
+    "state": {
+      "business_type": "logistics",
+      "monthly_revenue": 50
+    }
+  },
+  {
+    "scenario": "Out of Scope Knowledge Question",
+    "call_id": "sim-scenario-04",
+    "qualification_status": "NEEDS_MORE_INFORMATION",
+    "lead_created": false,
+    "state": {}
+  },
+  {
+    "scenario": "Human Representative Escalation",
+    "call_id": "sim-scenario-05",
+    "qualification_status": "NEEDS_MORE_INFORMATION",
+    "lead_created": false,
+    "state": {}
+  }
+]

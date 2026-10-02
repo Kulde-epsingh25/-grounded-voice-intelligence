@@ -1,0 +1,472 @@
+/**
+ * Q1 Voice Agent — Browser Interface Logic.
+ *
+ * Coordinates:
+ * - Vapi Web SDK for browser-based voice calls
+ * - Fallback interactive simulator for testing qualification without live credentials
+ * - Real-time state updates (transcript, qualification fields, Q2 citations)
+ */
+
+const API_BASE = window.location.origin;
+
+// State
+let callActive = false;
+let vapiInstance = null;
+let currentCallId = null;
+let turnCount = 0;
+let qualificationState = {
+    business_type: null,
+    years_in_business: null,
+    monthly_revenue: null,
+    requested_amount: null,
+    product: null,
+};
+
+// DOM Elements
+const btnStart = document.getElementById("btn-start-call");
+const btnEnd = document.getElementById("btn-end-call");
+const btnMute = document.getElementById("btn-toggle-mic");
+const statusDot = document.getElementById("call-status-dot");
+const statusText = document.getElementById("call-status-text");
+const agentBadge = document.getElementById("agent-state-badge");
+const transcriptFeed = document.getElementById("transcript-feed");
+const turnCounter = document.getElementById("turn-counter");
+const inputForm = document.getElementById("text-input-form");
+const textInput = document.getElementById("text-utterance");
+const btnVapi = document.getElementById("provider-btn-vapi");
+const btnGemini = document.getElementById("provider-btn-gemini");
+
+let activeProvider = "vapi";
+let geminiSessionId = null;
+
+const fieldBusinessType = document.getElementById("field-business-type");
+const fieldYears = document.getElementById("field-years");
+const fieldRevenue = document.getElementById("field-revenue");
+const fieldRequested = document.getElementById("field-requested");
+const fieldProduct = document.getElementById("field-product");
+const eligibilityBadge = document.getElementById("eligibility-badge");
+const reasonsBox = document.getElementById("qualification-notes");
+const reasonsList = document.getElementById("reasons-list");
+const citationBox = document.getElementById("latest-citation-box");
+const groundingStatus = document.getElementById("grounding-status");
+const alertCard = document.getElementById("escalation-alert-card");
+
+// Initialize
+document.addEventListener("DOMContentLoaded", async () => {
+    setupVapiIfAvailable();
+    setupEventListeners();
+});
+
+function setActiveProvider(provider) {
+    activeProvider = provider;
+    if (provider === "vapi") {
+        if (btnVapi) btnVapi.className = "provider-toggle-btn active";
+        if (btnGemini) btnGemini.className = "provider-toggle-btn";
+    } else {
+        if (btnVapi) btnVapi.className = "provider-toggle-btn";
+        if (btnGemini) btnGemini.className = "provider-toggle-btn active fallback";
+    }
+}
+
+async function setupVapiIfAvailable() {
+    try {
+        const resp = await fetch(`${API_BASE}/api/v1/vapi/config`);
+        if (resp.ok) {
+            const data = await resp.json();
+            if (data.configured && data.public_key && window.Vapi) {
+                vapiInstance = new window.Vapi(data.public_key);
+                attachVapiEvents(vapiInstance);
+                console.log("Vapi Web SDK initialized with public key.");
+            }
+        }
+    } catch (e) {
+        console.warn("Vapi config endpoint unreachable, using fallback provider:", e);
+    }
+}
+
+function attachVapiEvents(vapi) {
+    vapi.on("call-start", () => {
+        setCallActive(true);
+        addMessage("assistant", "Hello, thank you for calling commercial lending. How can I help you today?");
+    });
+
+    vapi.on("call-end", () => {
+        setCallActive(false);
+    });
+
+    vapi.on("message", (msg) => {
+        if (msg.type === "transcript" && msg.transcriptType === "final") {
+            addMessage(msg.role, msg.transcript);
+        }
+    });
+
+    vapi.on("error", (err) => {
+        console.error("Vapi error:", err);
+        addMessage("system", "Vapi connection failed. Switching to backup voice provider (Gemini Live)...");
+        setActiveProvider("gemini_live");
+        startGeminiLiveSession();
+    });
+}
+
+function setupEventListeners() {
+    btnStart.addEventListener("click", startCall);
+    btnEnd.addEventListener("click", endCall);
+
+    if (btnVapi) {
+        btnVapi.addEventListener("click", () => setActiveProvider("vapi"));
+    }
+    if (btnGemini) {
+        btnGemini.addEventListener("click", () => setActiveProvider("gemini_live"));
+    }
+
+    inputForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const text = textInput.value.trim();
+        if (!text) return;
+        textInput.value = "";
+        processUserTurn(text);
+    });
+
+    // Scenario buttons
+    document.querySelectorAll(".btn-scenario").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const sc = btn.getAttribute("data-scenario");
+            runScenario(sc);
+        });
+    });
+}
+
+function setCallActive(active) {
+    callActive = active;
+    btnStart.disabled = active;
+    btnEnd.disabled = !active;
+    btnMute.disabled = !active;
+
+    if (active) {
+        statusDot.className = "dot dot-active";
+        statusText.textContent = activeProvider === "gemini_live" ? "In Call (Gemini Live)" : "In Call (Vapi)";
+        agentBadge.textContent = "Listening";
+        agentBadge.className = "badge badge-accent";
+    } else {
+        statusDot.className = "dot dot-idle";
+        statusText.textContent = "Call Ended";
+        agentBadge.textContent = "Idle";
+        agentBadge.className = "badge";
+    }
+}
+
+async function startGeminiLiveSession() {
+    try {
+        const resp = await fetch(`${API_BASE}/api/v1/gemini/session/start`, { method: "POST" });
+        if (resp.ok) {
+            const data = await resp.json();
+            geminiSessionId = data.session_id;
+            addMessage("assistant", data.greeting || "Hello! Connected to Gemini Live backup voice assistant.");
+            return;
+        }
+    } catch (e) {
+        console.warn("Could not start Gemini Live session on backend:", e);
+    }
+    addMessage("assistant", "Hello! I am your commercial loan qualification assistant (Backup Mode). How can I help you today?");
+}
+
+async function startCall() {
+    currentCallId = "call_" + Math.random().toString(36).substring(2, 9);
+    turnCount = 0;
+    transcriptFeed.innerHTML = "";
+    resetQualificationState();
+    setCallActive(true);
+
+    if (activeProvider === "gemini_live") {
+        await startGeminiLiveSession();
+        return;
+    }
+
+    if (vapiInstance) {
+        try {
+            vapiInstance.start();
+        } catch (e) {
+            addMessage("system", "Vapi cannot establish connection. Switching to backup voice provider (Gemini Live)...");
+            setActiveProvider("gemini_live");
+            await startGeminiLiveSession();
+        }
+    } else {
+        // Automatic fallback when Vapi credentials/SDK not active
+        addMessage("system", "Primary provider (Vapi) not configured. Automatically routing to backup voice provider (Gemini Live)...");
+        setActiveProvider("gemini_live");
+        await startGeminiLiveSession();
+    }
+}
+
+function endCall() {
+    if (vapiInstance && activeProvider === "vapi") {
+        vapiInstance.stop();
+    }
+    if (geminiSessionId) {
+        fetch(`${API_BASE}/api/v1/gemini/session/${geminiSessionId}/end`, { method: "POST" }).catch(() => {});
+        geminiSessionId = null;
+    }
+    setCallActive(false);
+    addMessage("system", "Call session concluded.");
+}
+
+function addMessage(role, text) {
+    const bubble = document.createElement("div");
+    bubble.className = `chat-bubble bubble-${role}`;
+    bubble.textContent = text;
+    transcriptFeed.appendChild(bubble);
+    transcriptFeed.scrollTop = transcriptFeed.scrollHeight;
+    turnCount++;
+    turnCounter.textContent = `Turn: ${turnCount}`;
+}
+
+
+// Interactive Turn Processor
+async function processUserTurn(text) {
+    if (!callActive) {
+        startCall();
+    }
+    addMessage("user", text);
+    agentBadge.textContent = "Processing";
+
+    // If Gemini Live is active, dispatch to backend Gemini Live session endpoint
+    if (activeProvider === "gemini_live" && geminiSessionId) {
+        try {
+            const resp = await fetch(`${API_BASE}/api/v1/gemini/session/${geminiSessionId}/message`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ text }),
+            });
+            if (resp.ok) {
+                const data = await resp.json();
+                addMessage("assistant", data.assistant_response);
+                if (data.citations && data.citations.length > 0) {
+                    renderCitations({ grounded: data.grounded, confidence: 0.95, citations: data.citations });
+                }
+                if (data.escalated) {
+                    triggerEscalation("Customer requested specialist via Gemini Live");
+                }
+                if (data.qualification_state) {
+                    const qs = data.qualification_state;
+                    if (qs.business_type && qs.business_type.value) qualificationState.business_type = qs.business_type.value;
+                    if (qs.years_in_business && qs.years_in_business.value) qualificationState.years_in_business = qs.years_in_business.value;
+                    if (qs.monthly_revenue && qs.monthly_revenue.value) qualificationState.monthly_revenue = qs.monthly_revenue.value;
+                    if (qs.requested_amount && qs.requested_amount.value) qualificationState.requested_amount = qs.requested_amount.value;
+                    updateQualificationUI();
+                }
+                agentBadge.textContent = "Listening";
+                return;
+            }
+        } catch (e) {
+            console.error("Gemini Live message error:", e);
+        }
+    }
+
+    const lower = text.toLowerCase();
+
+
+    // 1. Check Human Escalation
+    if (lower.includes("human") || lower.includes("representative") || lower.includes("speak with someone")) {
+        triggerEscalation("Customer requested live specialist");
+        addMessage("assistant", "I understand. I am transferring you directly to a human commercial lending specialist. Please hold the line.");
+        return;
+    }
+
+    // 2. Check Information Question or Objection -> Query Q2 KB
+    const isQuestion = text.includes("?") || lower.startsWith("what") || lower.startsWith("why") || lower.startsWith("how") || lower.includes("rate") || lower.includes("time") || lower.includes("documents");
+    const isObjection = lower.includes("2 years") || lower.includes("too high") || lower.includes("too long");
+
+    if (isQuestion || isObjection) {
+        try {
+            const kbResp = await fetch(`${API_BASE}/api/v1/kb/search`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ query: text }),
+            });
+
+            if (kbResp.ok) {
+                const kbData = await kbResp.json();
+                renderCitations(kbData);
+
+                if (kbData.grounded) {
+                    addMessage("assistant", kbData.answer);
+                } else {
+                    addMessage("assistant", `${kbData.answer} Would you like me to connect you with an underwriter or continue checking your eligibility?`);
+                }
+                return;
+            }
+        } catch (e) {
+            console.error("KB query error:", e);
+        }
+    }
+
+    // 3. Qualification Information Extraction
+    extractClientSideFields(text);
+    evaluateRulesAndRespond();
+}
+
+function extractClientSideFields(text) {
+    const lower = text.toLowerCase();
+
+    if (lower.includes("retail")) qualificationState.business_type = "retail";
+    if (lower.includes("trading")) qualificationState.business_type = "trading";
+    if (lower.includes("manufacturing")) qualificationState.business_type = "manufacturing";
+    if (lower.includes("tech")) qualificationState.business_type = "technology";
+
+    // Years
+    const yr = text.match(/(\d+(?:\.\d+)?)\s*(?:years?|yrs?)/i);
+    if (yr) qualificationState.years_in_business = parseFloat(yr[1]);
+
+    // Check ambiguous revenue e.g. "fifty"
+    if (/\bfifty\b/i.test(text) && !/(thousand|million|k|m)/i.test(text)) {
+        qualificationState.revenue_ambiguous = true;
+    } else {
+        const rev = text.match(/([0-9\.]+)\s*(?:million|m)\b/i);
+        if (rev) qualificationState.monthly_revenue = parseFloat(rev[1]) * 1000000;
+        const revK = text.match(/([0-9\.]+)\s*(?:thousand|k)\b/i);
+        if (revK) qualificationState.monthly_revenue = parseFloat(revK[1]) * 1000;
+    }
+
+    // Requested amount
+    const req = text.match(/borrow|loan\s*of|need\s*([0-9\.]+\s*(?:million|thousand|k|m)?)/i);
+    if (req) {
+        const amtStr = req[1];
+        if (amtStr.includes("m") || amtStr.includes("million")) {
+            qualificationState.requested_amount = parseFloat(amtStr) * 1000000;
+        } else if (amtStr.includes("k") || amtStr.includes("thousand")) {
+            qualificationState.requested_amount = parseFloat(amtStr) * 1000;
+        }
+    }
+
+    updateQualificationUI();
+}
+
+function evaluateRulesAndRespond() {
+    if (qualificationState.revenue_ambiguous) {
+        addMessage("assistant", "Could you clarify if you mean fifty thousand or fifty million dollars?");
+        qualificationState.revenue_ambiguous = false;
+        return;
+    }
+
+    const { business_type, years_in_business, monthly_revenue, requested_amount } = qualificationState;
+
+    if (!business_type) {
+        addMessage("assistant", "Could you tell me what industry or business type you operate in?");
+        return;
+    }
+    if (years_in_business === null) {
+        addMessage("assistant", "How many years has your business been operating?");
+        return;
+    }
+    if (monthly_revenue === null) {
+        addMessage("assistant", "What is your average monthly revenue?");
+        return;
+    }
+    if (requested_amount === null) {
+        addMessage("assistant", "How much loan funding are you looking to secure?");
+        return;
+    }
+
+    // Deterministic evaluation
+    if (years_in_business < 2 || monthly_revenue < 500000) {
+        eligibilityBadge.textContent = "INELIGIBLE";
+        eligibilityBadge.className = "badge badge-ineligible";
+        addMessage("assistant", "Based on our policy criteria, our minimum requirement is at least 2 years in operations and $500,000 monthly revenue. We cannot approve this application automatically.");
+        return;
+    }
+
+    // Eligible
+    eligibilityBadge.textContent = "ELIGIBLE";
+    eligibilityBadge.className = "badge badge-eligible";
+    qualificationState.product = "Starter";
+    fieldProduct.textContent = "Starter Loan ($2,000,000 Max | 12.5%)";
+    addMessage("assistant", "Great news! Based on your 3 years in business and monthly revenue, you qualify for the Starter business loan tier up to $2,000,000 at 12.5% interest. May I record this as an underwriter lead?");
+}
+
+function updateQualificationUI() {
+    fieldBusinessType.textContent = qualificationState.business_type || "—";
+    fieldBusinessType.className = qualificationState.business_type ? "field-value" : "field-value empty";
+
+    fieldYears.textContent = qualificationState.years_in_business !== null ? `${qualificationState.years_in_business} years` : "—";
+    fieldYears.className = qualificationState.years_in_business !== null ? "field-value" : "field-value empty";
+
+    fieldRevenue.textContent = qualificationState.monthly_revenue !== null ? `$${qualificationState.monthly_revenue.toLocaleString()}` : "—";
+    fieldRevenue.className = qualificationState.monthly_revenue !== null ? "field-value" : "field-value empty";
+
+    fieldRequested.textContent = qualificationState.requested_amount !== null ? `$${qualificationState.requested_amount.toLocaleString()}` : "—";
+    fieldRequested.className = qualificationState.requested_amount !== null ? "field-value" : "field-value empty";
+
+    fieldProduct.textContent = qualificationState.product || "—";
+}
+
+function resetQualificationState() {
+    qualificationState = {
+        business_type: null,
+        years_in_business: null,
+        monthly_revenue: null,
+        requested_amount: null,
+        product: null,
+    };
+    updateQualificationUI();
+    eligibilityBadge.textContent = "PENDING";
+    eligibilityBadge.className = "badge badge-pending";
+    alertCard.classList.add("hidden");
+    citationBox.innerHTML = '<p class="placeholder-text">When a knowledge question or objection is raised, retrieved Q2 source chunks and content hash lineage appear here.</p>';
+}
+
+function renderCitations(data) {
+    if (!data.grounded || !data.citations || data.citations.length === 0) {
+        groundingStatus.textContent = "Abstained (Low Confidence)";
+        groundingStatus.className = "badge badge-pending";
+        citationBox.innerHTML = `<p style="color: #fca5a5;">⚠️ Safe Abstention: Confidence was ${data.confidence.toFixed(2)} (< 0.60 threshold). Response refrained from hallucination.</p>`;
+        return;
+    }
+
+    groundingStatus.textContent = `Grounded (${(data.confidence * 100).toFixed(0)}% Conf)`;
+    groundingStatus.className = "badge badge-eligible";
+
+    let html = '<div style="display:flex; flex-direction:column; gap:0.5rem;">';
+    data.citations.forEach((c, i) => {
+        html += `
+            <div style="background: rgba(255,255,255,0.03); padding: 0.5rem; border-radius: 4px; border-left: 3px solid #3b82f6;">
+                <div style="font-weight:600; font-size:0.8rem; color:#93c5fd;">[Source ${i+1}] ${c.source_name} (v${c.version})</div>
+                <div style="font-size:0.75rem; color:#64748b; font-family:monospace;">Hash: ${c.content_hash.substring(0, 10)}... | Conf: ${c.confidence}</div>
+                <div style="font-size:0.8rem; margin-top:0.25rem;">"${c.snippet}"</div>
+            </div>
+        `;
+    });
+    html += '</div>';
+    citationBox.innerHTML = html;
+}
+
+function triggerEscalation(reason) {
+    alertCard.classList.remove("hidden");
+    document.getElementById("alert-message").textContent = `Reason: ${reason}. Underwriter notified.`;
+}
+
+// Scenarios
+async function runScenario(type) {
+    startCall();
+    if (type === "cooperative") {
+        await delay(500);
+        await processUserTurn("We are a retail trading company with 3 years in operations.");
+        await delay(800);
+        await processUserTurn("Our monthly revenue is around 600k and we need a 1.5 million loan.");
+    } else if (type === "objection") {
+        await delay(500);
+        await processUserTurn("Why is there a requirement to be in business for at least 2 years?");
+    } else if (type === "ambiguous") {
+        await delay(500);
+        await processUserTurn("Our revenue is around fifty.");
+    } else if (type === "out_of_scope") {
+        await delay(500);
+        await processUserTurn("What is the weather forecast for Tokyo tomorrow?");
+    } else if (type === "escalation") {
+        await delay(500);
+        await processUserTurn("I want to speak with a human manager please.");
+    }
+}
+
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}

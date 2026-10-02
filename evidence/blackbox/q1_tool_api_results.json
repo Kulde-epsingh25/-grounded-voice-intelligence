@@ -1,0 +1,38 @@
+[
+  {
+    "tool_name": "search_knowledge_tool",
+    "status_code": 200,
+    "latency_ms": 6.3,
+    "response": {
+      "results": []
+    },
+    "verdict": "PASS"
+  },
+  {
+    "tool_name": "evaluate_qualification_tool",
+    "status_code": 200,
+    "latency_ms": 1.88,
+    "response": {
+      "results": []
+    },
+    "verdict": "PASS"
+  },
+  {
+    "tool_name": "create_lead_tool",
+    "status_code": 200,
+    "latency_ms": 2.01,
+    "response": {
+      "results": []
+    },
+    "verdict": "PASS"
+  },
+  {
+    "tool_name": "escalate_to_human_tool",
+    "status_code": 200,
+    "latency_ms": 1.89,
+    "response": {
+      "results": []
+    },
+    "verdict": "PASS"
+  }
+]

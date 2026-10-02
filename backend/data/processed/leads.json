@@ -1,0 +1,50 @@
+[
+  {
+    "lead_id": "lead_70e125aa",
+    "call_id": "call_same_1",
+    "created_at": "2026-10-02T11:49:19.523857Z",
+    "updated_at": "2026-10-02T11:49:19.524589Z",
+    "business_type": "Tech",
+    "years_in_business": null,
+    "monthly_revenue": 1200000.0,
+    "requested_amount": null,
+    "qualification_status": "ELIGIBLE",
+    "recommended_product": null,
+    "contact_permission": true,
+    "notes": "",
+    "source": "voice_agent",
+    "status": "new"
+  },
+  {
+    "lead_id": "lead_530ee273",
+    "call_id": "test-ph-coop",
+    "created_at": "2026-10-02T11:49:19.532007Z",
+    "updated_at": "2026-10-02T11:49:19.534415Z",
+    "business_type": "retail",
+    "years_in_business": 3.0,
+    "monthly_revenue": 1200000.0,
+    "requested_amount": 2000000.0,
+    "qualification_status": "ELIGIBLE",
+    "recommended_product": "Growth",
+    "contact_permission": true,
+    "notes": "Qualified via localized bot (PH)\nQualified via localized bot (PH)",
+    "source": "voice_agent",
+    "status": "new"
+  },
+  {
+    "lead_id": "lead_aae058b2",
+    "call_id": "test-id-coop",
+    "created_at": "2026-10-02T11:49:19.560839Z",
+    "updated_at": "2026-10-02T11:49:19.562600Z",
+    "business_type": "kuliner",
+    "years_in_business": 3.0,
+    "monthly_revenue": 1200000.0,
+    "requested_amount": 2000000.0,
+    "qualification_status": "ELIGIBLE",
+    "recommended_product": "Growth",
+    "contact_permission": true,
+    "notes": "Qualified via localized bot (ID)\nQualified via localized bot (ID)",
+    "source": "voice_agent",
+    "status": "new"
+  }
+]

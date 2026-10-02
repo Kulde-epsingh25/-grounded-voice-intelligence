@@ -1,0 +1,198 @@
+"""
+Vapi Integration — Assistant Configuration Builder.
+
+Builds reproducible, production-style Vapi Assistant configuration:
+- System prompt strictly delegating to Q2 KB and deterministic rule engine
+- Custom Knowledge Base pointing to Q2 /kb/search
+- Tool definitions for knowledge search, qualification, lead creation, escalation
+"""
+
+from __future__ import annotations
+
+from typing import Any
+
+from app.agents.prompts import ASSISTANT_SYSTEM_PROMPT
+from app.integrations.vapi.knowledge_base import build_custom_kb_config
+from app.integrations.vapi.schemas import VapiAssistantConfig, VapiFunctionTool
+
+
+def get_vapi_tools() -> list[VapiFunctionTool]:
+    """Define Vapi Function Tools available to the assistant during voice calls."""
+    return [
+        VapiFunctionTool(
+            function={
+                "name": "search_knowledge",
+                "description": "Search official business loan knowledge base for factual information regarding products, interest rates, requirements, processing times, and policies.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "query": {
+                            "type": "string",
+                            "description": "Natural language query about loan terms, documents, eligibility, or policies.",
+                        }
+                    },
+                    "required": ["query"],
+                },
+            }
+        ),
+        VapiFunctionTool(
+            function={
+                "name": "evaluate_qualification",
+                "description": "Evaluates applicant eligibility against deterministic business rules using collected financial details.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "business_type": {"type": "string", "description": "Type of business or industry."},
+                        "years_in_business": {"type": "number", "description": "Operational years in business."},
+                        "monthly_revenue": {"type": "number", "description": "Average monthly revenue in dollars."},
+                        "requested_amount": {"type": "number", "description": "Loan amount requested in dollars."},
+                    },
+                    "required": ["business_type", "years_in_business", "monthly_revenue", "requested_amount"],
+                },
+            }
+        ),
+        VapiFunctionTool(
+            function={
+                "name": "create_lead",
+                "description": "Creates a commercial loan lead record in the backend for underwriter follow-up.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "contact_permission": {"type": "boolean", "description": "Caller agreed to be contacted."},
+                        "notes": {"type": "string", "description": "Summary notes or special underwriter considerations."},
+                    },
+                    "required": ["contact_permission"],
+                },
+            }
+        ),
+        VapiFunctionTool(
+            function={
+                "name": "escalate_to_human",
+                "description": "Transfers call to a human commercial lending specialist when requested or required by policy.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "reason": {"type": "string", "description": "Specific reason for human escalation."}
+                    },
+                    "required": ["reason"],
+                },
+            }
+        ),
+    ]
+
+
+def build_assistant_config(server_base_url: str = "http://localhost:8000") -> VapiAssistantConfig:
+    """Construct full Vapi Assistant configuration object for standard Q1 agent."""
+    clean_url = server_base_url.rstrip("/")
+    custom_kb = build_custom_kb_config(server_base_url=clean_url)
+    tools = get_vapi_tools()
+
+    return VapiAssistantConfig(
+        name="Business Loan Qualification Assistant",
+        model={
+            "provider": "openai",
+            "model": "gpt-4o-mini",
+            "temperature": 0.2,
+            "messages": [
+                {"role": "system", "content": ASSISTANT_SYSTEM_PROMPT}
+            ],
+        },
+        voice={
+            "provider": "11labs",
+            "voiceId": "sarah",
+        },
+        firstMessage="Hello, thank you for calling commercial lending. I can answer questions or see what loan products your business qualifies for. How can I help you today?",
+        knowledgeBase=custom_kb,
+        tools=tools,
+        serverUrl=f"{clean_url}/api/v1/vapi/webhook",
+        recordingEnabled=True,
+    )
+
+
+def build_philippines_assistant(server_base_url: str = "http://localhost:8000") -> VapiAssistantConfig:
+    """Construct Vapi Assistant for Philippines Bancassurance with Taglish and Deepgram Nova 3 multi."""
+    clean_url = server_base_url.rstrip("/")
+    custom_kb = build_custom_kb_config(server_base_url=clean_url)
+    tools = get_vapi_tools()
+
+    ph_system_prompt = (
+        "ROLE: You are a professional, warm Bancassurance Virtual Assistant for a bank partner in the Philippines.\n"
+        "BEHAVIOR:\n"
+        "- Speak naturally in Taglish (Tagalog-English code-switching), Filipino, or English depending on how the customer speaks to you.\n"
+        "- Always use polite Filipino honorifics ('po', 'opo') when speaking in Tagalog or Taglish.\n"
+        "- Collect client coverage preferences, employment status, monthly budget, and target sum assured.\n"
+        "- Use the knowledge base tool for all insurance policy terms, riders, grace periods, and bank referral guidelines.\n"
+        "- Never invent policy benefits or claim criteria. If unverified, use the fallback response.\n"
+        "- Transfer to a human licensed specialist immediately if the caller requests it."
+    )
+
+    return VapiAssistantConfig(
+        name="Philippines Bancassurance Assistant",
+        model={
+            "provider": "openai",
+            "model": "gpt-4o-mini",
+            "temperature": 0.2,
+            "messages": [{"role": "system", "content": ph_system_prompt}],
+        },
+        transcriber={
+            "provider": "deepgram",
+            "model": "nova-3",
+            "language": "multi",
+            "smartFormat": True,
+            "keywords": ["bancassurance:2.0", "premium:1.5", "rider:1.5", "beneficiary:1.5", "lapse:1.5"],
+        },
+        voice={
+            "provider": "11labs",
+            "model": "eleven_multilingual_v2",
+            "voiceId": "21m00Tcm4TlvDq8ikWAM",  # Multilingual female voice
+        },
+        firstMessage="Magandang araw po! Ako po ang inyong Bancassurance Virtual Assistant mula sa partner bank. Paano ko po kayo matutulungan sa inyong life coverage o policy inquiry ngayon?",
+        knowledgeBase=custom_kb,
+        tools=tools,
+        serverUrl=f"{clean_url}/api/v1/vapi/webhook",
+        recordingEnabled=True,
+    )
+
+
+def build_indonesia_assistant(server_base_url: str = "http://localhost:8000") -> VapiAssistantConfig:
+    """Construct Vapi Assistant for Indonesia Multifinance supporting formal and colloquial Bahasa."""
+    clean_url = server_base_url.rstrip("/")
+    custom_kb = build_custom_kb_config(server_base_url=clean_url)
+    tools = get_vapi_tools()
+
+    id_system_prompt = (
+        "ROLE: You are a professional, courteous Multifinance Virtual Assistant for consumer credit in Indonesia.\n"
+        "BEHAVIOR:\n"
+        "- Respond in the register matching the customer: use formal Indonesian ('Bapak/Ibu') for business inquiries, or polite colloquial ('Kak') for retail consumer inquiries.\n"
+        "- Naturally use standard Indonesian finance terminology: 'cicilan', 'tenor', 'denda', 'DP', 'jatuh tempo', 'angsuran', 'pembiayaan'.\n"
+        "- Use the knowledge base tool for all financing criteria, interest rates, tenor maximums, and penalty rules.\n"
+        "- Never invent financial approval terms or interest rates. Use the deterministic qualification tool.\n"
+        "- Escalate to customer service if the customer requests a human or has complex payment disputes."
+    )
+
+    return VapiAssistantConfig(
+        name="Indonesia Multifinance Assistant",
+        model={
+            "provider": "openai",
+            "model": "gpt-4o-mini",
+            "temperature": 0.2,
+            "messages": [{"role": "system", "content": id_system_prompt}],
+        },
+        transcriber={
+            "provider": "deepgram",
+            "model": "nova-3",
+            "language": "multi",
+            "smartFormat": True,
+            "keywords": ["cicilan:2.0", "tenor:2.0", "denda:2.0", "DP:2.0", "jatuh tempo:2.0", "angsuran:2.0"],
+        },
+        voice={
+            "provider": "11labs",
+            "model": "eleven_multilingual_v2",
+            "voiceId": "AZnzlk1XvdvUeBnXmlld",  # Multilingual Indonesian voice
+        },
+        firstMessage="Selamat pagi Bapak/Ibu, terima kasih telah menghubungi layanan pembiayaan kami. Ada yang bisa kami bantu terkait simulasi cicilan atau pengajuan dana multiguna hari ini?",
+        knowledgeBase=custom_kb,
+        tools=tools,
+        serverUrl=f"{clean_url}/api/v1/vapi/webhook",
+        recordingEnabled=True,
+    )

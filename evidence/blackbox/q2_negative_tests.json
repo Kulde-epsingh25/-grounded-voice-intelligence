@@ -1,0 +1,47 @@
+[
+  {
+    "test": "Empty query string",
+    "status_code": 200,
+    "latency_ms": 2.38,
+    "no_500_crash": true,
+    "no_stack_trace": true,
+    "response_snippet": "{\"query\":\"\",\"answer\":\"I don't have verified information about that.\",\"grounded\":false,\"confidence\":0.0,\"citations\":[],\"results\":[],\"abstain_reason\":\"e",
+    "verdict": "PASS"
+  },
+  {
+    "test": "Missing query field",
+    "status_code": 200,
+    "latency_ms": 1.08,
+    "no_500_crash": true,
+    "no_stack_trace": true,
+    "response_snippet": "{\"query\":\"\",\"answer\":\"I don't have verified information about that.\",\"grounded\":false,\"confidence\":0.0,\"citations\":[],\"results\":[],\"abstain_reason\":\"e",
+    "verdict": "PASS"
+  },
+  {
+    "test": "Malformed JSON raw body",
+    "status_code": 422,
+    "latency_ms": 1.59,
+    "no_500_crash": true,
+    "no_stack_trace": true,
+    "response_snippet": "{\"detail\":[{\"type\":\"json_invalid\",\"loc\":[\"body\",1],\"msg\":\"JSON decode error\",\"input\":{},\"ctx\":{\"error\":\"Expecting property name enclosed in double quo",
+    "verdict": "PASS"
+  },
+  {
+    "test": "Unsupported market filter",
+    "status_code": 200,
+    "latency_ms": 1.9,
+    "no_500_crash": true,
+    "no_stack_trace": true,
+    "response_snippet": "{\"query\":\"loan\",\"answer\":\"I don't have verified information about that.\",\"grounded\":false,\"confidence\":0.0,\"citations\":[],\"results\":[],\"abstain_reason",
+    "verdict": "PASS"
+  },
+  {
+    "test": "Oversized junk input",
+    "status_code": 200,
+    "latency_ms": 3.85,
+    "no_500_crash": true,
+    "no_stack_trace": true,
+    "response_snippet": "{\"query\":\"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+    "verdict": "PASS"
+  }
+]

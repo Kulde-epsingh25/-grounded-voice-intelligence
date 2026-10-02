@@ -1,0 +1,9 @@
+[
+  {
+    "scenario": "Human Representative Escalation",
+    "call_id": "sim-scenario-05",
+    "trigger": "I need to speak with a human specialist to discuss a custom syndicate financing package.",
+    "status": "requested",
+    "final_state": "ESCALATION"
+  }
+]

@@ -1,0 +1,417 @@
+[
+  {
+    "scenario": "PH-01 English",
+    "query": "What is the bancassurance life plan coverage?",
+    "status_code": 200,
+    "response": {
+      "query": "What is the bancassurance life plan coverage?",
+      "answer": "SYNTHETIC DEMO DATA \u2014 NOT REAL INSURANCE POLICY\n\nPhilippines Bancassurance Life Insurance Guidelines\n\nProduct: ProtectPlus Bancassurance Life Plan\nPartner Bank Referral: Commercial Bank Network\n\n1. Policy Coverage & Riders (Proteksyon sa Buhay):\nBasic plan includes life insurance protection (sum assured) up to 5,000,000 PHP. Clients can attach critical illness rider, total disability rider, and accidental death benefit.\n\nSources:\n  [1] [Source: synthetic_ph_bancassurance.txt | Section: Grace Period, Coverage, at Policy Lapse | p. 1 | v1.0 | hash:a1b2c3d4]\n  [2] [Source: synthetic_ph_bancassurance.txt | Section: Grace Period, Coverage, at Policy Lapse | p. 1 | v1.0 | hash:a1b2c3d4]",
+      "grounded": true,
+      "confidence": 0.9015,
+      "citations": [
+        {
+          "citation_id": "cit_954e8ad2",
+          "source_id": "src_ph_bancassurance",
+          "source_name": "synthetic_ph_bancassurance.txt",
+          "record_id": "kb_loc_ph_01",
+          "chunk_id": "chk_bbff2ef5",
+          "section": "Grace Period, Coverage, at Policy Lapse",
+          "source_page": 1,
+          "version": "1.0",
+          "content_hash": "a1b2c3d4e5f60102030405060708090a1b2c3d4e5f60718293a4b5c6d7e8f901",
+          "confidence": 0.8652,
+          "snippet": "SYNTHETIC DEMO DATA \u2014 NOT REAL INSURANCE POLICY"
+        },
+        {
+          "citation_id": "cit_0cd9ebe3",
+          "source_id": "src_ph_bancassurance",
+          "source_name": "synthetic_ph_bancassurance.txt",
+          "record_id": "kb_loc_ph_01",
+          "chunk_id": "chk_da1f8f2d",
+          "section": "Grace Period, Coverage, at Policy Lapse",
+          "source_page": 1,
+          "version": "1.0",
+          "content_hash": "a1b2c3d4e5f60102030405060708090a1b2c3d4e5f60718293a4b5c6d7e8f901",
+          "confidence": 0.6761,
+          "snippet": "2. Grace Period & Policy Lapse (Palugit at Mawalan ng Bisa):"
+        },
+        {
+          "citation_id": "cit_21835af6",
+          "source_id": "src_ph_bancassurance",
+          "source_name": "synthetic_ph_bancassurance.txt",
+          "record_id": "kb_loc_ph_01",
+          "chunk_id": "chk_97d1ac7c",
+          "section": "Grace Period, Coverage, at Policy Lapse",
+          "source_page": 1,
+          "version": "1.0",
+          "content_hash": "a1b2c3d4e5f60102030405060708090a1b2c3d4e5f60718293a4b5c6d7e8f901",
+          "confidence": 0.6386,
+          "snippet": "3. Payment Flexibility (Paraan ng Pagbabayad ng Premium):"
+        }
+      ],
+      "results": [
+        {
+          "chunk_id": "chk_bbff2ef5",
+          "title": "Philippines Bancassurance Policy Guidelines \u2014 Grace Period, Coverage, at Policy Lapse",
+          "section": "Grace Period, Coverage, at Policy Lapse",
+          "content": "SYNTHETIC DEMO DATA \u2014 NOT REAL INSURANCE POLICY\n\nPhilippines Bancassurance Life Insurance Guidelines\n\nProduct: ProtectPlus Bancassurance Life Plan\nPartner Bank Referral: Commercial Bank Network\n\n1. Policy Coverage & Riders (Proteksyon sa Buhay):\nBasic plan includes life insurance protection (sum assured) up to 5,000,000 PHP. Clients can attach critical illness rider, total disability rider, and accidental death benefit.",
+          "source_name": "synthetic_ph_bancassurance.txt",
+          "source_id": "src_ph_bancassurance",
+          "score": 0.8652,
+          "citation": {
+            "citation_id": "cit_954e8ad2",
+            "source_id": "src_ph_bancassurance",
+            "source_name": "synthetic_ph_bancassurance.txt",
+            "record_id": "kb_loc_ph_01",
+            "chunk_id": "chk_bbff2ef5",
+            "section": "Grace Period, Coverage, at Policy Lapse",
+            "source_page": 1,
+            "version": "1.0",
+            "content_hash": "a1b2c3d4e5f60102030405060708090a1b2c3d4e5f60718293a4b5c6d7e8f901",
+            "confidence": 0.8652,
+            "snippet": "SYNTHETIC DEMO DATA \u2014 NOT REAL INSURANCE POLICY"
+          }
+        },
+        {
+          "chunk_id": "chk_da1f8f2d",
+          "title": "Philippines Bancassurance Policy Guidelines \u2014 Grace Period, Coverage, at Policy Lapse",
+          "section": "Grace Period, Coverage, at Policy Lapse",
+          "content": "2. Grace Period & Policy Lapse (Palugit at Mawalan ng Bisa):\nA 31-day grace period (31 araw na palugit) is provided for overdue premium payments bago mag-lapse ang policy. If unpaid within 31 calendar days, the policy coverage will temporarily lapse (mawalan ng bisa ang coverage). Reinstatement is available within 2 years subject to health evidence.",
+          "source_name": "synthetic_ph_bancassurance.txt",
+          "source_id": "src_ph_bancassurance",
+          "score": 0.6761,
+          "citation": {
+            "citation_id": "cit_0cd9ebe3",
+            "source_id": "src_ph_bancassurance",
+            "source_name": "synthetic_ph_bancassurance.txt",
+            "record_id": "kb_loc_ph_01",
+            "chunk_id": "chk_da1f8f2d",
+            "section": "Grace Period, Coverage, at Policy Lapse",
+            "source_page": 1,
+            "version": "1.0",
+            "content_hash": "a1b2c3d4e5f60102030405060708090a1b2c3d4e5f60718293a4b5c6d7e8f901",
+            "confidence": 0.6761,
+            "snippet": "2. Grace Period & Policy Lapse (Palugit at Mawalan ng Bisa):"
+          }
+        },
+        {
+          "chunk_id": "chk_97d1ac7c",
+          "title": "Philippines Bancassurance Policy Guidelines \u2014 Grace Period, Coverage, at Policy Lapse",
+          "section": "Grace Period, Coverage, at Policy Lapse",
+          "content": "3. Payment Flexibility (Paraan ng Pagbabayad ng Premium):\nPremiums can be settled monthly, quarterly, semi-annually, or annually via bank auto-debit or online branch transfer to ensure uninterrupted protection.",
+          "source_name": "synthetic_ph_bancassurance.txt",
+          "source_id": "src_ph_bancassurance",
+          "score": 0.6386,
+          "citation": {
+            "citation_id": "cit_21835af6",
+            "source_id": "src_ph_bancassurance",
+            "source_name": "synthetic_ph_bancassurance.txt",
+            "record_id": "kb_loc_ph_01",
+            "chunk_id": "chk_97d1ac7c",
+            "section": "Grace Period, Coverage, at Policy Lapse",
+            "source_page": 1,
+            "version": "1.0",
+            "content_hash": "a1b2c3d4e5f60102030405060708090a1b2c3d4e5f60718293a4b5c6d7e8f901",
+            "confidence": 0.6386,
+            "snippet": "3. Payment Flexibility (Paraan ng Pagbabayad ng Premium):"
+          }
+        }
+      ],
+      "abstain_reason": null,
+      "processing_time_ms": 0.52
+    },
+    "grounded": true,
+    "confidence": 0.9015,
+    "citations": [
+      {
+        "citation_id": "cit_954e8ad2",
+        "source_id": "src_ph_bancassurance",
+        "source_name": "synthetic_ph_bancassurance.txt",
+        "record_id": "kb_loc_ph_01",
+        "chunk_id": "chk_bbff2ef5",
+        "section": "Grace Period, Coverage, at Policy Lapse",
+        "source_page": 1,
+        "version": "1.0",
+        "content_hash": "a1b2c3d4e5f60102030405060708090a1b2c3d4e5f60718293a4b5c6d7e8f901",
+        "confidence": 0.8652,
+        "snippet": "SYNTHETIC DEMO DATA \u2014 NOT REAL INSURANCE POLICY"
+      },
+      {
+        "citation_id": "cit_0cd9ebe3",
+        "source_id": "src_ph_bancassurance",
+        "source_name": "synthetic_ph_bancassurance.txt",
+        "record_id": "kb_loc_ph_01",
+        "chunk_id": "chk_da1f8f2d",
+        "section": "Grace Period, Coverage, at Policy Lapse",
+        "source_page": 1,
+        "version": "1.0",
+        "content_hash": "a1b2c3d4e5f60102030405060708090a1b2c3d4e5f60718293a4b5c6d7e8f901",
+        "confidence": 0.6761,
+        "snippet": "2. Grace Period & Policy Lapse (Palugit at Mawalan ng Bisa):"
+      },
+      {
+        "citation_id": "cit_21835af6",
+        "source_id": "src_ph_bancassurance",
+        "source_name": "synthetic_ph_bancassurance.txt",
+        "record_id": "kb_loc_ph_01",
+        "chunk_id": "chk_97d1ac7c",
+        "section": "Grace Period, Coverage, at Policy Lapse",
+        "source_page": 1,
+        "version": "1.0",
+        "content_hash": "a1b2c3d4e5f60102030405060708090a1b2c3d4e5f60718293a4b5c6d7e8f901",
+        "confidence": 0.6386,
+        "snippet": "3. Payment Flexibility (Paraan ng Pagbabayad ng Premium):"
+      }
+    ]
+  },
+  {
+    "scenario": "PH-02 Tagalog",
+    "query": "Paano po ba maiiwasan ang pagka-lapse ng aking life plan?",
+    "status_code": 200,
+    "response": {
+      "query": "Paano po ba maiiwasan ang pagka-lapse ng aking life plan?",
+      "answer": "I don't have verified information about that.",
+      "grounded": false,
+      "confidence": 0.4417,
+      "citations": [],
+      "results": [
+        {
+          "chunk_id": "chk_da1f8f2d",
+          "title": "Philippines Bancassurance Policy Guidelines \u2014 Grace Period, Coverage, at Policy Lapse",
+          "section": "Grace Period, Coverage, at Policy Lapse",
+          "content": "2. Grace Period & Policy Lapse (Palugit at Mawalan ng Bisa):\nA 31-day grace period (31 araw na palugit) is provided for overdue premium payments bago mag-lapse ang policy. If unpaid within 31 calendar days, the policy coverage will temporarily lapse (mawalan ng bisa ang coverage). Reinstatement is available within 2 years subject to health evidence.",
+          "source_name": "synthetic_ph_bancassurance.txt",
+          "source_id": "src_ph_bancassurance",
+          "score": 0.6377,
+          "citation": {
+            "citation_id": "cit_b872ea26",
+            "source_id": "src_ph_bancassurance",
+            "source_name": "synthetic_ph_bancassurance.txt",
+            "record_id": "kb_loc_ph_01",
+            "chunk_id": "chk_da1f8f2d",
+            "section": "Grace Period, Coverage, at Policy Lapse",
+            "source_page": 1,
+            "version": "1.0",
+            "content_hash": "a1b2c3d4e5f60102030405060708090a1b2c3d4e5f60718293a4b5c6d7e8f901",
+            "confidence": 0.6377,
+            "snippet": "2. Grace Period & Policy Lapse (Palugit at Mawalan ng Bisa):"
+          }
+        },
+        {
+          "chunk_id": "chk_bbff2ef5",
+          "title": "Philippines Bancassurance Policy Guidelines \u2014 Grace Period, Coverage, at Policy Lapse",
+          "section": "Grace Period, Coverage, at Policy Lapse",
+          "content": "SYNTHETIC DEMO DATA \u2014 NOT REAL INSURANCE POLICY\n\nPhilippines Bancassurance Life Insurance Guidelines\n\nProduct: ProtectPlus Bancassurance Life Plan\nPartner Bank Referral: Commercial Bank Network\n\n1. Policy Coverage & Riders (Proteksyon sa Buhay):\nBasic plan includes life insurance protection (sum assured) up to 5,000,000 PHP. Clients can attach critical illness rider, total disability rider, and accidental death benefit.",
+          "source_name": "synthetic_ph_bancassurance.txt",
+          "source_id": "src_ph_bancassurance",
+          "score": 0.6366,
+          "citation": {
+            "citation_id": "cit_63dbd46c",
+            "source_id": "src_ph_bancassurance",
+            "source_name": "synthetic_ph_bancassurance.txt",
+            "record_id": "kb_loc_ph_01",
+            "chunk_id": "chk_bbff2ef5",
+            "section": "Grace Period, Coverage, at Policy Lapse",
+            "source_page": 1,
+            "version": "1.0",
+            "content_hash": "a1b2c3d4e5f60102030405060708090a1b2c3d4e5f60718293a4b5c6d7e8f901",
+            "confidence": 0.6366,
+            "snippet": "SYNTHETIC DEMO DATA \u2014 NOT REAL INSURANCE POLICY"
+          }
+        },
+        {
+          "chunk_id": "chk_97d1ac7c",
+          "title": "Philippines Bancassurance Policy Guidelines \u2014 Grace Period, Coverage, at Policy Lapse",
+          "section": "Grace Period, Coverage, at Policy Lapse",
+          "content": "3. Payment Flexibility (Paraan ng Pagbabayad ng Premium):\nPremiums can be settled monthly, quarterly, semi-annually, or annually via bank auto-debit or online branch transfer to ensure uninterrupted protection.",
+          "source_name": "synthetic_ph_bancassurance.txt",
+          "source_id": "src_ph_bancassurance",
+          "score": 0.5964,
+          "citation": {
+            "citation_id": "cit_d4cbddde",
+            "source_id": "src_ph_bancassurance",
+            "source_name": "synthetic_ph_bancassurance.txt",
+            "record_id": "kb_loc_ph_01",
+            "chunk_id": "chk_97d1ac7c",
+            "section": "Grace Period, Coverage, at Policy Lapse",
+            "source_page": 1,
+            "version": "1.0",
+            "content_hash": "a1b2c3d4e5f60102030405060708090a1b2c3d4e5f60718293a4b5c6d7e8f901",
+            "confidence": 0.5964,
+            "snippet": "3. Payment Flexibility (Paraan ng Pagbabayad ng Premium):"
+          }
+        }
+      ],
+      "abstain_reason": "confidence_below_threshold_0.6",
+      "processing_time_ms": 0.8
+    },
+    "grounded": false,
+    "confidence": 0.4417,
+    "citations": []
+  },
+  {
+    "scenario": "PH-03 Taglish",
+    "query": "Ilang araw po ang grace period bago mag-lapse ang policy kung na-delay ang payment?",
+    "status_code": 200,
+    "response": {
+      "query": "Ilang araw po ang grace period bago mag-lapse ang policy kung na-delay ang payment?",
+      "answer": "2. Grace Period & Policy Lapse (Palugit at Mawalan ng Bisa):\nA 31-day grace period (31 araw na palugit) is provided for overdue premium payments bago mag-lapse ang policy. If unpaid within 31 calendar days, the policy coverage will temporarily lapse (mawalan ng bisa ang coverage). Reinstatement is available within 2 years subject to health evidence.\n\nSources:\n  [1] [Source: synthetic_ph_bancassurance.txt | Section: Grace Period, Coverage, at Policy Lapse | p. 1 | v1.0 | hash:a1b2c3d4]\n  [2] [Source: synthetic_ph_bancassurance.txt | Section: Grace Period, Coverage, at Policy Lapse | p. 1 | v1.0 | hash:a1b2c3d4]",
+      "grounded": true,
+      "confidence": 0.6804,
+      "citations": [
+        {
+          "citation_id": "cit_02a78457",
+          "source_id": "src_ph_bancassurance",
+          "source_name": "synthetic_ph_bancassurance.txt",
+          "record_id": "kb_loc_ph_01",
+          "chunk_id": "chk_da1f8f2d",
+          "section": "Grace Period, Coverage, at Policy Lapse",
+          "source_page": 1,
+          "version": "1.0",
+          "content_hash": "a1b2c3d4e5f60102030405060708090a1b2c3d4e5f60718293a4b5c6d7e8f901",
+          "confidence": 0.7556,
+          "snippet": "2. Grace Period & Policy Lapse (Palugit at Mawalan ng Bisa):"
+        },
+        {
+          "citation_id": "cit_77b6581e",
+          "source_id": "src_ph_bancassurance",
+          "source_name": "synthetic_ph_bancassurance.txt",
+          "record_id": "kb_loc_ph_01",
+          "chunk_id": "chk_bbff2ef5",
+          "section": "Grace Period, Coverage, at Policy Lapse",
+          "source_page": 1,
+          "version": "1.0",
+          "content_hash": "a1b2c3d4e5f60102030405060708090a1b2c3d4e5f60718293a4b5c6d7e8f901",
+          "confidence": 0.6225,
+          "snippet": "SYNTHETIC DEMO DATA \u2014 NOT REAL INSURANCE POLICY"
+        },
+        {
+          "citation_id": "cit_3da359f3",
+          "source_id": "src_ph_bancassurance",
+          "source_name": "synthetic_ph_bancassurance.txt",
+          "record_id": "kb_loc_ph_01",
+          "chunk_id": "chk_97d1ac7c",
+          "section": "Grace Period, Coverage, at Policy Lapse",
+          "source_page": 1,
+          "version": "1.0",
+          "content_hash": "a1b2c3d4e5f60102030405060708090a1b2c3d4e5f60718293a4b5c6d7e8f901",
+          "confidence": 0.6225,
+          "snippet": "3. Payment Flexibility (Paraan ng Pagbabayad ng Premium):"
+        }
+      ],
+      "results": [
+        {
+          "chunk_id": "chk_da1f8f2d",
+          "title": "Philippines Bancassurance Policy Guidelines \u2014 Grace Period, Coverage, at Policy Lapse",
+          "section": "Grace Period, Coverage, at Policy Lapse",
+          "content": "2. Grace Period & Policy Lapse (Palugit at Mawalan ng Bisa):\nA 31-day grace period (31 araw na palugit) is provided for overdue premium payments bago mag-lapse ang policy. If unpaid within 31 calendar days, the policy coverage will temporarily lapse (mawalan ng bisa ang coverage). Reinstatement is available within 2 years subject to health evidence.",
+          "source_name": "synthetic_ph_bancassurance.txt",
+          "source_id": "src_ph_bancassurance",
+          "score": 0.7556,
+          "citation": {
+            "citation_id": "cit_02a78457",
+            "source_id": "src_ph_bancassurance",
+            "source_name": "synthetic_ph_bancassurance.txt",
+            "record_id": "kb_loc_ph_01",
+            "chunk_id": "chk_da1f8f2d",
+            "section": "Grace Period, Coverage, at Policy Lapse",
+            "source_page": 1,
+            "version": "1.0",
+            "content_hash": "a1b2c3d4e5f60102030405060708090a1b2c3d4e5f60718293a4b5c6d7e8f901",
+            "confidence": 0.7556,
+            "snippet": "2. Grace Period & Policy Lapse (Palugit at Mawalan ng Bisa):"
+          }
+        },
+        {
+          "chunk_id": "chk_bbff2ef5",
+          "title": "Philippines Bancassurance Policy Guidelines \u2014 Grace Period, Coverage, at Policy Lapse",
+          "section": "Grace Period, Coverage, at Policy Lapse",
+          "content": "SYNTHETIC DEMO DATA \u2014 NOT REAL INSURANCE POLICY\n\nPhilippines Bancassurance Life Insurance Guidelines\n\nProduct: ProtectPlus Bancassurance Life Plan\nPartner Bank Referral: Commercial Bank Network\n\n1. Policy Coverage & Riders (Proteksyon sa Buhay):\nBasic plan includes life insurance protection (sum assured) up to 5,000,000 PHP. Clients can attach critical illness rider, total disability rider, and accidental death benefit.",
+          "source_name": "synthetic_ph_bancassurance.txt",
+          "source_id": "src_ph_bancassurance",
+          "score": 0.6225,
+          "citation": {
+            "citation_id": "cit_77b6581e",
+            "source_id": "src_ph_bancassurance",
+            "source_name": "synthetic_ph_bancassurance.txt",
+            "record_id": "kb_loc_ph_01",
+            "chunk_id": "chk_bbff2ef5",
+            "section": "Grace Period, Coverage, at Policy Lapse",
+            "source_page": 1,
+            "version": "1.0",
+            "content_hash": "a1b2c3d4e5f60102030405060708090a1b2c3d4e5f60718293a4b5c6d7e8f901",
+            "confidence": 0.6225,
+            "snippet": "SYNTHETIC DEMO DATA \u2014 NOT REAL INSURANCE POLICY"
+          }
+        },
+        {
+          "chunk_id": "chk_97d1ac7c",
+          "title": "Philippines Bancassurance Policy Guidelines \u2014 Grace Period, Coverage, at Policy Lapse",
+          "section": "Grace Period, Coverage, at Policy Lapse",
+          "content": "3. Payment Flexibility (Paraan ng Pagbabayad ng Premium):\nPremiums can be settled monthly, quarterly, semi-annually, or annually via bank auto-debit or online branch transfer to ensure uninterrupted protection.",
+          "source_name": "synthetic_ph_bancassurance.txt",
+          "source_id": "src_ph_bancassurance",
+          "score": 0.6225,
+          "citation": {
+            "citation_id": "cit_3da359f3",
+            "source_id": "src_ph_bancassurance",
+            "source_name": "synthetic_ph_bancassurance.txt",
+            "record_id": "kb_loc_ph_01",
+            "chunk_id": "chk_97d1ac7c",
+            "section": "Grace Period, Coverage, at Policy Lapse",
+            "source_page": 1,
+            "version": "1.0",
+            "content_hash": "a1b2c3d4e5f60102030405060708090a1b2c3d4e5f60718293a4b5c6d7e8f901",
+            "confidence": 0.6225,
+            "snippet": "3. Payment Flexibility (Paraan ng Pagbabayad ng Premium):"
+          }
+        }
+      ],
+      "abstain_reason": null,
+      "processing_time_ms": 1.2
+    },
+    "grounded": true,
+    "confidence": 0.6804,
+    "citations": [
+      {
+        "citation_id": "cit_02a78457",
+        "source_id": "src_ph_bancassurance",
+        "source_name": "synthetic_ph_bancassurance.txt",
+        "record_id": "kb_loc_ph_01",
+        "chunk_id": "chk_da1f8f2d",
+        "section": "Grace Period, Coverage, at Policy Lapse",
+        "source_page": 1,
+        "version": "1.0",
+        "content_hash": "a1b2c3d4e5f60102030405060708090a1b2c3d4e5f60718293a4b5c6d7e8f901",
+        "confidence": 0.7556,
+        "snippet": "2. Grace Period & Policy Lapse (Palugit at Mawalan ng Bisa):"
+      },
+      {
+        "citation_id": "cit_77b6581e",
+        "source_id": "src_ph_bancassurance",
+        "source_name": "synthetic_ph_bancassurance.txt",
+        "record_id": "kb_loc_ph_01",
+        "chunk_id": "chk_bbff2ef5",
+        "section": "Grace Period, Coverage, at Policy Lapse",
+        "source_page": 1,
+        "version": "1.0",
+        "content_hash": "a1b2c3d4e5f60102030405060708090a1b2c3d4e5f60718293a4b5c6d7e8f901",
+        "confidence": 0.6225,
+        "snippet": "SYNTHETIC DEMO DATA \u2014 NOT REAL INSURANCE POLICY"
+      },
+      {
+        "citation_id": "cit_3da359f3",
+        "source_id": "src_ph_bancassurance",
+        "source_name": "synthetic_ph_bancassurance.txt",
+        "record_id": "kb_loc_ph_01",
+        "chunk_id": "chk_97d1ac7c",
+        "section": "Grace Period, Coverage, at Policy Lapse",
+        "source_page": 1,
+        "version": "1.0",
+        "content_hash": "a1b2c3d4e5f60102030405060708090a1b2c3d4e5f60718293a4b5c6d7e8f901",
+        "confidence": 0.6225,
+        "snippet": "3. Payment Flexibility (Paraan ng Pagbabayad ng Premium):"
+      }
+    ]
+  }
+]

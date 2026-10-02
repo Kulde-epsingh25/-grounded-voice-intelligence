@@ -1,0 +1,44 @@
+{
+  "scenario_id": "scenario-03",
+  "name": "Incomplete and Ambiguous Information",
+  "description": "Customer gives vague revenue ('around fifty'). Agent clarifies without guessing denominations.",
+  "call_id": "sim-scenario-03",
+  "call_type": "SIMULATION \u2014 NOT LIVE CALL",
+  "final_state": "QUALIFICATION",
+  "qualification_state": {
+    "business_type": "logistics",
+    "monthly_revenue": 50
+  },
+  "qualification_status": "NEEDS_MORE_INFORMATION",
+  "lead_created": false,
+  "lead_record": null,
+  "escalated": false,
+  "transcript": [
+    {
+      "turn": 1,
+      "caller": "Hi, I run a logistics startup.",
+      "agent": "How many years has your business been operating?",
+      "state_before": "GREETING",
+      "state_after": "QUALIFICATION",
+      "grounded": true,
+      "citations": [],
+      "actions": [
+        {
+          "action_type": "EVALUATE_QUALIFICATION",
+          "parameters": {},
+          "result_summary": "NEEDS_MORE_INFORMATION"
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "caller": "Our monthly revenue is around fifty.",
+      "agent": "Could you clarify if you mean fifty thousand, fifty million, or another amount?",
+      "state_before": "QUALIFICATION",
+      "state_after": "QUALIFICATION",
+      "grounded": true,
+      "citations": [],
+      "actions": []
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "provider": "OpenAI",
+  "service": "Embeddings (text-embedding-3-small) & LLM (gpt-4o-mini)",
+  "api_key_configured": false,
+  "execution_mode": "CONFIGURED_NOT_LIVE_TESTED",
+  "audit_finding": "OPENAI_API_KEY is not provisioned. The Q2 retrieval pipeline operated entirely on local deterministic dense hashing and sparse BM25 indexing in app/retrieval/store.py. The Q1 dialogue agent operated on deterministic Python state machines and rule engines in app/agents/rules.py without invoking remote OpenAI endpoints.",
+  "action_required_for_live": "Provision valid OPENAI_API_KEY in .env."
+}

@@ -1,0 +1,182 @@
+{
+  "title": "AI Engineer Assessment — Black-Box QA Software Scorecard",
+  "evaluated_at": "2026-10-02T10:19:30Z",
+  "evaluator_mode": "EXTERNAL_CLIENT_BLACKBOX",
+  "summary": {
+    "total_requirements": 24,
+    "pass_count": 21,
+    "partial_count": 3,
+    "fail_count": 0,
+    "execution_type": "Verified over HTTP, WebSocket, Audio Replay, and Browser DOM without internal Python module imports."
+  },
+  "scorecard": [
+    {
+      "requirement_id": "REQ-01-HEALTH",
+      "blackbox_test": "GET /health public endpoint uptime and service status",
+      "result": "PASS",
+      "evidence": "evidence/blackbox/01_health.json",
+      "notes": "Returned HTTP 200 in 553ms; all sub-service health flags mapped properly."
+    },
+    {
+      "requirement_id": "REQ-02-API-INVENTORY",
+      "blackbox_test": "Discovery and validation of all 8 public HTTP routes",
+      "result": "PASS",
+      "evidence": "evidence/blackbox/api_inventory.json",
+      "notes": "Verified /health, /kb/search, /api/v1/leads, /api/v1/vapi/webhook, /api/v1/realtime/sessions, /voice/, /insights/."
+    },
+    {
+      "requirement_id": "REQ-03-Q2-RETRIEVAL-PRODUCT",
+      "blackbox_test": "POST /kb/search with Product query",
+      "result": "PASS",
+      "evidence": "evidence/blackbox/q2_api_results.json (Q2-BB-01)",
+      "notes": "Grounded=True, confidence=0.84, latency=4.0ms, cited source sample_conflicting_policy.txt."
+    },
+    {
+      "requirement_id": "REQ-04-Q2-RETRIEVAL-POLICY",
+      "blackbox_test": "POST /kb/search with Policy query",
+      "result": "PASS",
+      "evidence": "evidence/blackbox/q2_api_results.json (Q2-BB-02)",
+      "notes": "Grounded=True, confidence=0.66, latency=2.7ms, cited source sample_faq.html."
+    },
+    {
+      "requirement_id": "REQ-05-Q2-RETRIEVAL-QUALIFICATION",
+      "blackbox_test": "POST /kb/search with Qualification criteria query",
+      "result": "PASS",
+      "evidence": "evidence/blackbox/q2_api_results.json (Q2-BB-03)",
+      "notes": "Grounded=True, confidence=0.78, latency=2.4ms, cited source sample_duplicate.txt."
+    },
+    {
+      "requirement_id": "REQ-06-Q2-RETRIEVAL-FAQ",
+      "blackbox_test": "POST /kb/search with FAQ query",
+      "result": "PASS",
+      "evidence": "evidence/blackbox/q2_api_results.json (Q2-BB-04)",
+      "notes": "Grounded=True, confidence=0.67, latency=2.3ms, cited source sample_faq.html."
+    },
+    {
+      "requirement_id": "REQ-07-Q2-RETRIEVAL-OBJECTION",
+      "blackbox_test": "POST /kb/search with customer objection handling query",
+      "result": "PASS",
+      "evidence": "evidence/blackbox/q2_api_results.json (Q2-BB-05)",
+      "notes": "Grounded=True, confidence=0.79, latency=4.7ms, cited source sample_duplicate.txt."
+    },
+    {
+      "requirement_id": "REQ-08-Q2-RETRIEVAL-OUT-OF-SCOPE",
+      "blackbox_test": "POST /kb/search with out-of-scope query (Tokyo weather)",
+      "result": "PASS",
+      "evidence": "evidence/blackbox/q2_api_results.json (Q2-BB-06)",
+      "notes": "Grounded=False, confidence=0.15, correctly abstained, zero hallucination."
+    },
+    {
+      "requirement_id": "REQ-09-Q2-RETRIEVAL-AMBIGUOUS",
+      "blackbox_test": "POST /kb/search with vague query ('Can I get money for stuff?')",
+      "result": "PASS",
+      "evidence": "evidence/blackbox/q2_api_results.json (Q2-BB-07)",
+      "notes": "Grounded=False, confidence=0.29, correctly abstained with safe fallback response."
+    },
+    {
+      "requirement_id": "REQ-10-Q2-RETRIEVAL-TABLE-NUMERIC",
+      "blackbox_test": "POST /kb/search with table/numeric limits query",
+      "result": "PASS",
+      "evidence": "evidence/blackbox/q2_api_results.json (Q2-BB-08)",
+      "notes": "Grounded=True, confidence=0.72, latency=2.5ms, correctly matched structured limits."
+    },
+    {
+      "requirement_id": "REQ-11-Q2-RETRIEVAL-MARKET-FILTERS",
+      "blackbox_test": "POST /kb/search with PH and ID queries with market filters",
+      "result": "PASS",
+      "evidence": "evidence/blackbox/q2_api_results.json (Q2-BB-09, Q2-BB-10)",
+      "notes": "Both passed with Grounded=True and confidence >= 0.80."
+    },
+    {
+      "requirement_id": "REQ-12-Q2-NEGATIVE-ROBUSTNESS",
+      "blackbox_test": "Empty query, missing query, malformed JSON body, oversized input",
+      "result": "PASS",
+      "evidence": "evidence/blackbox/q2_negative_tests.json",
+      "notes": "Zero 500 crashes, no stack traces leaked, HTTP 422 returned on malformed payload."
+    },
+    {
+      "requirement_id": "REQ-13-Q1-VAPI-WEBHOOK-TOOLS",
+      "blackbox_test": "POST /api/v1/vapi/webhook tool calls (search, qual, lead, escalate)",
+      "result": "PASS",
+      "evidence": "evidence/blackbox/q1_tool_api_results.json",
+      "notes": "All 4 tool calls returned HTTP 200 with standard Vapi tool response format."
+    },
+    {
+      "requirement_id": "REQ-14-Q1-BROWSER-UI",
+      "blackbox_test": "GET /voice/ browser UI elements and secret exposure scrutiny",
+      "result": "PASS",
+      "evidence": "evidence/blackbox/q1_ui_checklist.md",
+      "notes": "Start/End buttons present, transcript container verified, 0 secret tokens in DOM."
+    },
+    {
+      "requirement_id": "REQ-15-Q1-VOICE-SCENARIOS",
+      "blackbox_test": "End-to-end voice calls (cooperative, objection, incomplete, OOS, escalate)",
+      "result": "PARTIAL",
+      "evidence": "evidence/q1/call_01_cooperative.json through call_05_escalation.json",
+      "notes": "Completed in validated multi-turn simulation; marked SIMULATION ONLY due to absent live Vapi phone carrier."
+    },
+    {
+      "requirement_id": "REQ-16-Q1-HALLUCINATION-ABSTENTION",
+      "blackbox_test": "Post unanswerable question about extraterrestrial taxes to public KB",
+      "result": "PASS",
+      "evidence": "evidence/blackbox/q1_abstention.json",
+      "notes": "Grounded=False, confidence=0.39, returns default abstention phrase without business fact fabrication."
+    },
+    {
+      "requirement_id": "REQ-17-Q1-CONFLICTING-INPUTS",
+      "blackbox_test": "Send conflicting/negative financial values into qualification webhook",
+      "result": "PASS",
+      "evidence": "evidence/blackbox/q1_conflict.json",
+      "notes": "Handled safely without silent acceptance; transitioned to NEEDS_MORE_INFO."
+    },
+    {
+      "requirement_id": "REQ-18-Q3-PHILIPPINES-LOCALIZATION",
+      "blackbox_test": "Philippines bancassurance queries in English, Tagalog, and Taglish",
+      "result": "PASS",
+      "evidence": "evidence/blackbox/q3_philippines.json",
+      "notes": "Validated cultural honorifics ('po'/'opo'), non-literal phrasing, and fallback mechanisms."
+    },
+    {
+      "requirement_id": "REQ-19-Q3-INDONESIA-LOCALIZATION",
+      "blackbox_test": "Indonesia multifinance queries with formal, colloquial, and loanwords",
+      "result": "PASS",
+      "evidence": "evidence/blackbox/q3_indonesia.json",
+      "notes": "Validated terms 'cicilan', 'tenor', 'denda', 'DP', 'jatuh tempo', 'angsuran', 'pembiayaan'."
+    },
+    {
+      "requirement_id": "REQ-20-Q3-LIVE-PROVIDER-ASR-TTS",
+      "blackbox_test": "Deepgram streaming ASR and ElevenLabs multilingual TTS live provider tests",
+      "result": "PARTIAL",
+      "evidence": "evidence/q3/regional/regional_accent_eval.json",
+      "notes": "Marked CONFIGURED ONLY — NOT LIVE VERIFIED (API keys not provisioned in local environment)."
+    },
+    {
+      "requirement_id": "REQ-21-Q4-WEBSOCKET-STREAMING",
+      "blackbox_test": "Connect to /ws/realtime/{session_id} and receive real-time call events",
+      "result": "PASS",
+      "evidence": "evidence/blackbox/q4_websocket_results.json",
+      "notes": "Successfully connected to WebSocket endpoint and received session_snapshot."
+    },
+    {
+      "requirement_id": "REQ-22-Q4-REALTIME-AUDIO-REPLAY",
+      "blackbox_test": "Execute scripts/replay_audio.py at 1.0x speed with synthetic call audio",
+      "result": "PASS",
+      "evidence": "evidence/q4/replay_timing_evidence.json",
+      "notes": "Nudge emitted at t=7.5s before 8.0s audio replay concluded (timing drift 151.8ms)."
+    },
+    {
+      "requirement_id": "REQ-23-Q4-NUDGE-SUPPRESSION",
+      "blackbox_test": "Spam duplicate signals and test suppression window / cooldown",
+      "result": "PASS",
+      "evidence": "evidence/blackbox/q4_suppression.json",
+      "notes": "Verified duplicate suppression, cooldown window, and expiry pruning."
+    },
+    {
+      "requirement_id": "REQ-24-SECURITY-BLACKBOX",
+      "blackbox_test": "404 handler, 405 handler, secret scanning, PII redaction checks",
+      "result": "PASS",
+      "evidence": "evidence/blackbox/security_results.json",
+      "notes": "No tracebacks, 0 private API keys leaked in HTML/JSON responses, PII redacted."
+    }
+  ]
+}

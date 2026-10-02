@@ -1,0 +1,38 @@
+[
+  {
+    "id": "ID-REG-01",
+    "region_accent": "East Java / Surabaya (Javanese-influenced Bahasa Indonesia)",
+    "description": "Features heavy voiced stops (/b/, /d/, /g/), vowel rounding, and East Javanese conversational particles ('rek', 'ta', 'se').",
+    "utterance": "Iki piye rek, cicilane kok abot temen lek DP-ne mung sithik? Iso digawe telung puluh enem wulan ta?",
+    "expected_meaning": "How is this, everyone, why is the installment so heavy if the DP is only small? Can it be made 36 months?",
+    "finance_terminology": ["cicilan", "DP", "tenor 36 bulan"],
+    "expected_transcript": "Ini gimana ya, cicilannya kok berat sekali kalau DP-nya cuma sedikit? Bisa dibuat tiga puluh enam bulan tidak?",
+    "audio": null,
+    "status": "TEST CASE PREPARED — AUDIO NOT YET AVAILABLE",
+    "linguistic_notes": "Javanese speakers frequently substitute standard Indonesian interrogatives with Javanese equivalents ('piye' for 'bagaimana', 'iso' for 'bisa'). ASR acoustic models trained solely on standard Jakarta broadcasting speech often fail on heavy voiced glottal stops."
+  },
+  {
+    "id": "ID-REG-02",
+    "region_accent": "West Java / Sundanese (Priangan / Bandung)",
+    "description": "Features rising terminal pitch intonation, vowel shift (/f/ to /p/), and softening particles ('atuh', 'mah', 'teh').",
+    "utterance": "Punten Kang, pami denda keterlambatan teh dihitungna per dinten atanapi kumaha? Hoyong terang rincian cicilanna atuh.",
+    "expected_meaning": "Excuse me Sir, for the late penalty fee is it calculated per day or how? I'd really like to know the installment details.",
+    "finance_terminology": ["denda keterlambatan", "cicilan"],
+    "expected_transcript": "Permisi Kang, kalau denda keterlambatannya itu dihitung per hari atau bagaimana? Mau tahu rincian cicilannya dong.",
+    "audio": null,
+    "status": "TEST CASE PREPARED — AUDIO NOT YET AVAILABLE",
+    "linguistic_notes": "Sundanese accent introduces softening discourse particles ('teh', 'atuh') and often pronounces /f/ loanwords as /p/ ('pelunasan' vs 'fasilitas' -> 'pasilitas')."
+  },
+  {
+    "id": "ID-REG-03",
+    "region_accent": "North Sumatra / Medan",
+    "description": "Features staccato rhythm, emphatic final consonants, direct assertion, and Medan lexicon ('cak', 'tengok', 'kali').",
+    "utterance": "Cak kau jelaskan dulu, apa syaratnya biar cepat approve pembiayaan keretaku? Jangan lama kali prosesnya ya!",
+    "expected_meaning": "Please explain to me, what are the requirements so my motorcycle financing is quickly approved? Don't take too long with the process!",
+    "finance_terminology": ["approve", "pembiayaan", "kereta (motorcycle)"],
+    "expected_transcript": "Coba tolong jelaskan, apa syaratnya agar cepat disetujui pembiayaan sepeda motorku? Jangan terlalu lama prosesnya ya!",
+    "audio": null,
+    "status": "TEST CASE PREPARED — AUDIO NOT YET AVAILABLE",
+    "linguistic_notes": "In Medan dialect, 'kereta' universally refers to a motorcycle (standard Indonesian 'sepeda motor'), not a train. A standard lexicon without regional mapping could misinterpret collateral types."
+  }
+]

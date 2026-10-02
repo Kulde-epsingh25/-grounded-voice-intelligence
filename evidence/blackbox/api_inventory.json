@@ -1,0 +1,444 @@
+[
+  {
+    "method": "GET",
+    "endpoint": "/health",
+    "status_code": 200,
+    "latency_ms": 2.64,
+    "content_type": "application/json",
+    "sample_response": {
+      "status": "healthy",
+      "timestamp": "2026-10-02T10:56:23.642975+00:00",
+      "version": "0.1.0",
+      "environment": "development",
+      "services": {
+        "openai": {
+          "configured": true,
+          "embedding_model": "text-embedding-3-small",
+          "llm_model": "gpt-4o-mini"
+        },
+        "vapi": {
+          "configured": true
+        },
+        "deepgram": {
+          "configured": true
+        },
+        "elevenlabs": {
+          "configured": true
+        },
+        "qdrant": {
+          "url": "http://localhost:6333",
+          "configured": true
+        }
+      }
+    },
+    "pass": true
+  },
+  {
+    "method": "POST",
+    "endpoint": "/kb/search",
+    "status_code": 200,
+    "latency_ms": 9.39,
+    "content_type": "application/json",
+    "sample_response": {
+      "query": "What is the Starter loan?",
+      "answer": "SYNTHETIC TEST DATA \u2014 NOT ASSESSMENT BUSINESS DATA\n\nBusiness Loan eligibility\n\nThe minimum monthly revenue requirement for the Starter business loan is $500,000.\nApplicants must have been in business for at least 2 years.\nThe maximum loan amount for Starter tier is $2,000,000.\n\nSources:\n  [1] [Source: sample_duplicate.txt | Section: sample_duplicate.txt | v1.0 | hash:7f9d99c9]\n  [2] [Source: sample_faq.html | Section: What is the minimum revenue requirement? | v1.0 | hash:abc5e4c6]",
+      "grounded": true,
+      "confidence": 0.8494,
+      "citations": [
+        {
+          "citation_id": "cit_e0d86763",
+          "source_id": "src_e39bc5e6",
+          "source_name": "sample_duplicate.txt",
+          "record_id": "kb_ce46ef2a",
+          "chunk_id": "chk_8c45a656",
+          "section": "sample_duplicate.txt",
+          "source_page": null,
+          "version": "1.0",
+          "content_hash": "7f9d99c98225a983dcd3ff06889f3228e038265104beeb5e98646efb2ab6fade",
+          "confidence": 0.7979,
+          "snippet": "SYNTHETIC TEST DATA \u2014 NOT ASSESSMENT BUSINESS DATA"
+        },
+        {
+          "citation_id": "cit_a8ca1db3",
+          "source_id": "src_8d32c240",
+          "source_name": "sample_faq.html",
+          "record_id": "kb_eb9e63cc",
+          "chunk_id": "chk_f083e828",
+          "section": "What is the minimum revenue requirement?",
+          "source_page": null,
+          "version": "1.0",
+          "content_hash": "abc5e4c609ab39f2b0f573019faf9d60fa49d2dcb95ddfcbb8eac793695b3180",
+          "confidence": 0.7933,
+          "snippet": "What is the minimum revenue requirement?"
+        },
+        {
+          "citation_id": "cit_3a839995",
+          "source_id": "src_bd25329e",
+          "source_name": "sample_conflicting_policy.txt",
+          "record_id": "kb_cf96f5c7",
+          "chunk_id": "chk_fa367b55",
+          "section": "sample_conflicting_policy.txt",
+          "source_page": null,
+          "version": "1.0",
+          "content_hash": "26b46b952a149d7a48ee0272df7835004f12a39a6ef96d6e1f482d464ff2c55c",
+          "confidence": 0.7886,
+          "snippet": "SYNTHETIC TEST DATA \u2014 NOT ASSESSMENT BUSINESS DATA"
+        },
+        {
+          "citation_id": "cit_5c733724",
+          "source_id": "src_8d32c240",
+          "source_name": "sample_faq.html",
+          "record_id": "kb_2f98d227",
+          "chunk_id": "chk_526c99ec",
+          "section": "Business Loan Frequently Asked Questions",
+          "source_page": null,
+          "version": "1.0",
+          "content_hash": "642cc395948146ce529630f01f0337d16e08ea28d355e6a2e2f047b8066fc940",
+          "confidence": 0.7,
+          "snippet": "Business Loan Frequently Asked Questions"
+        },
+        {
+          "citation_id": "cit_b8f6f2f1",
+          "source_id": "src_2bb61270",
+          "source_name": "sample_customer_pii.txt",
+          "record_id": "kb_ef39aac5",
+          "chunk_id": "chk_86e2ebb1",
+          "section": "sample_customer_pii.txt",
+          "source_page": null,
+          "version": "1.0",
+          "content_hash": "0f87eb07b4f726b2320e1209697e5e5ae67c1a70aa276c72fdfbed7e38ed062d",
+          "confidence": 0.6206,
+          "snippet": "SYNTHETIC TEST DATA \u2014 NOT ASSESSMENT BUSINESS DATA"
+        }
+      ],
+      "results": [
+        {
+          "chunk_id": "chk_8c45a656",
+          "title": "sample_duplicate.txt",
+          "section": "sample_duplicate.txt",
+          "content": "SYNTHETIC TEST DATA \u2014 NOT ASSESSMENT BUSINESS DATA\n\nBusiness Loan eligibility\n\nThe minimum monthly revenue requirement for the Starter business loan is $500,000.\nApplicants must have been in business for at least 2 years.\nThe maximum loan amount for Starter tier is $2,000,000.",
+          "source_name": "sample_duplicate.txt",
+          "source_id": "src_e39bc5e6",
+          "score": 0.7979,
+          "citation": {
+            "citation_id": "cit_e0d86763",
+            "source_id": "src_e39bc5e6",
+            "source_name": "sample_duplicate.txt",
+            "record_id": "kb_ce46ef2a",
+            "chunk_id": "chk_8c45a656",
+            "section": "sample_duplicate.txt",
+            "source_page": null,
+            "version": "1.0",
+            "content_hash": "7f9d99c98225a983dcd3ff06889f3228e038265104beeb5e98646efb2ab6fade",
+            "confidence": 0.7979,
+            "snippet": "SYNTHETIC TEST DATA \u2014 NOT ASSESSMENT BUSINESS DATA"
+          }
+        },
+        {
+          "chunk_id": "chk_f083e828",
+          "title": "What is the minimum revenue requirement?",
+          "section": "What is the minimum revenue requirement?",
+          "content": "What is the minimum revenue requirement?\n\nSYNTHETIC TEST DATA \u2014 NOT ASSESSMENT BUSINESS DATA.\n\nThe minimum monthly revenue requirement depends on the loan type. For the Starter business loan, the minimum monthly revenue is $500,000. For the Growth business loan product, the minimum is $1,000,000.",
+          "source_name": "sample_faq.html",
+          "source_id": "src_8d32c240",
+          "score": 0.7933,
+          "citation": {
+            "citation_id": "cit_a8ca1db3",
+            "source_id": "src_8d32c240",
+            "source_name": "sample_faq.html",
+            "record_id": "kb_eb9e63cc",
+            "chunk_id": "chk_f083e828",
+            "section": "What is the minimum revenue requirement?",
+            "source_page": null,
+            "version": "1.0",
+            "content_hash": "abc5e4c609ab39f2b0f573019faf9d60fa49d2dcb95ddfcbb8eac793695b3180",
+            "confidence": 0.7933,
+            "snippet": "What is the minimum revenue requirement?"
+          }
+        },
+        {
+          "chunk_id": "chk_fa367b55",
+          "title": "sample_conflicting_policy.txt",
+          "section": "sample_conflicting_policy.txt",
+          "content": "SYNTHETIC TEST DATA \u2014 NOT ASSESSMENT BUSINESS DATA\n\nSource A \u2014 Business Loan Policy v1.0\n\nThe minimum monthly revenue for Starter loans is $500,000.\nMaximum loan amount: $2,000,000.\nProcessing time: 5 business days.\nInterest rate: 12.5% per annum.\n\n---\n\nSource B \u2014 Business Loan Policy v2.0\n\nThe minimum monthly revenue for Starter loans is $750,000.\nMaximum loan amount: $3,000,000.\nProcessing time: 7 business days.\nInterest rate: 11.0% per annum.",
+          "source_name": "sample_conflicting_policy.txt",
+          "source_id": "src_bd25329e",
+          "score": 0.7886,
+          "citation": {
+            "citation_id": "cit_3a839995",
+            "source_id": "src_bd25329e",
+            "source_name": "sample_conflicting_policy.txt",
+            "record_id": "kb_cf96f5c7",
+            "chunk_id": "chk_fa367b55",
+            "section": "sample_conflicting_policy.txt",
+            "source_page": null,
+            "version": "1.0",
+            "content_hash": "26b46b952a149d7a48ee0272df7835004f12a39a6ef96d6e1f482d464ff2c55c",
+            "confidence": 0.7886,
+            "snippet": "SYNTHETIC TEST DATA \u2014 NOT ASSESSMENT BUSINESS DATA"
+          }
+        },
+        {
+          "chunk_id": "chk_526c99ec",
+          "title": "Business Loan Frequently Asked Questions",
+          "section": "Business Loan Frequently Asked Questions",
+          "content": "Business Loan Frequently Asked Questions",
+          "source_name": "sample_faq.html",
+          "source_id": "src_8d32c240",
+          "score": 0.7,
+          "citation": {
+            "citation_id": "cit_5c733724",
+            "source_id": "src_8d32c240",
+            "source_name": "sample_faq.html",
+            "record_id": "kb_2f98d227",
+            "chunk_id": "chk_526c99ec",
+            "section": "Business Loan Frequently Asked Questions",
+            "source_page": null,
+            "version": "1.0",
+            "content_hash": "642cc395948146ce529630f01f0337d16e08ea28d355e6a2e2f047b8066fc940",
+            "confidence": 0.7,
+            "snippet": "Business Loan Frequently Asked Questions"
+          }
+        },
+        {
+          "chunk_id": "chk_86e2ebb1",
+          "title": "sample_customer_pii.txt",
+          "section": "sample_customer_pii.txt",
+          "content": "SYNTHETIC TEST DATA \u2014 NOT ASSESSMENT BUSINESS DATA\n\nCustomer Application Record\n---\n\nApplicant: [PERSON_NAME]: [EMAIL]\nPhone: [PHONE]\nBusiness: Smith Trading Co.\nAccount: [ACCOUNT_ID]-78901\nPolicy: [ACCOUNT_ID]\n\nMr. Smith applied for a business loan product with a loan amount of $2,000,000.\nHis monthly revenue is approximately $800,000.\n\nContact: [EMAIL]\nSecondary phone: [PHONE]\nCustomer ID: [ACCOUNT_ID]",
+          "source_name": "sample_customer_pii.txt",
+          "source_id": "src_2bb61270",
+          "score": 0.6206,
+          "citation": {
+            "citation_id": "cit_b8f6f2f1",
+            "source_id": "src_2bb61270",
+            "source_name": "sample_customer_pii.txt",
+            "record_id": "kb_ef39aac5",
+            "chunk_id": "chk_86e2ebb1",
+            "section": "sample_customer_pii.txt",
+            "source_page": null,
+            "version": "1.0",
+            "content_hash": "0f87eb07b4f726b2320e1209697e5e5ae67c1a70aa276c72fdfbed7e38ed062d",
+            "confidence": 0.6206,
+            "snippet": "SYNTHETIC TEST DATA \u2014 NOT ASSESSMENT BUSINESS DATA"
+          }
+        }
+      ],
+      "abstain_reason": null,
+      "processing_time_ms": 3.74
+    },
+    "pass": true
+  },
+  {
+    "method": "GET",
+    "endpoint": "/api/v1/leads",
+    "status_code": 200,
+    "latency_ms": 8.34,
+    "content_type": "application/json",
+    "sample_response": [
+      {
+        "lead_id": "lead_efe92b13",
+        "call_id": "call_same_1",
+        "created_at": "2026-10-02T10:27:55.221794Z",
+        "updated_at": "2026-10-02T10:27:55.222630Z",
+        "business_type": "Tech",
+        "years_in_business": null,
+        "monthly_revenue": 1200000.0,
+        "requested_amount": null,
+        "qualification_status": "ELIGIBLE",
+        "recommended_product": null,
+        "contact_permission": true,
+        "notes": "",
+        "source": "voice_agent",
+        "status": "new"
+      },
+      {
+        "lead_id": "lead_ba52e186",
+        "call_id": "test-ph-coop",
+        "created_at": "2026-10-02T10:27:55.227550Z",
+        "updated_at": "2026-10-02T10:27:55.229632Z",
+        "business_type": "retail",
+        "years_in_business": 3.0,
+        "monthly_revenue": 1200000.0,
+        "requested_amount": 2000000.0,
+        "qualification_status": "ELIGIBLE",
+        "recommended_product": "Growth",
+        "contact_permission": true,
+        "notes": "Qualified via localized bot (PH)\nQualified via localized bot (PH)",
+        "source": "voice_agent",
+        "status": "new"
+      },
+      {
+        "lead_id": "lead_d6752b39",
+        "call_id": "test-id-coop",
+        "created_at": "2026-10-02T10:27:55.237067Z",
+        "updated_at": "2026-10-02T10:27:55.238307Z",
+        "business_type": "kuliner",
+        "years_in_business": 3.0,
+        "monthly_revenue": 1200000.0,
+        "requested_amount": 2000000.0,
+        "qualification_status": "ELIGIBLE",
+        "recommended_product": "Growth",
+        "contact_permission": true,
+        "notes": "Qualified via localized bot (ID)\nQualified via localized bot (ID)",
+        "source": "voice_agent",
+        "status": "new"
+      }
+    ],
+    "pass": true
+  },
+  {
+    "method": "POST",
+    "endpoint": "/api/v1/leads",
+    "status_code": 422,
+    "latency_ms": 8.89,
+    "content_type": "application/json",
+    "sample_response": {
+      "detail": [
+        {
+          "type": "missing",
+          "loc": [
+            "body",
+            "call_id"
+          ],
+          "msg": "Field required",
+          "input": {
+            "business_name": "Acme Corp",
+            "contact_name": "John Doe",
+            "email": "john@acme.com",
+            "phone": "555-0199",
+            "requested_amount": 50000
+          }
+        },
+        {
+          "type": "missing",
+          "loc": [
+            "body",
+            "fields"
+          ],
+          "msg": "Field required",
+          "input": {
+            "business_name": "Acme Corp",
+            "contact_name": "John Doe",
+            "email": "john@acme.com",
+            "phone": "555-0199",
+            "requested_amount": 50000
+          }
+        }
+      ]
+    },
+    "pass": false
+  },
+  {
+    "method": "POST",
+    "endpoint": "/api/v1/vapi/webhook",
+    "status_code": 200,
+    "latency_ms": 7.65,
+    "content_type": "application/json",
+    "sample_response": {
+      "results": []
+    },
+    "pass": true
+  },
+  {
+    "method": "POST",
+    "endpoint": "/api/v1/realtime/sessions",
+    "status_code": 200,
+    "latency_ms": 3.12,
+    "content_type": "application/json",
+    "sample_response": {
+      "session_id": "bb_inv_sess",
+      "call_id": "call_ba848190",
+      "mode": "replay",
+      "status": "created"
+    },
+    "pass": true
+  },
+  {
+    "method": "GET",
+    "endpoint": "/api/v1/realtime/sessions/bb_inv_sess",
+    "status_code": 200,
+    "latency_ms": 2.44,
+    "content_type": "application/json",
+    "sample_response": {
+      "session_id": "bb_inv_sess",
+      "call_id": "call_ba848190",
+      "mode": "replay",
+      "status": "created",
+      "chunk_count": 0,
+      "duration_ms": 0.0,
+      "active_nudges": [],
+      "suppressed_nudges_count": 0
+    },
+    "pass": true
+  },
+  {
+    "method": "GET",
+    "endpoint": "/api/v1/realtime/sessions/bb_inv_sess/stats",
+    "status_code": 200,
+    "latency_ms": 1.59,
+    "content_type": "application/json",
+    "sample_response": {
+      "session_id": "bb_inv_sess",
+      "latency_summary": {
+        "asr": {
+          "sample_size": 0,
+          "p50_ms": null,
+          "p95_ms": null,
+          "min_ms": null,
+          "max_ms": null
+        },
+        "signal": {
+          "sample_size": 0,
+          "p50_ms": null,
+          "p95_ms": null,
+          "min_ms": null,
+          "max_ms": null
+        },
+        "nudge": {
+          "sample_size": 0,
+          "p50_ms": null,
+          "p95_ms": null,
+          "min_ms": null,
+          "max_ms": null
+        },
+        "delivery": {
+          "sample_size": 0,
+          "p50_ms": null,
+          "p95_ms": null,
+          "min_ms": null,
+          "max_ms": null
+        },
+        "end_to_end": {
+          "sample_size": 0,
+          "p50_ms": null,
+          "p95_ms": null,
+          "min_ms": null,
+          "max_ms": null
+        }
+      },
+      "transcripts_count": 0,
+      "signals_count": 0,
+      "nudges_count": 0,
+      "suppressed_count": 0
+    },
+    "pass": true
+  },
+  {
+    "method": "GET",
+    "endpoint": "/voice/",
+    "status_code": 200,
+    "latency_ms": 136.03,
+    "content_type": "text/html; charset=utf-8",
+    "sample_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Q1 Voice Agent \u2014 Commercial Lending Qualificati",
+    "pass": true
+  },
+  {
+    "method": "GET",
+    "endpoint": "/insights/",
+    "status_code": 200,
+    "latency_ms": 3.64,
+    "content_type": "text/html; charset=utf-8",
+    "sample_response": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Q4 Realtime Call Intelligence Dashboard</title>\n  <st",
+    "pass": true
+  }
+]

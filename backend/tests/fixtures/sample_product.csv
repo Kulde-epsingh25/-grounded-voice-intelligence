@@ -1,0 +1,5 @@
+loan_type,minimum_revenue,max_amount,term_months,interest_rate
+Starter,500000,2000000,12,12.5
+Growth,1000000,5000000,24,10.0
+Premium,2500000,15000000,60,8.5
+Enterprise,5000000,50000000,84,7.0

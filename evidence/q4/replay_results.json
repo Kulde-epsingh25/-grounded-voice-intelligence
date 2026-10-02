@@ -1,0 +1,16 @@
+{
+  "audio_file": "data\\audio\\synthetic_call_sample.wav",
+  "speed": 1.0,
+  "sample_rate": 16000,
+  "channels": 1,
+  "sample_width": 2,
+  "total_frames": 128000,
+  "audio_duration_ms": 8000.0,
+  "expected_replay_time_ms": 8000.0,
+  "actual_elapsed_ms": 8145.74,
+  "replay_drift_ms": 145.74,
+  "chunks_emitted": 16,
+  "transcripts_count": 8,
+  "signals_count": 2,
+  "nudges_count": 2
+}

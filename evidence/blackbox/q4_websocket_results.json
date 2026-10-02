@@ -1,0 +1,46 @@
+[
+  {
+    "event_type": "session_snapshot",
+    "session_id": "bb_ws_test",
+    "status": "created",
+    "mode": "replay",
+    "active_nudges": [],
+    "latency_summary": {
+      "asr": {
+        "sample_size": 0,
+        "p50_ms": null,
+        "p95_ms": null,
+        "min_ms": null,
+        "max_ms": null
+      },
+      "signal": {
+        "sample_size": 0,
+        "p50_ms": null,
+        "p95_ms": null,
+        "min_ms": null,
+        "max_ms": null
+      },
+      "nudge": {
+        "sample_size": 0,
+        "p50_ms": null,
+        "p95_ms": null,
+        "min_ms": null,
+        "max_ms": null
+      },
+      "delivery": {
+        "sample_size": 0,
+        "p50_ms": null,
+        "p95_ms": null,
+        "min_ms": null,
+        "max_ms": null
+      },
+      "end_to_end": {
+        "sample_size": 0,
+        "p50_ms": null,
+        "p95_ms": null,
+        "min_ms": null,
+        "max_ms": null
+      }
+    }
+  }
+]

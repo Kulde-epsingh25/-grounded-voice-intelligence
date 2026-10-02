@@ -1,0 +1,17 @@
+{
+  "module": "Q3 — Philippines Localized Bancassurance Voice Agent",
+  "market": "PH",
+  "sector": "life_insurance_or_bancassurance",
+  "languages": ["en", "fil", "taglish"],
+  "status": "PARTIAL — SIMULATION ONLY",
+  "reason": "Multilingual agent state machine, Taglish code-switching, terminology dictionaries, and localized fallback are fully verified in simulation; live phone recordings have not yet been produced.",
+  "demo_files": {
+    "call_01_cooperative": "evidence/q3/philippines/call-01.json",
+    "call_02_objection_handled": "evidence/q3/philippines/call-02.json",
+    "call_03_code_switch_escalation": "evidence/q3/philippines/call-03.json",
+    "localization_examples": "evidence/q3/philippines/localization_examples.json",
+    "assistant_config": "evidence/q3/philippines/config.json",
+    "asr_manifest": "evidence/q3/philippines/asr_results.json",
+    "tts_manifest": "evidence/q3/philippines/tts_results.json"
+  }
+}

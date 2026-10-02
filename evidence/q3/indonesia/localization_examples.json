@@ -1,0 +1,42 @@
+[
+  {
+    "category": "greeting",
+    "english_intent": "Hello, welcome to our loan department. How can I help you?",
+    "localized_wording": "Selamat pagi Bapak/Ibu, terima kasih telah menghubungi layanan pembiayaan kami. Ada yang bisa kami bantu terkait simulasi cicilan atau pengajuan dana multiguna hari ini?",
+    "why_localized": "Literal translation sounds robotic and ignores Indonesian business etiquette. Formal greeting with 'Bapak/Ibu' and industry-standard terms 'pembiayaan' and 'cicilan' conveys regulatory legitimacy and respect.",
+    "cultural_consideration": "Indonesian corporate financial customer service demands respectful honorifics ('Bapak' for male, 'Ibu' for female, or 'Kakak/Kak' in digital retail consumer apps).",
+    "market": "ID",
+    "language": "id_formal",
+    "conversational_register": "formal"
+  },
+  {
+    "category": "objection_interest_rate",
+    "english_intent": "Our interest rate is reasonable and complies with regulations.",
+    "localized_wording": "Bisa kami pahami pertimbangan Bapak/Ibu. Perlu kami sampaikan bahwa besaran suku bunga dan biaya pembiayaan kami sudah sepenuhnya transparan serta mengikuti regulasi OJK, tanpa ada biaya tersembunyi saat jatuh tempo.",
+    "why_localized": "Directly arguing about interest rates triggers distrust regarding predatory lending (pinjol ilegal). Explicitly citing transparency and OJK (Otoritas Jasa Keuangan) compliance reassures the applicant about safety and fair installment ('cicilan').",
+    "cultural_consideration": "Consumers in Indonesia are highly cautious of predatory illegal lenders; referencing compliance and absence of hidden penalty fees ('tanpa denda tersembunyi') is critical for trust.",
+    "market": "ID",
+    "language": "id_formal",
+    "conversational_register": "formal"
+  },
+  {
+    "category": "clarification_down_payment",
+    "english_intent": "How much initial money down will you provide?",
+    "localized_wording": "Boleh tahu Kak, untuk DP atau uang muka yang disiapkan kira-kira di kisaran berapa persen atau berapa juta?",
+    "why_localized": "In conversational consumer finance, using the loanword 'DP' (/de-pe/) and friendly address 'Kak' feels natural and modern, avoiding stiff textbook Indonesian ('uang panjar awal').",
+    "cultural_consideration": "Modern urban Indonesian retail finance widely uses 'DP' and 'tenor' as natural conversational loanwords.",
+    "market": "ID",
+    "language": "id_colloquial",
+    "conversational_register": "colloquial"
+  },
+  {
+    "category": "human_escalation",
+    "english_intent": "Transferring you to an agent.",
+    "localized_wording": "Baik Kak, biar lebih jelas dan bisa dibantu hitungkan simulasi cicilannya secara detail, langsung aku sambungkan ke representatif pembiayaan kami ya. Mohon tunggu sebentar.",
+    "why_localized": "Colloquial warmth ('langsung aku sambungkan ya') makes the transfer feel like helpful customer advocacy rather than an automated deflection.",
+    "cultural_consideration": "Promotes relational warmth (kekeluargaan) and helpful personal service.",
+    "market": "ID",
+    "language": "id_colloquial",
+    "conversational_register": "colloquial"
+  }
+]

@@ -1,0 +1,117 @@
+{
+  "scenario_id": "scenario-04",
+  "name": "Out of Scope Knowledge Question",
+  "description": "Customer asks about an unsupported topic (cryptocurrency lending). Agent safely abstains via Q2 confidence gate, then answers a grounded question.",
+  "call_id": "sim-scenario-04",
+  "call_type": "SIMULATION \u2014 NOT LIVE CALL",
+  "final_state": "KNOWLEDGE_QUESTION",
+  "qualification_state": {},
+  "qualification_status": "NEEDS_MORE_INFORMATION",
+  "lead_created": false,
+  "lead_record": null,
+  "escalated": false,
+  "transcript": [
+    {
+      "turn": 1,
+      "caller": "Do you offer collateralized Bitcoin and crypto business loans?",
+      "agent": "I don't have verified information about that. Would you like me to connect you with a representative who can look into this?",
+      "state_before": "GREETING",
+      "state_after": "KNOWLEDGE_QUESTION",
+      "grounded": false,
+      "citations": [],
+      "actions": [
+        {
+          "action_type": "SEARCH_KB",
+          "parameters": {
+            "query": "Do you offer collateralized Bitcoin and crypto business loans?"
+          },
+          "result_summary": "ungrounded"
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "caller": "What documents are required to apply for a business loan?",
+      "agent": "What documents are required?\n\nApplicants must provide business registration, financial statements for the last 2 years, bank statements for the last 6 months, and valid government-issued identification.\n\nSources:\n  [1] [Source: sample_faq.html | Section: What documents are required? | v1.0 | hash:f2e4a4f6]\n  [2] [Source: sample_faq.html | Section: Business Loan Frequently Asked Questions | v1.0 | hash:642cc395]",
+      "state_before": "KNOWLEDGE_QUESTION",
+      "state_after": "KNOWLEDGE_QUESTION",
+      "grounded": true,
+      "citations": [
+        {
+          "citation_id": "cit_a35deab3",
+          "source_id": "src_8d32c240",
+          "source_name": "sample_faq.html",
+          "record_id": "kb_a5e91616",
+          "chunk_id": "chk_0b03b09e",
+          "section": "What documents are required?",
+          "source_page": null,
+          "version": "1.0",
+          "content_hash": "f2e4a4f6a180c78b17be06760ce9dd5f6b4b8968ed52f612ceed8fd859ff78f6",
+          "confidence": 0.777,
+          "snippet": "What documents are required?"
+        },
+        {
+          "citation_id": "cit_1ccd8396",
+          "source_id": "src_8d32c240",
+          "source_name": "sample_faq.html",
+          "record_id": "kb_2f98d227",
+          "chunk_id": "chk_aefc341c",
+          "section": "Business Loan Frequently Asked Questions",
+          "source_page": null,
+          "version": "1.0",
+          "content_hash": "642cc395948146ce529630f01f0337d16e08ea28d355e6a2e2f047b8066fc940",
+          "confidence": 0.6887,
+          "snippet": "Business Loan Frequently Asked Questions"
+        },
+        {
+          "citation_id": "cit_9cf2be5e",
+          "source_id": "src_2bb61270",
+          "source_name": "sample_customer_pii.txt",
+          "record_id": "kb_ef39aac5",
+          "chunk_id": "chk_f71a0a71",
+          "section": "sample_customer_pii.txt",
+          "source_page": null,
+          "version": "1.0",
+          "content_hash": "0f87eb07b4f726b2320e1209697e5e5ae67c1a70aa276c72fdfbed7e38ed062d",
+          "confidence": 0.6502,
+          "snippet": "SYNTHETIC TEST DATA \u2014 NOT ASSESSMENT BUSINESS DATA"
+        },
+        {
+          "citation_id": "cit_8ed01efa",
+          "source_id": "src_e39bc5e6",
+          "source_name": "sample_duplicate.txt",
+          "record_id": "kb_ce46ef2a",
+          "chunk_id": "chk_97be3d7d",
+          "section": "sample_duplicate.txt",
+          "source_page": null,
+          "version": "1.0",
+          "content_hash": "7f9d99c98225a983dcd3ff06889f3228e038265104beeb5e98646efb2ab6fade",
+          "confidence": 0.6471,
+          "snippet": "SYNTHETIC TEST DATA \u2014 NOT ASSESSMENT BUSINESS DATA"
+        },
+        {
+          "citation_id": "cit_027e23cf",
+          "source_id": "src_8d32c240",
+          "source_name": "sample_faq.html",
+          "record_id": "kb_eb9e63cc",
+          "chunk_id": "chk_d164efac",
+          "section": "What is the minimum revenue requirement?",
+          "source_page": null,
+          "version": "1.0",
+          "content_hash": "abc5e4c609ab39f2b0f573019faf9d60fa49d2dcb95ddfcbb8eac793695b3180",
+          "confidence": 0.6381,
+          "snippet": "What is the minimum revenue requirement?"
+        }
+      ],
+      "actions": [
+        {
+          "action_type": "SEARCH_KB",
+          "parameters": {
+            "query": "What documents are required to apply for a business loan?"
+          },
+          "result_summary": "grounded"
+        }
+      ]
+    }
+  ]
+}

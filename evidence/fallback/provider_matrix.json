@@ -1,0 +1,50 @@
+{
+  "matrix_generated_at": "2026-10-02T12:48:41Z",
+  "architecture": {
+    "llm": {
+      "primary": "OpenAI (gpt-4o-mini)",
+      "fallbacks": [
+        "Gemini (gemini-3.5-flash)",
+        "Groq (llama-3.3-70b-versatile)",
+        "OpenRouter (nemotron-3.5-lightning:free)"
+      ]
+    },
+    "asr": {
+      "primary": "Deepgram (Nova-3)",
+      "fallbacks": [
+        "Gemini Transcribe (gemini-3.5-flash)",
+        "HF Whisper (whisper-large-v3-turbo)"
+      ]
+    },
+    "tts": {
+      "primary": "ElevenLabs (eleven_multilingual_v2)",
+      "fallbacks": [
+        "Gemini TTS (gemini-3.8-flash-tts)",
+        "HF Meta MMS-TTS (mms-tts-tgl, mms-tts-ind)"
+      ]
+    },
+    "voice": {
+      "primary": "Vapi (Web SDK & Telephony)",
+      "fallbacks": [
+        "Gemini Live (Dual Transport)"
+      ]
+    },
+    "retrieval": {
+      "primary": "Hybrid BGE-M3 + BM25 + Qdrant",
+      "fallbacks": [
+        "Local In-Memory Qdrant/Cosine + BM25"
+      ]
+    }
+  },
+  "live_provider_audit": {
+    "vapi": "LIVE VERIFIED",
+    "openai": "FAILED (401)",
+    "deepgram": "LIVE VERIFIED",
+    "elevenlabs": "LIVE VERIFIED",
+    "gemini": "FAILED (UNREACHABLE)",
+    "groq": "NOT VERIFIED",
+    "openrouter": "LIVE VERIFIED",
+    "hf_whisper": "LOCAL VERIFIED",
+    "hf_mms": "LOCAL VERIFIED"
+  }
+}

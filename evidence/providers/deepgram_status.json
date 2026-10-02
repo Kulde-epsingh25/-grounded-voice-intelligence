@@ -1,0 +1,10 @@
+{
+  "provider": "Deepgram",
+  "service": "Streaming Websocket ASR (Nova-3)",
+  "api_key_configured": false,
+  "execution_mode": "ADAPTER_IMPLEMENTED_NOT_LIVE_VERIFIED",
+  "claim_audited": "Deepgram WER 14.3%, latency 280ms",
+  "audit_finding": "The previously reported 14.3% WER and 280ms latency were calculated from a static scenario fixture in scripts/eval_hf_models.py. Deepgram streaming ASR was not live-executed against wss://api.deepgram.com because DEEPGRAM_API_KEY was not provisioned in the local environment.",
+  "runtime_behavior": "When unconfigured, the system falls back to SimulatedAudioASR, which yields pre-parsed transcript chunks corresponding to synthetic audio timestamps without performing real cloud streaming speech recognition.",
+  "action_required_for_live": "Provision valid DEEPGRAM_API_KEY in .env."
+}

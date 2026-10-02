@@ -1,0 +1,293 @@
+{
+  "scenario_a_missed_cross_sell": {
+    "scenario": "SCENARIO A \u2014 MISSED CROSS-SELL",
+    "mode": "MODE C \u2014 TRANSCRIPT REPLAY (TEST ONLY)",
+    "turns_processed": 5,
+    "active_nudges_emitted": 1,
+    "suppressed_count": 0,
+    "latencies_ms": [
+      109.99999999999943
+    ],
+    "timeline": [
+      {
+        "timestamp": 1.0,
+        "speaker": "AGENT",
+        "text": "Good morning, thank you for calling Premier Auto Insurance. This call is recorded for quality assurance.",
+        "confidence": 1.0,
+        "signals": [],
+        "nudges": []
+      },
+      {
+        "timestamp": 3.0,
+        "speaker": "CUSTOMER",
+        "text": "Hi, I'm calling about my sedan policy renewal.",
+        "confidence": 1.0,
+        "signals": [],
+        "nudges": []
+      },
+      {
+        "timestamp": 5.0,
+        "speaker": "AGENT",
+        "text": "I can certainly help you with your sedan policy today.",
+        "confidence": 1.0,
+        "signals": [],
+        "nudges": []
+      },
+      {
+        "timestamp": 7.5,
+        "speaker": "CUSTOMER",
+        "text": "Also, I have another vehicle that I might want to add to this coverage later.",
+        "confidence": 1.0,
+        "signals": [
+          {
+            "signal_id": "sig_cross_sell_second_vehicle_7500",
+            "type": "missed_opportunity",
+            "timestamp": 7.5,
+            "confidence": 0.88,
+            "speaker": "CUSTOMER",
+            "evidence_text": "another vehicle",
+            "severity": "medium",
+            "source": "rule",
+            "metadata": {
+              "rule_name": "cross_sell_second_vehicle",
+              "full_utterance": "Also, I have another vehicle that I might want to add to this coverage later."
+            }
+          }
+        ],
+        "nudges": [
+          {
+            "nudge_id": "nudge_missed_opportunity_7600",
+            "session_id": "sess_scenario_a_\u2014_missed_cross-sell",
+            "type": "missed_opportunity",
+            "priority": "MEDIUM",
+            "message": "Customer mentioned a second vehicle. Check multi-vehicle offer.",
+            "confidence": 0.88,
+            "created_at": 7.6,
+            "expires_at": 52.6,
+            "cooldown_seconds": 30.0,
+            "source_signal": "sig_cross_sell_second_vehicle_7500",
+            "evidence": "another vehicle",
+            "status": "active",
+            "suppression_reason": null
+          }
+        ]
+      },
+      {
+        "timestamp": 9.5,
+        "speaker": "AGENT",
+        "text": "Great, let's review your details first.",
+        "confidence": 1.0,
+        "signals": [],
+        "nudges": []
+      }
+    ]
+  },
+  "scenario_b_compliance_gap": {
+    "scenario": "SCENARIO B \u2014 COMPLIANCE GAP",
+    "mode": "MODE C \u2014 TRANSCRIPT REPLAY (TEST ONLY)",
+    "turns_processed": 3,
+    "active_nudges_emitted": 1,
+    "suppressed_count": 0,
+    "latencies_ms": [
+      109.99999999999943
+    ],
+    "timeline": [
+      {
+        "timestamp": 1.0,
+        "speaker": "AGENT",
+        "text": "Hello, thank you for calling financing support today.",
+        "confidence": 1.0,
+        "signals": [],
+        "nudges": []
+      },
+      {
+        "timestamp": 3.0,
+        "speaker": "CUSTOMER",
+        "text": "I'm interested in applying for a commercial loan.",
+        "confidence": 1.0,
+        "signals": [],
+        "nudges": []
+      },
+      {
+        "timestamp": 5.0,
+        "speaker": "AGENT",
+        "text": "Please provide your social security number and annual business revenue right now.",
+        "confidence": 1.0,
+        "signals": [
+          {
+            "signal_id": "sig_compliance_missing_recording_disclosure_5000",
+            "type": "compliance_gap",
+            "timestamp": 5.0,
+            "confidence": 0.92,
+            "speaker": "AGENT",
+            "evidence_text": "social security",
+            "severity": "critical",
+            "source": "rule",
+            "metadata": {
+              "rule_name": "compliance_missing_recording_disclosure",
+              "full_utterance": "Please provide your social security number and annual business revenue right now."
+            }
+          }
+        ],
+        "nudges": [
+          {
+            "nudge_id": "nudge_compliance_gap_5100",
+            "session_id": "sess_scenario_b_\u2014_compliance_gap",
+            "type": "compliance_gap",
+            "priority": "HIGH",
+            "message": "Required disclosure appears missing. Deliver mandatory call recording disclosure before proceeding.",
+            "confidence": 0.92,
+            "created_at": 5.1,
+            "expires_at": 50.1,
+            "cooldown_seconds": 15.0,
+            "source_signal": "sig_compliance_missing_recording_disclosure_5000",
+            "evidence": "social security",
+            "status": "active",
+            "suppression_reason": null
+          }
+        ]
+      }
+    ]
+  },
+  "scenario_c_rising_frustration": {
+    "scenario": "SCENARIO C \u2014 RISING FRUSTRATION",
+    "mode": "MODE C \u2014 TRANSCRIPT REPLAY (TEST ONLY)",
+    "turns_processed": 4,
+    "active_nudges_emitted": 2,
+    "suppressed_count": 0,
+    "latencies_ms": [
+      109.99999999999987,
+      110.00000000000121
+    ],
+    "timeline": [
+      {
+        "timestamp": 1.0,
+        "speaker": "AGENT",
+        "text": "Thank you for holding. Can you state your account number?",
+        "confidence": 1.0,
+        "signals": [
+          {
+            "signal_id": "sig_topic_1000",
+            "type": "topic_shift",
+            "timestamp": 1.0,
+            "confidence": 0.82,
+            "speaker": "AGENT",
+            "evidence_text": "Shifted from greeting to closing",
+            "severity": "low",
+            "source": "semantic",
+            "metadata": {
+              "previous_topic": "greeting",
+              "new_topic": "closing"
+            }
+          }
+        ],
+        "nudges": [
+          {
+            "nudge_id": "nudge_topic_shift_1099",
+            "session_id": "sess_scenario_c_\u2014_rising_frustration",
+            "type": "topic_shift",
+            "priority": "LOW",
+            "message": "Customer shifted focus to closing. Address questions before returning to qualification.",
+            "confidence": 0.82,
+            "created_at": 1.0999999999999999,
+            "expires_at": 46.1,
+            "cooldown_seconds": 30.0,
+            "source_signal": "sig_topic_1000",
+            "evidence": "Shifted from greeting to closing",
+            "status": "active",
+            "suppression_reason": null
+          }
+        ]
+      },
+      {
+        "timestamp": 3.0,
+        "speaker": "CUSTOMER",
+        "text": "I already entered it in the automated prompt.",
+        "confidence": 1.0,
+        "signals": [],
+        "nudges": []
+      },
+      {
+        "timestamp": 5.5,
+        "speaker": "AGENT",
+        "text": "I understand, but our screen refreshed so I need you to repeat it.",
+        "confidence": 1.0,
+        "signals": [],
+        "nudges": []
+      },
+      {
+        "timestamp": 8.0,
+        "speaker": "CUSTOMER",
+        "text": "I've explained this three times already. Why is this taking so long? Waste of my time!",
+        "confidence": 1.0,
+        "signals": [
+          {
+            "signal_id": "sig_customer_frustration_repetition_delay_8000",
+            "type": "frustration",
+            "timestamp": 8.0,
+            "confidence": 0.93,
+            "speaker": "CUSTOMER",
+            "evidence_text": "explained this three times",
+            "severity": "high",
+            "source": "rule",
+            "metadata": {
+              "rule_name": "customer_frustration_repetition_delay",
+              "full_utterance": "I've explained this three times already. Why is this taking so long? Waste of my time!"
+            }
+          }
+        ],
+        "nudges": [
+          {
+            "nudge_id": "nudge_frustration_8100",
+            "session_id": "sess_scenario_c_\u2014_rising_frustration",
+            "type": "frustration",
+            "priority": "HIGH",
+            "message": "Customer expressed frustration over delays. Acknowledge concern and clarify the next step.",
+            "confidence": 0.93,
+            "created_at": 8.100000000000001,
+            "expires_at": 53.1,
+            "cooldown_seconds": 30.0,
+            "source_signal": "sig_customer_frustration_repetition_delay_8000",
+            "evidence": "explained this three times",
+            "status": "active",
+            "suppression_reason": null
+          }
+        ]
+      }
+    ]
+  },
+  "scenario_d_noisy_suppression": {
+    "scenario": "SCENARIO D \u2014 NOISY AMBIGUOUS SUPPRESSION",
+    "mode": "MODE C \u2014 TRANSCRIPT REPLAY (TEST ONLY)",
+    "turns_processed": 3,
+    "active_nudges_emitted": 0,
+    "suppressed_count": 0,
+    "latencies_ms": [],
+    "timeline": [
+      {
+        "timestamp": 1.0,
+        "speaker": "AGENT",
+        "text": "Hello, can you hear me clearly?",
+        "confidence": 1.0,
+        "signals": [],
+        "nudges": []
+      },
+      {
+        "timestamp": 3.0,
+        "speaker": "CUSTOMER",
+        "text": "mumble... maybe another... car... crackle",
+        "confidence": 0.45,
+        "signals": [],
+        "nudges": []
+      },
+      {
+        "timestamp": 5.0,
+        "speaker": "AGENT",
+        "text": "Pardon me, the audio broke up.",
+        "confidence": 1.0,
+        "signals": [],
+        "nudges": []
+      }
+    ]
+  }
+}

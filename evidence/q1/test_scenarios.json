@@ -1,0 +1,50 @@
+[
+  {
+    "id": "scenario-01",
+    "name": "Cooperative Qualification",
+    "desc": "Customer answers qualification questions normally and qualifies for Growth Loan.",
+    "turns": [
+      "Hello, I run a retail grocery business.",
+      "We have been in business for 3 years.",
+      "Our monthly revenue is around 1.2 million dollars.",
+      "We need to borrow 2 million for inventory expansion.",
+      "Yes, you have my permission to proceed and contact me."
+    ]
+  },
+  {
+    "id": "scenario-02",
+    "name": "Customer Objection Handled via Q2",
+    "desc": "Customer objects that 5 to 7 days processing time is too long. Agent retrieves grounded policy from Q2 and continues.",
+    "turns": [
+      "I run an online electronics shop.",
+      "Why is processing time 5 to 7 business days? That is too long for our suppliers.",
+      "We have been operating for 3 years, with 1.5 million monthly revenue."
+    ]
+  },
+  {
+    "id": "scenario-03",
+    "name": "Incomplete and Ambiguous Information",
+    "desc": "Customer gives vague revenue ('around fifty'). Agent clarifies without guessing denominations.",
+    "turns": [
+      "Hi, I run a logistics startup.",
+      "Our monthly revenue is around fifty."
+    ]
+  },
+  {
+    "id": "scenario-04",
+    "name": "Out of Scope Knowledge Question",
+    "desc": "Customer asks about an unsupported topic (cryptocurrency lending). Agent safely abstains via Q2 confidence gate, then answers a grounded question.",
+    "turns": [
+      "Do you offer collateralized Bitcoin and crypto business loans?",
+      "What documents are required to apply for a business loan?"
+    ]
+  },
+  {
+    "id": "scenario-05",
+    "name": "Human Representative Escalation",
+    "desc": "Customer requests to speak with a human underwriter. Agent triggers immediate escalation.",
+    "turns": [
+      "I need to speak with a human specialist to discuss a custom syndicate financing package."
+    ]
+  }
+]

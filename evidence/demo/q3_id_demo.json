@@ -1,0 +1,18 @@
+{
+  "module": "Q3 — Indonesia Localized Multifinance Voice Agent",
+  "market": "ID",
+  "sector": "multifinance_or_consumer_finance",
+  "languages": ["id_formal", "id_colloquial", "id_mixed"],
+  "status": "PARTIAL — SIMULATION ONLY (REGIONAL ACCENT MANIFEST PREPARED)",
+  "reason": "Formal and colloquial Bahasa registers, finance loanword mappings (cicilan, tenor, denda, DP), and localized fallback are verified; live phone calls and acoustic regional accent audio benchmarks have not yet been produced.",
+  "demo_files": {
+    "call_01_cooperative": "evidence/q3/indonesia/call-01.json",
+    "call_02_objection_handled": "evidence/q3/indonesia/call-02.json",
+    "call_03_colloquial_escalation": "evidence/q3/indonesia/call-03.json",
+    "localization_examples": "evidence/q3/indonesia/localization_examples.json",
+    "regional_accent_manifest": "evidence/q3/regional/accent_test_manifest.json",
+    "assistant_config": "evidence/q3/indonesia/config.json",
+    "asr_manifest": "evidence/q3/indonesia/asr_results.json",
+    "tts_manifest": "evidence/q3/indonesia/tts_results.json"
+  }
+}

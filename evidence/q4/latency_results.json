@@ -1,0 +1,16 @@
+[
+  {
+    "event_id": "sig_topic_1250",
+    "end_to_end_ms": 1790938290779.8975,
+    "asr_latency_ms": 1790938290777.769,
+    "signal_latency_ms": 0.0324249267578125,
+    "nudge_latency_ms": 0.09584426879882812
+  },
+  {
+    "event_id": "sig_cross_sell_second_vehicle_5250",
+    "end_to_end_ms": 1790938286780.529,
+    "asr_latency_ms": 1790938286778.4343,
+    "signal_latency_ms": 0.0059604644775390625,
+    "nudge_latency_ms": 0.08869171142578125
+  }
+]

@@ -1,0 +1,125 @@
+{
+  "scenario_id": "CALL-ID-01",
+  "name": "Cooperative Consumer Finance Client (Colloquial)",
+  "description": "Customer inquires about consumer financing with friendly colloquial Indonesian.",
+  "call_id": "sim-id-CALL-ID-01",
+  "call_type": "SIMULATION \u2014 NOT LIVE CALL",
+  "market": "ID",
+  "final_language": "id_colloquial",
+  "final_register": "colloquial",
+  "final_state": "ESCALATION",
+  "qualification_state": {
+    "business_type": "kuliner",
+    "years_in_business": 3.0,
+    "monthly_revenue": 1200000.0,
+    "requested_amount": 2000000.0,
+    "contact_permission": true
+  },
+  "lead_created": true,
+  "escalated": true,
+  "detected_terminology": [
+    "financing"
+  ],
+  "transcript": [
+    {
+      "turn": 1,
+      "caller": "Halo Kak! Mau nanya dong soal pembiayaan dana buat usaha kuliner saya.",
+      "agent": "Udah berapa lama nih usahanya atau kerja di tempat yang sekarang, Kak?",
+      "detected_language": "id_colloquial",
+      "detected_register": "colloquial",
+      "code_switch_detected": false,
+      "state_before": "GREETING",
+      "state_after": "QUALIFICATION",
+      "grounded": true,
+      "citations": [],
+      "actions": [
+        {
+          "action_type": "EVALUATE_QUALIFICATION",
+          "parameters": {},
+          "result_summary": "NEEDS_MORE_INFORMATION"
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "caller": "Usahanya udah jalan 3 tahun nih Kak.",
+      "agent": "Kira-kira rata-rata pemasukan atau gaji per bulan berapa ya, Kak?",
+      "detected_language": "id_colloquial",
+      "detected_register": "colloquial",
+      "code_switch_detected": false,
+      "state_before": "QUALIFICATION",
+      "state_after": "QUALIFICATION",
+      "grounded": true,
+      "citations": [],
+      "actions": [
+        {
+          "action_type": "EVALUATE_QUALIFICATION",
+          "parameters": {},
+          "result_summary": "NEEDS_MORE_INFORMATION"
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "caller": "Rata-rata omzet bulanan kita sekitar 1.2 juta.",
+      "agent": "Berapa estimasi nominal pembiayaan yang ingin Bapak/Ibu ajukan?",
+      "detected_language": "id_mixed",
+      "detected_register": "mixed",
+      "code_switch_detected": false,
+      "state_before": "QUALIFICATION",
+      "state_after": "QUALIFICATION",
+      "grounded": true,
+      "citations": [],
+      "actions": [
+        {
+          "action_type": "EVALUATE_QUALIFICATION",
+          "parameters": {},
+          "result_summary": "NEEDS_MORE_INFORMATION"
+        }
+      ]
+    },
+    {
+      "turn": 4,
+      "caller": "Rencana mau ngajuin pinjaman dua juta buat nambah alat masak.",
+      "agent": "Kabar baik Bapak/Ibu, permohonan Anda memenuhi kriteria untuk produk pembiayaan Growth. Anda berhak mendapatkan fasilitas hingga Rp 5,000,000 dengan suku bunga 10.0%. Data pengajuan Anda telah kami teruskan kepada konsultan pembiayaan kami untuk penyusunan jadwal cicilan resmi.",
+      "detected_language": "id_mixed",
+      "detected_register": "mixed",
+      "code_switch_detected": false,
+      "state_before": "QUALIFICATION",
+      "state_after": "REVIEW",
+      "grounded": true,
+      "citations": [],
+      "actions": [
+        {
+          "action_type": "EVALUATE_QUALIFICATION",
+          "parameters": {},
+          "result_summary": "ELIGIBLE"
+        },
+        {
+          "action_type": "CREATE_LEAD",
+          "parameters": {},
+          "result_summary": "created"
+        }
+      ]
+    },
+    {
+      "turn": 5,
+      "caller": "Boleh banget Kak, silakan kalau tim staf mau hubungi saya via WA.",
+      "agent": "Siap Kak, langsung aku sambungkan ke tim representatif kami ya. Ditunggu sebentar ya Kak.",
+      "detected_language": "id_colloquial",
+      "detected_register": "colloquial",
+      "code_switch_detected": false,
+      "state_before": "REVIEW",
+      "state_after": "ESCALATION",
+      "grounded": true,
+      "citations": [],
+      "actions": [
+        {
+          "action_type": "ESCALATE",
+          "parameters": {},
+          "result_summary": "requested"
+        }
+      ]
+    }
+  ]
+}

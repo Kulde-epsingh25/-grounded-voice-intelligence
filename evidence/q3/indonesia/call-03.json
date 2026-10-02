@@ -1,0 +1,38 @@
+{
+  "scenario_id": "CALL-ID-03",
+  "name": "Formal Indonesian with Human Escalation",
+  "description": "Customer requests immediate escalation to customer service officer.",
+  "call_id": "sim-id-CALL-ID-03",
+  "call_type": "SIMULATION \u2014 NOT LIVE CALL",
+  "market": "ID",
+  "final_language": "id_formal",
+  "final_register": "formal",
+  "final_state": "ESCALATION",
+  "qualification_state": {},
+  "lead_created": false,
+  "escalated": true,
+  "detected_terminology": [
+    "financing"
+  ],
+  "transcript": [
+    {
+      "turn": 1,
+      "caller": "Selamat pagi Bapak/Ibu, saya ingin berbicara dengan staf customer service langsung terkait restrukturisasi kredit pembiayaan saya.",
+      "agent": "Baik Bapak/Ibu, saya akan segera menyambungkan panggilan ini ke staf customer service kami. Mohon ditunggu sejenak.",
+      "detected_language": "id_formal",
+      "detected_register": "formal",
+      "code_switch_detected": false,
+      "state_before": "GREETING",
+      "state_after": "ESCALATION",
+      "grounded": true,
+      "citations": [],
+      "actions": [
+        {
+          "action_type": "ESCALATE",
+          "parameters": {},
+          "result_summary": "requested"
+        }
+      ]
+    }
+  ]
+}

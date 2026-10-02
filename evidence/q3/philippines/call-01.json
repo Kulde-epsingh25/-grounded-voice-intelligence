@@ -1,0 +1,125 @@
+{
+  "scenario_id": "CALL-PH-01",
+  "name": "Cooperative Bancassurance Client (Taglish)",
+  "description": "Customer inquires and qualifies for bancassurance life coverage in natural Taglish.",
+  "call_id": "sim-ph-CALL-PH-01",
+  "call_type": "SIMULATION \u2014 NOT LIVE CALL",
+  "market": "PH",
+  "final_language": "taglish",
+  "final_register": "formal",
+  "final_state": "ESCALATION",
+  "qualification_state": {
+    "business_type": "retail",
+    "years_in_business": 3.0,
+    "monthly_revenue": 1200000.0,
+    "requested_amount": 2000000.0,
+    "contact_permission": true
+  },
+  "lead_created": true,
+  "escalated": true,
+  "detected_terminology": [
+    "coverage"
+  ],
+  "transcript": [
+    {
+      "turn": 1,
+      "caller": "Magandang araw po! May retail grocery business po ako sa Quezon City.",
+      "agent": "Ilang taon na po kayong nagpapatakbo ng inyong negosyo?",
+      "detected_language": "taglish",
+      "detected_register": "formal",
+      "code_switch_detected": true,
+      "state_before": "GREETING",
+      "state_after": "QUALIFICATION",
+      "grounded": true,
+      "citations": [],
+      "actions": [
+        {
+          "action_type": "EVALUATE_QUALIFICATION",
+          "parameters": {},
+          "result_summary": "NEEDS_MORE_INFORMATION"
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "caller": "Nasa 3 years na po kaming nag-ooperate.",
+      "agent": "Mga magkano po ang average na monthly revenue o kinikita ninyo kada buwan?",
+      "detected_language": "taglish",
+      "detected_register": "formal",
+      "code_switch_detected": true,
+      "state_before": "QUALIFICATION",
+      "state_after": "QUALIFICATION",
+      "grounded": true,
+      "citations": [],
+      "actions": [
+        {
+          "action_type": "EVALUATE_QUALIFICATION",
+          "parameters": {},
+          "result_summary": "NEEDS_MORE_INFORMATION"
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "caller": "Ang monthly revenue po namin is around 1.2 million pesos.",
+      "agent": "Magkano po ang target coverage o halaga na nais ninyong i-secure?",
+      "detected_language": "taglish",
+      "detected_register": "formal",
+      "code_switch_detected": true,
+      "state_before": "QUALIFICATION",
+      "state_after": "QUALIFICATION",
+      "grounded": true,
+      "citations": [],
+      "actions": [
+        {
+          "action_type": "EVALUATE_QUALIFICATION",
+          "parameters": {},
+          "result_summary": "NEEDS_MORE_INFORMATION"
+        }
+      ]
+    },
+    {
+      "turn": 4,
+      "caller": "Target po naming loan or coverage amount is 2 million para sa protection.",
+      "agent": "Magandang balita po! Pasok po ang inyong profile sa ating Growth plan. Qualified po kayo para sa hanggang $5,000,000 sa interest rate na 10.0%. Na-record ko na po ang inyong application lead para ma-assist kayo ng ating specialist sa branch.",
+      "detected_language": "taglish",
+      "detected_register": "formal",
+      "code_switch_detected": true,
+      "state_before": "QUALIFICATION",
+      "state_after": "REVIEW",
+      "grounded": true,
+      "citations": [],
+      "actions": [
+        {
+          "action_type": "EVALUATE_QUALIFICATION",
+          "parameters": {},
+          "result_summary": "ELIGIBLE"
+        },
+        {
+          "action_type": "CREATE_LEAD",
+          "parameters": {},
+          "result_summary": "created"
+        }
+      ]
+    },
+    {
+      "turn": 5,
+      "caller": "Opo, pumapayag po ako na tawagan ako ng specialist niyo sa branch.",
+      "agent": "Opo, nauunawaan ko po. I-transfer ko na po kayo ngayon sa ating insurance financial specialist. Sandali lamang po.",
+      "detected_language": "taglish",
+      "detected_register": "formal",
+      "code_switch_detected": true,
+      "state_before": "REVIEW",
+      "state_after": "ESCALATION",
+      "grounded": true,
+      "citations": [],
+      "actions": [
+        {
+          "action_type": "ESCALATE",
+          "parameters": {},
+          "result_summary": "requested"
+        }
+      ]
+    }
+  ]
+}

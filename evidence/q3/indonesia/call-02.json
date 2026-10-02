@@ -1,0 +1,128 @@
+{
+  "scenario_id": "CALL-ID-02",
+  "name": "Finance Objection with English Terminology (DP & Denda)",
+  "description": "Customer objects to late penalties and down payment. Grounded in Q2 KB.",
+  "call_id": "sim-id-CALL-ID-02",
+  "call_type": "SIMULATION \u2014 NOT LIVE CALL",
+  "market": "ID",
+  "final_language": "id_colloquial",
+  "final_register": "colloquial",
+  "final_state": "OBJECTION",
+  "qualification_state": {
+    "business_type": "bengkel",
+    "years_in_business": 3.0,
+    "monthly_revenue": 1500000.0,
+    "contact_permission": true
+  },
+  "lead_created": false,
+  "escalated": false,
+  "detected_terminology": [
+    "late_penalty",
+    "tenor",
+    "financing",
+    "due_date"
+  ],
+  "transcript": [
+    {
+      "turn": 1,
+      "caller": "Siang Kak, mau cek kredit motor tapi takut denda keterlambatannya kemahalan kalau lewat tanggal jatuh tempo.",
+      "agent": "Waduh mohon maaf Kak, info soal itu belum ada di panduan resmi kami nih. Mau aku hubungkan langsung sama customer service kami biar dibantu?",
+      "detected_language": "id_colloquial",
+      "detected_register": "colloquial",
+      "code_switch_detected": false,
+      "state_before": "GREETING",
+      "state_after": "OBJECTION",
+      "grounded": false,
+      "citations": [],
+      "actions": [
+        {
+          "action_type": "SEARCH_KB",
+          "parameters": {
+            "query": "Siang Kak, mau cek kredit motor tapi takut denda keterlambatannya kemahalan kalau lewat tanggal jatuh tempo"
+          },
+          "result_summary": "ungrounded"
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "caller": "Berapa denda keterlambatan jika melewati tanggal jatuh tempo?",
+      "agent": "Dapat kami pahami pertimbangan Bapak/Ibu. 2. Pilihan Tenor dan Pembayaran Cicilan:\nTenor pembiayaan tersedia fleksibel mulai dari 12 bulan (1 tahun) hingga 60 bulan (5 tahun). Besaran cicilan bulanan dihitung berdasarkan pokok pinjaman dan suku bunga flat yang disepakati.\n\n3. Denda Keterlambatan dan Batas Jatuh Tempo:\nPembayaran angsuran wajib disetorkan sebelum tanggal jatuh tempo setiap bulannya. Keterlambatan dikenakan denda sebesar 0.5% per hari dari nominal cicilan yang tertunggak.\n\nSources:\n  [1] [Source: synthetic_id_multifinance.txt | Section: Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan | p. 1 | v1.0 | hash:f9e8d7c6]\n  [2] [Source: synthetic_id_multifinance.txt | Section: Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan | p. 1 | v1.0 | hash:f9e8d7c6]\n\nApakah berkenan kami carikan simulasi dengan tenor yang lebih panjang agar angsuran tetap terjangkau?",
+      "detected_language": "id_mixed",
+      "detected_register": "mixed",
+      "code_switch_detected": false,
+      "state_before": "OBJECTION",
+      "state_after": "OBJECTION",
+      "grounded": true,
+      "citations": [
+        {
+          "citation_id": "cit_44181857",
+          "source_id": "src_id_multifinance",
+          "source_name": "synthetic_id_multifinance.txt",
+          "record_id": "kb_loc_id_01",
+          "chunk_id": "chk_e6d31a17",
+          "section": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+          "source_page": 1,
+          "version": "1.0",
+          "content_hash": "f9e8d7c6b5a4090807060504030201f9e8d7c6b5a4030201f9e8d7c6b5a40302",
+          "confidence": 0.7375,
+          "snippet": "2. Pilihan Tenor dan Pembayaran Cicilan:"
+        },
+        {
+          "citation_id": "cit_5f19ac2f",
+          "source_id": "src_id_multifinance",
+          "source_name": "synthetic_id_multifinance.txt",
+          "record_id": "kb_loc_id_01",
+          "chunk_id": "chk_bccbad80",
+          "section": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+          "source_page": 1,
+          "version": "1.0",
+          "content_hash": "f9e8d7c6b5a4090807060504030201f9e8d7c6b5a4030201f9e8d7c6b5a40302",
+          "confidence": 0.2903,
+          "snippet": "4. Pelunasan Dipercepat:"
+        },
+        {
+          "citation_id": "cit_abf458ec",
+          "source_id": "src_id_multifinance",
+          "source_name": "synthetic_id_multifinance.txt",
+          "record_id": "kb_loc_id_01",
+          "chunk_id": "chk_356d2bf8",
+          "section": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+          "source_page": 1,
+          "version": "1.0",
+          "content_hash": "f9e8d7c6b5a4090807060504030201f9e8d7c6b5a4030201f9e8d7c6b5a40302",
+          "confidence": 0.2857,
+          "snippet": "SYNTHETIC DEMO DATA \u2014 NOT REAL MULTIFINANCE POLICY"
+        }
+      ],
+      "actions": [
+        {
+          "action_type": "SEARCH_KB",
+          "parameters": {
+            "query": "Berapa denda keterlambatan jika melewati tanggal jatuh tempo"
+          },
+          "result_summary": "grounded"
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "caller": "Usaha bengkel saya udah 3 tahun, omzet 1.5 juta per bulan.",
+      "agent": "Rencana mau ngajuin pinjaman berapa juta nih, Kak?",
+      "detected_language": "id_colloquial",
+      "detected_register": "colloquial",
+      "code_switch_detected": false,
+      "state_before": "OBJECTION",
+      "state_after": "OBJECTION",
+      "grounded": true,
+      "citations": [],
+      "actions": [
+        {
+          "action_type": "EVALUATE_QUALIFICATION",
+          "parameters": {},
+          "result_summary": "NEEDS_MORE_INFORMATION"
+        }
+      ]
+    }
+  ]
+}

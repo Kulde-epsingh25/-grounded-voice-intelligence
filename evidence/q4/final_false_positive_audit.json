@@ -1,0 +1,35 @@
+{
+  "audit_name": "Q4 Signal Extraction & False-Positive Audit",
+  "dataset_path": "data/eval/q4_signals/cases.json",
+  "sample_count": 28,
+  "confusion_matrix": {
+    "true_positives": 20,
+    "true_negatives": 7,
+    "false_positives": 1,
+    "false_negatives": 0
+  },
+  "metrics": {
+    "precision": 0.9524,
+    "recall": 1.0,
+    "false_positive_rate": 0.125,
+    "specificity": 0.875,
+    "f1_score": 0.9756
+  },
+  "fpr_explanation": "The 12.5% False Positive Rate (FPR = FP / (FP + TN) = 1 / (1 + 7) = 1/8) arises because the benchmark includes 8 negative/neutral control cases and exactly 1 false alert fired. Precision remains high at 95.2% (20/21) across all emitted alerts.",
+  "incorrect_cases_count": 1,
+  "incorrect_cases": [
+    {
+      "case_id": "CASE-NEU-03",
+      "category": "neutral",
+      "speaker": "AGENT",
+      "text": "Thank you for providing that. Let me look up our standard commercial tiers.",
+      "expected_alert": false,
+      "predicted_alert": true,
+      "predicted_signal": "topic_shift",
+      "predicted_priority": "LOW",
+      "confidence": 0.82,
+      "root_cause_analysis": "The heuristic topic-shift classifier detected the lexical token 'tier' from 'commercial tiers' and categorized it as a transition from greeting to qualification/pricing. In production, this can be refined by conditioning topic shifts on multi-token phrases or customer utterances rather than agent acknowledgments."
+    }
+  ],
+  "verification_verdict": "VERIFIED — NO UNREPORTED FAILURES"
+}

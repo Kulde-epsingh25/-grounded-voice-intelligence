@@ -1,0 +1,18 @@
+{
+  "module": "Q1 — Knowledge-Grounded Commercial Loan Voice Agent",
+  "status": "PARTIAL — SIMULATION ONLY",
+  "reason": "Full state machine, qualification rules, and Q2 retrieval integration are implemented and tested, but live Vapi phone recordings have not yet been produced due to absent external telephony credentials.",
+  "demo_files": {
+    "call_01_cooperative": "evidence/q1/calls/call-01.json",
+    "call_02_objection_handled": "evidence/q1/calls/call-02.json",
+    "call_03_incomplete_clarified": "evidence/q1/calls/call-03.json",
+    "call_04_out_of_scope_abstain": "evidence/q1/calls/call-04.json",
+    "call_05_human_escalation": "evidence/q1/calls/call-05.json"
+  },
+  "summary_artifacts": {
+    "qualification_results": "evidence/q1/qualification_results.json",
+    "scenarios_manifest": "evidence/q1/test_scenarios.json",
+    "assistant_config": "config/vapi_assistant.json"
+  },
+  "browser_test_url": "http://localhost:8000/voice"
+}

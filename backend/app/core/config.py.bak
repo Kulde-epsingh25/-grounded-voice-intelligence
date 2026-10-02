@@ -1,0 +1,230 @@
+"""
+AI Engineer Assessment — Application Configuration.
+
+All configuration is loaded from environment variables.
+No secrets are hardcoded.
+"""
+
+from __future__ import annotations
+
+import os
+from dataclasses import dataclass, field
+from pathlib import Path
+from functools import lru_cache
+from dotenv import load_dotenv
+
+# Load root .env
+_env_path = Path(__file__).resolve().parents[3] / ".env"
+if _env_path.exists():
+    load_dotenv(dotenv_path=_env_path)
+else:
+    load_dotenv()
+
+
+@dataclass(frozen=True)
+class OpenAIConfig:
+    api_key: str = ""
+    embedding_model: str = "text-embedding-3-small"
+    llm_model: str = "gpt-4o-mini"
+
+
+@dataclass(frozen=True)
+class VapiConfig:
+    api_key: str = ""
+    public_key: str = ""
+
+
+@dataclass(frozen=True)
+class DeepgramConfig:
+    api_key: str = ""
+
+
+@dataclass(frozen=True)
+class ElevenLabsConfig:
+    api_key: str = ""
+
+
+@dataclass(frozen=True)
+class GeminiConfig:
+    api_key: str = ""
+    text_model: str = "gemini-3.5-flash"
+    live_model: str = "gemini-3.5-flash"
+    transcribe_model: str = "gemini-3.5-flash"
+    tts_model: str = "gemini-3.8-flash-tts"
+
+
+@dataclass(frozen=True)
+class GroqConfig:
+    api_key: str = ""
+    model: str = "llama-3.3-70b-versatile"
+
+
+@dataclass(frozen=True)
+class OpenRouterConfig:
+    api_key: str = ""
+    model: str = "nvidia/nemotron-3.5-lightning:free"
+
+
+@dataclass(frozen=True)
+class HuggingFaceConfig:
+    token: str = ""
+    local_enabled: bool = True
+
+
+@dataclass(frozen=True)
+class MockFailureConfig:
+    vapi: bool = False
+    openai: bool = False
+    deepgram: bool = False
+    elevenlabs: bool = False
+    gemini: bool = False
+
+
+@dataclass(frozen=True)
+class QdrantConfig:
+    url: str = "http://localhost:6333"
+    api_key: str = ""
+    collection_name: str = "knowledge_base"
+
+
+@dataclass(frozen=True)
+class RetrievalConfig:
+    confidence_threshold: float = 0.60
+    top_k: int = 5
+    chunk_size: int = 512
+    chunk_overlap: int = 64
+
+
+@dataclass(frozen=True)
+class WebhookConfig:
+    kb_secret: str = ""
+    vapi_secret: str = ""
+
+
+@dataclass(frozen=True)
+class AppConfig:
+    env: str = "development"
+    host: str = "0.0.0.0"
+    port: int = 8000
+    log_level: str = "INFO"
+    project_root: Path = field(default_factory=lambda: Path(__file__).resolve().parents[3])
+
+    openai: OpenAIConfig = field(default_factory=OpenAIConfig)
+    vapi: VapiConfig = field(default_factory=VapiConfig)
+    deepgram: DeepgramConfig = field(default_factory=DeepgramConfig)
+    elevenlabs: ElevenLabsConfig = field(default_factory=ElevenLabsConfig)
+    gemini: GeminiConfig = field(default_factory=GeminiConfig)
+    groq: GroqConfig = field(default_factory=GroqConfig)
+    openrouter: OpenRouterConfig = field(default_factory=OpenRouterConfig)
+    hf: HuggingFaceConfig = field(default_factory=HuggingFaceConfig)
+    mock_failure: MockFailureConfig = field(default_factory=MockFailureConfig)
+    qdrant: QdrantConfig = field(default_factory=QdrantConfig)
+    retrieval: RetrievalConfig = field(default_factory=RetrievalConfig)
+    webhook: WebhookConfig = field(default_factory=WebhookConfig)
+
+    @property
+    def is_development(self) -> bool:
+        return self.env == "development"
+
+    @property
+    def is_production(self) -> bool:
+        return self.env == "production"
+
+
+def _float_env(key: str, default: float) -> float:
+    val = os.getenv(key)
+    if val is None:
+        return default
+    try:
+        return float(val)
+    except ValueError:
+        return default
+
+
+def _int_env(key: str, default: int) -> int:
+    val = os.getenv(key)
+    if val is None:
+        return default
+    try:
+        return int(val)
+    except ValueError:
+        return default
+
+
+def _bool_env(key: str, default: bool) -> bool:
+    val = os.getenv(key)
+    if val is None:
+        return default
+    return val.strip().lower() in ("true", "1", "yes", "t", "on")
+
+
+def load_config() -> AppConfig:
+    """Load configuration from environment variables."""
+    return AppConfig(
+        env=os.getenv("APP_ENV", "development"),
+        host=os.getenv("APP_HOST", "0.0.0.0"),
+        port=_int_env("APP_PORT", 8000),
+        log_level=os.getenv("LOG_LEVEL", "INFO"),
+        openai=OpenAIConfig(
+            api_key=os.getenv("OPENAI_API_KEY", ""),
+            embedding_model=os.getenv("OPENAI_EMBEDDING_MODEL", "text-embedding-3-small"),
+            llm_model=os.getenv("OPENAI_LLM_MODEL", "gpt-4o-mini"),
+        ),
+        vapi=VapiConfig(
+            api_key=os.getenv("VAPI_API_KEY", ""),
+            public_key=os.getenv("VAPI_PUBLIC_KEY", ""),
+        ),
+        deepgram=DeepgramConfig(
+            api_key=os.getenv("DEEPGRAM_API_KEY", ""),
+        ),
+        elevenlabs=ElevenLabsConfig(
+            api_key=os.getenv("ELEVENLABS_API_KEY", ""),
+        ),
+        gemini=GeminiConfig(
+            api_key=os.getenv("GEMINI_API_KEY", ""),
+            text_model=os.getenv("GEMINI_TEXT_MODEL", "gemini-3.5-flash"),
+            live_model=os.getenv("GEMINI_LIVE_MODEL", "gemini-3.5-flash"),
+            transcribe_model=os.getenv("GEMINI_TRANSCRIBE_MODEL", "gemini-3.5-flash"),
+            tts_model=os.getenv("GEMINI_TTS_MODEL", "gemini-3.8-flash-tts"),
+        ),
+        groq=GroqConfig(
+            api_key=os.getenv("GROQ_API_KEY", ""),
+            model=os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile"),
+        ),
+        openrouter=OpenRouterConfig(
+            api_key=os.getenv("OPENROUTER_API_KEY", ""),
+            model=os.getenv("OPENROUTER_MODEL", "nvidia/nemotron-3.5-lightning:free"),
+        ),
+        hf=HuggingFaceConfig(
+            token=os.getenv("HF_TOKEN") or os.getenv("HUGGINGFACE_API_KEY") or "",
+            local_enabled=_bool_env("HF_LOCAL_ENABLED", True),
+        ),
+        mock_failure=MockFailureConfig(
+            vapi=_bool_env("MOCK_VAPI_FAILURE", False),
+            openai=_bool_env("MOCK_OPENAI_FAILURE", False),
+            deepgram=_bool_env("MOCK_DEEPGRAM_FAILURE", False),
+            elevenlabs=_bool_env("MOCK_ELEVENLABS_FAILURE", False),
+            gemini=_bool_env("MOCK_GEMINI_FAILURE", False),
+        ),
+        qdrant=QdrantConfig(
+            url=os.getenv("QDRANT_URL", "http://localhost:6333"),
+            api_key=os.getenv("QDRANT_API_KEY", ""),
+            collection_name=os.getenv("QDRANT_COLLECTION_NAME", "knowledge_base"),
+        ),
+        retrieval=RetrievalConfig(
+            confidence_threshold=_float_env("RETRIEVAL_CONFIDENCE_THRESHOLD", 0.60),
+            top_k=_int_env("RETRIEVAL_TOP_K", 5),
+            chunk_size=_int_env("CHUNK_SIZE", 512),
+            chunk_overlap=_int_env("CHUNK_OVERLAP", 64),
+        ),
+        webhook=WebhookConfig(
+            kb_secret=os.getenv("KB_WEBHOOK_SECRET", ""),
+            vapi_secret=os.getenv("VAPI_WEBHOOK_SECRET", ""),
+        ),
+    )
+
+
+@lru_cache(maxsize=1)
+def get_config() -> AppConfig:
+    """Get cached application configuration."""
+    return load_config()

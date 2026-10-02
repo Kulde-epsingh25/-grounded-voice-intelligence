@@ -1,0 +1,337 @@
+[
+  {
+    "scenario": "ID-01 Formal",
+    "query": "Berapa lama jangka waktu tenor pembiayaan dan simulasi cicilan bulanan?",
+    "status_code": 200,
+    "response": {
+      "query": "Berapa lama jangka waktu tenor pembiayaan dan simulasi cicilan bulanan?",
+      "answer": "2. Pilihan Tenor dan Pembayaran Cicilan:\nTenor pembiayaan tersedia fleksibel mulai dari 12 bulan (1 tahun) hingga 60 bulan (5 tahun). Besaran cicilan bulanan dihitung berdasarkan pokok pinjaman dan suku bunga flat yang disepakati.\n\n3. Denda Keterlambatan dan Batas Jatuh Tempo:\nPembayaran angsuran wajib disetorkan sebelum tanggal jatuh tempo setiap bulannya. Keterlambatan dikenakan denda sebesar 0.5% per hari dari nominal cicilan yang tertunggak.\n\nSources:\n  [1] [Source: synthetic_id_multifinance.txt | Section: Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan | p. 1 | v1.0 | hash:f9e8d7c6]\n  [2] [Source: synthetic_id_multifinance.txt | Section: Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan | p. 1 | v1.0 | hash:f9e8d7c6]",
+      "grounded": true,
+      "confidence": 0.6491,
+      "citations": [
+        {
+          "citation_id": "cit_ed52efb2",
+          "source_id": "src_id_multifinance",
+          "source_name": "synthetic_id_multifinance.txt",
+          "record_id": "kb_loc_id_01",
+          "chunk_id": "chk_9234bb88",
+          "section": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+          "source_page": 1,
+          "version": "1.0",
+          "content_hash": "f9e8d7c6b5a4090807060504030201f9e8d7c6b5a4030201f9e8d7c6b5a40302",
+          "confidence": 0.7429,
+          "snippet": "2. Pilihan Tenor dan Pembayaran Cicilan:"
+        },
+        {
+          "citation_id": "cit_a97af98c",
+          "source_id": "src_id_multifinance",
+          "source_name": "synthetic_id_multifinance.txt",
+          "record_id": "kb_loc_id_01",
+          "chunk_id": "chk_cfc4e15e",
+          "section": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+          "source_page": 1,
+          "version": "1.0",
+          "content_hash": "f9e8d7c6b5a4090807060504030201f9e8d7c6b5a4030201f9e8d7c6b5a40302",
+          "confidence": 0.6664,
+          "snippet": "SYNTHETIC DEMO DATA \u2014 NOT REAL MULTIFINANCE POLICY"
+        },
+        {
+          "citation_id": "cit_324fc433",
+          "source_id": "src_id_multifinance",
+          "source_name": "synthetic_id_multifinance.txt",
+          "record_id": "kb_loc_id_01",
+          "chunk_id": "chk_0e2b3a21",
+          "section": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+          "source_page": 1,
+          "version": "1.0",
+          "content_hash": "f9e8d7c6b5a4090807060504030201f9e8d7c6b5a4030201f9e8d7c6b5a40302",
+          "confidence": 0.6606,
+          "snippet": "4. Pelunasan Dipercepat:"
+        }
+      ],
+      "results": [
+        {
+          "chunk_id": "chk_9234bb88",
+          "title": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+          "section": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+          "content": "2. Pilihan Tenor dan Pembayaran Cicilan:\nTenor pembiayaan tersedia fleksibel mulai dari 12 bulan (1 tahun) hingga 60 bulan (5 tahun). Besaran cicilan bulanan dihitung berdasarkan pokok pinjaman dan suku bunga flat yang disepakati.\n\n3. Denda Keterlambatan dan Batas Jatuh Tempo:\nPembayaran angsuran wajib disetorkan sebelum tanggal jatuh tempo setiap bulannya. Keterlambatan dikenakan denda sebesar 0.5% per hari dari nominal cicilan yang tertunggak.",
+          "source_name": "synthetic_id_multifinance.txt",
+          "source_id": "src_id_multifinance",
+          "score": 0.7429,
+          "citation": {
+            "citation_id": "cit_ed52efb2",
+            "source_id": "src_id_multifinance",
+            "source_name": "synthetic_id_multifinance.txt",
+            "record_id": "kb_loc_id_01",
+            "chunk_id": "chk_9234bb88",
+            "section": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+            "source_page": 1,
+            "version": "1.0",
+            "content_hash": "f9e8d7c6b5a4090807060504030201f9e8d7c6b5a4030201f9e8d7c6b5a40302",
+            "confidence": 0.7429,
+            "snippet": "2. Pilihan Tenor dan Pembayaran Cicilan:"
+          }
+        },
+        {
+          "chunk_id": "chk_cfc4e15e",
+          "title": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+          "section": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+          "content": "SYNTHETIC DEMO DATA \u2014 NOT REAL MULTIFINANCE POLICY\n\nKetentuan Pembiayaan Konsumen dan Multifinance Indonesia\n\nProduk: Pembiayaan Kendaraan Bermotor & Dana Multiguna\nPengawasan: Berizin dan diawasi oleh OJK (Otoritas Jasa Keuangan)\n\n1. Ketentuan Uang Muka (DP):\nMinimal Down Payment (DP) kendaraan roda empat adalah 20% dari harga OTR. Untuk program promo kredit retail, DP minimal 10% dapat diajukan setelah verifikasi penghasilan bulanan.",
+          "source_name": "synthetic_id_multifinance.txt",
+          "source_id": "src_id_multifinance",
+          "score": 0.6664,
+          "citation": {
+            "citation_id": "cit_a97af98c",
+            "source_id": "src_id_multifinance",
+            "source_name": "synthetic_id_multifinance.txt",
+            "record_id": "kb_loc_id_01",
+            "chunk_id": "chk_cfc4e15e",
+            "section": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+            "source_page": 1,
+            "version": "1.0",
+            "content_hash": "f9e8d7c6b5a4090807060504030201f9e8d7c6b5a4030201f9e8d7c6b5a40302",
+            "confidence": 0.6664,
+            "snippet": "SYNTHETIC DEMO DATA \u2014 NOT REAL MULTIFINANCE POLICY"
+          }
+        },
+        {
+          "chunk_id": "chk_0e2b3a21",
+          "title": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+          "section": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+          "content": "4. Pelunasan Dipercepat:\nKonsumen berhak melakukan pelunasan dipercepat atas sisa pokok pembiayaan sebelum masa tenor berakhir dengan melunasi sisa pokok ditambah biaya administrasi penutupan sebesar 2%.",
+          "source_name": "synthetic_id_multifinance.txt",
+          "source_id": "src_id_multifinance",
+          "score": 0.6606,
+          "citation": {
+            "citation_id": "cit_324fc433",
+            "source_id": "src_id_multifinance",
+            "source_name": "synthetic_id_multifinance.txt",
+            "record_id": "kb_loc_id_01",
+            "chunk_id": "chk_0e2b3a21",
+            "section": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+            "source_page": 1,
+            "version": "1.0",
+            "content_hash": "f9e8d7c6b5a4090807060504030201f9e8d7c6b5a4030201f9e8d7c6b5a40302",
+            "confidence": 0.6606,
+            "snippet": "4. Pelunasan Dipercepat:"
+          }
+        }
+      ],
+      "abstain_reason": null,
+      "processing_time_ms": 0.9
+    },
+    "grounded": true,
+    "confidence": 0.6491,
+    "citations": [
+      {
+        "citation_id": "cit_ed52efb2",
+        "source_id": "src_id_multifinance",
+        "source_name": "synthetic_id_multifinance.txt",
+        "record_id": "kb_loc_id_01",
+        "chunk_id": "chk_9234bb88",
+        "section": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+        "source_page": 1,
+        "version": "1.0",
+        "content_hash": "f9e8d7c6b5a4090807060504030201f9e8d7c6b5a4030201f9e8d7c6b5a40302",
+        "confidence": 0.7429,
+        "snippet": "2. Pilihan Tenor dan Pembayaran Cicilan:"
+      },
+      {
+        "citation_id": "cit_a97af98c",
+        "source_id": "src_id_multifinance",
+        "source_name": "synthetic_id_multifinance.txt",
+        "record_id": "kb_loc_id_01",
+        "chunk_id": "chk_cfc4e15e",
+        "section": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+        "source_page": 1,
+        "version": "1.0",
+        "content_hash": "f9e8d7c6b5a4090807060504030201f9e8d7c6b5a4030201f9e8d7c6b5a40302",
+        "confidence": 0.6664,
+        "snippet": "SYNTHETIC DEMO DATA \u2014 NOT REAL MULTIFINANCE POLICY"
+      },
+      {
+        "citation_id": "cit_324fc433",
+        "source_id": "src_id_multifinance",
+        "source_name": "synthetic_id_multifinance.txt",
+        "record_id": "kb_loc_id_01",
+        "chunk_id": "chk_0e2b3a21",
+        "section": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+        "source_page": 1,
+        "version": "1.0",
+        "content_hash": "f9e8d7c6b5a4090807060504030201f9e8d7c6b5a4030201f9e8d7c6b5a40302",
+        "confidence": 0.6606,
+        "snippet": "4. Pelunasan Dipercepat:"
+      }
+    ]
+  },
+  {
+    "scenario": "ID-02 Colloquial",
+    "query": "Halo Kak, mau tanya rincian denda kalau telat bayar angsuran motor gimana ya?",
+    "status_code": 200,
+    "response": {
+      "query": "Halo Kak, mau tanya rincian denda kalau telat bayar angsuran motor gimana ya?",
+      "answer": "I don't have verified information about that.",
+      "grounded": false,
+      "confidence": 0.4081,
+      "citations": [],
+      "results": [
+        {
+          "chunk_id": "chk_9234bb88",
+          "title": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+          "section": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+          "content": "2. Pilihan Tenor dan Pembayaran Cicilan:\nTenor pembiayaan tersedia fleksibel mulai dari 12 bulan (1 tahun) hingga 60 bulan (5 tahun). Besaran cicilan bulanan dihitung berdasarkan pokok pinjaman dan suku bunga flat yang disepakati.\n\n3. Denda Keterlambatan dan Batas Jatuh Tempo:\nPembayaran angsuran wajib disetorkan sebelum tanggal jatuh tempo setiap bulannya. Keterlambatan dikenakan denda sebesar 0.5% per hari dari nominal cicilan yang tertunggak.",
+          "source_name": "synthetic_id_multifinance.txt",
+          "source_id": "src_id_multifinance",
+          "score": 0.6132,
+          "citation": {
+            "citation_id": "cit_7e010b47",
+            "source_id": "src_id_multifinance",
+            "source_name": "synthetic_id_multifinance.txt",
+            "record_id": "kb_loc_id_01",
+            "chunk_id": "chk_9234bb88",
+            "section": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+            "source_page": 1,
+            "version": "1.0",
+            "content_hash": "f9e8d7c6b5a4090807060504030201f9e8d7c6b5a4030201f9e8d7c6b5a40302",
+            "confidence": 0.6132,
+            "snippet": "2. Pilihan Tenor dan Pembayaran Cicilan:"
+          }
+        },
+        {
+          "chunk_id": "chk_0e2b3a21",
+          "title": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+          "section": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+          "content": "4. Pelunasan Dipercepat:\nKonsumen berhak melakukan pelunasan dipercepat atas sisa pokok pembiayaan sebelum masa tenor berakhir dengan melunasi sisa pokok ditambah biaya administrasi penutupan sebesar 2%.",
+          "source_name": "synthetic_id_multifinance.txt",
+          "source_id": "src_id_multifinance",
+          "score": 0.2903,
+          "citation": {
+            "citation_id": "cit_8e2185b8",
+            "source_id": "src_id_multifinance",
+            "source_name": "synthetic_id_multifinance.txt",
+            "record_id": "kb_loc_id_01",
+            "chunk_id": "chk_0e2b3a21",
+            "section": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+            "source_page": 1,
+            "version": "1.0",
+            "content_hash": "f9e8d7c6b5a4090807060504030201f9e8d7c6b5a4030201f9e8d7c6b5a40302",
+            "confidence": 0.2903,
+            "snippet": "4. Pelunasan Dipercepat:"
+          }
+        },
+        {
+          "chunk_id": "chk_cfc4e15e",
+          "title": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+          "section": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+          "content": "SYNTHETIC DEMO DATA \u2014 NOT REAL MULTIFINANCE POLICY\n\nKetentuan Pembiayaan Konsumen dan Multifinance Indonesia\n\nProduk: Pembiayaan Kendaraan Bermotor & Dana Multiguna\nPengawasan: Berizin dan diawasi oleh OJK (Otoritas Jasa Keuangan)\n\n1. Ketentuan Uang Muka (DP):\nMinimal Down Payment (DP) kendaraan roda empat adalah 20% dari harga OTR. Untuk program promo kredit retail, DP minimal 10% dapat diajukan setelah verifikasi penghasilan bulanan.",
+          "source_name": "synthetic_id_multifinance.txt",
+          "source_id": "src_id_multifinance",
+          "score": 0.2857,
+          "citation": {
+            "citation_id": "cit_957b2120",
+            "source_id": "src_id_multifinance",
+            "source_name": "synthetic_id_multifinance.txt",
+            "record_id": "kb_loc_id_01",
+            "chunk_id": "chk_cfc4e15e",
+            "section": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+            "source_page": 1,
+            "version": "1.0",
+            "content_hash": "f9e8d7c6b5a4090807060504030201f9e8d7c6b5a4030201f9e8d7c6b5a40302",
+            "confidence": 0.2857,
+            "snippet": "SYNTHETIC DEMO DATA \u2014 NOT REAL MULTIFINANCE POLICY"
+          }
+        }
+      ],
+      "abstain_reason": "confidence_below_threshold_0.6",
+      "processing_time_ms": 0.92
+    },
+    "grounded": false,
+    "confidence": 0.4081,
+    "citations": []
+  },
+  {
+    "scenario": "ID-03 Loanwords",
+    "query": "Bisa tolong jelaskan detail down payment atau DP dan denda jatuh tempo?",
+    "status_code": 200,
+    "response": {
+      "query": "Bisa tolong jelaskan detail down payment atau DP dan denda jatuh tempo?",
+      "answer": "I don't have verified information about that.",
+      "grounded": false,
+      "confidence": 0.486,
+      "citations": [],
+      "results": [
+        {
+          "chunk_id": "chk_9234bb88",
+          "title": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+          "section": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+          "content": "2. Pilihan Tenor dan Pembayaran Cicilan:\nTenor pembiayaan tersedia fleksibel mulai dari 12 bulan (1 tahun) hingga 60 bulan (5 tahun). Besaran cicilan bulanan dihitung berdasarkan pokok pinjaman dan suku bunga flat yang disepakati.\n\n3. Denda Keterlambatan dan Batas Jatuh Tempo:\nPembayaran angsuran wajib disetorkan sebelum tanggal jatuh tempo setiap bulannya. Keterlambatan dikenakan denda sebesar 0.5% per hari dari nominal cicilan yang tertunggak.",
+          "source_name": "synthetic_id_multifinance.txt",
+          "source_id": "src_id_multifinance",
+          "score": 0.6674,
+          "citation": {
+            "citation_id": "cit_beb8d9fa",
+            "source_id": "src_id_multifinance",
+            "source_name": "synthetic_id_multifinance.txt",
+            "record_id": "kb_loc_id_01",
+            "chunk_id": "chk_9234bb88",
+            "section": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+            "source_page": 1,
+            "version": "1.0",
+            "content_hash": "f9e8d7c6b5a4090807060504030201f9e8d7c6b5a4030201f9e8d7c6b5a40302",
+            "confidence": 0.6674,
+            "snippet": "2. Pilihan Tenor dan Pembayaran Cicilan:"
+          }
+        },
+        {
+          "chunk_id": "chk_cfc4e15e",
+          "title": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+          "section": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+          "content": "SYNTHETIC DEMO DATA \u2014 NOT REAL MULTIFINANCE POLICY\n\nKetentuan Pembiayaan Konsumen dan Multifinance Indonesia\n\nProduk: Pembiayaan Kendaraan Bermotor & Dana Multiguna\nPengawasan: Berizin dan diawasi oleh OJK (Otoritas Jasa Keuangan)\n\n1. Ketentuan Uang Muka (DP):\nMinimal Down Payment (DP) kendaraan roda empat adalah 20% dari harga OTR. Untuk program promo kredit retail, DP minimal 10% dapat diajukan setelah verifikasi penghasilan bulanan.",
+          "source_name": "synthetic_id_multifinance.txt",
+          "source_id": "src_id_multifinance",
+          "score": 0.6443,
+          "citation": {
+            "citation_id": "cit_cafd8e3e",
+            "source_id": "src_id_multifinance",
+            "source_name": "synthetic_id_multifinance.txt",
+            "record_id": "kb_loc_id_01",
+            "chunk_id": "chk_cfc4e15e",
+            "section": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+            "source_page": 1,
+            "version": "1.0",
+            "content_hash": "f9e8d7c6b5a4090807060504030201f9e8d7c6b5a4030201f9e8d7c6b5a40302",
+            "confidence": 0.6443,
+            "snippet": "SYNTHETIC DEMO DATA \u2014 NOT REAL MULTIFINANCE POLICY"
+          }
+        },
+        {
+          "chunk_id": "chk_0e2b3a21",
+          "title": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+          "section": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+          "content": "4. Pelunasan Dipercepat:\nKonsumen berhak melakukan pelunasan dipercepat atas sisa pokok pembiayaan sebelum masa tenor berakhir dengan melunasi sisa pokok ditambah biaya administrasi penutupan sebesar 2%.",
+          "source_name": "synthetic_id_multifinance.txt",
+          "source_id": "src_id_multifinance",
+          "score": 0.5828,
+          "citation": {
+            "citation_id": "cit_e770e3be",
+            "source_id": "src_id_multifinance",
+            "source_name": "synthetic_id_multifinance.txt",
+            "record_id": "kb_loc_id_01",
+            "chunk_id": "chk_0e2b3a21",
+            "section": "Ketentuan Pembiayaan Multifinance dan Simulasi Cicilan",
+            "source_page": 1,
+            "version": "1.0",
+            "content_hash": "f9e8d7c6b5a4090807060504030201f9e8d7c6b5a4030201f9e8d7c6b5a40302",
+            "confidence": 0.5828,
+            "snippet": "4. Pelunasan Dipercepat:"
+          }
+        }
+      ],
+      "abstain_reason": "confidence_below_threshold_0.6",
+      "processing_time_ms": 0.88
+    },
+    "grounded": false,
+    "confidence": 0.486,
+    "citations": []
+  }
+]

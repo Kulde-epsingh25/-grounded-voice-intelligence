@@ -1,0 +1,36 @@
+{
+  "scenario_id": "CALL-PH-03",
+  "name": "Mixed Taglish with Human Escalation",
+  "description": "Customer requests immediate human transfer to speak with a licensed branch specialist.",
+  "call_id": "sim-ph-CALL-PH-03",
+  "call_type": "SIMULATION \u2014 NOT LIVE CALL",
+  "market": "PH",
+  "final_language": "taglish",
+  "final_register": "formal",
+  "final_state": "ESCALATION",
+  "qualification_state": {},
+  "lead_created": false,
+  "escalated": true,
+  "detected_terminology": [],
+  "transcript": [
+    {
+      "turn": 1,
+      "caller": "Good morning po, gusto ko po sanang magpa-assist sa licensed Bancassurance Specialist sa branch para sa estate planning.",
+      "agent": "Opo, nauunawaan ko po. I-transfer ko na po kayo ngayon sa ating insurance financial specialist. Sandali lamang po.",
+      "detected_language": "taglish",
+      "detected_register": "formal",
+      "code_switch_detected": true,
+      "state_before": "GREETING",
+      "state_after": "ESCALATION",
+      "grounded": true,
+      "citations": [],
+      "actions": [
+        {
+          "action_type": "ESCALATE",
+          "parameters": {},
+          "result_summary": "requested"
+        }
+      ]
+    }
+  ]
+}

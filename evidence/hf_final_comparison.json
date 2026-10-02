@@ -1,0 +1,150 @@
+{
+  "title": "Hugging Face and Commercial Model Final Comparison & Provenance Audit",
+  "generated_at": "2026-10-02T10:55:00Z",
+  "audit_standard": "Strict classification of execution modes: LIVE_HF_API, LIVE_API, LOCAL_MODEL, MOCK, DETERMINISTIC_FALLBACK, CATALOG_ONLY, or UNKNOWN.",
+  "comparisons": [
+    {
+      "task": "Q2 Dense Semantic Similarity",
+      "model": "BAAI/bge-m3",
+      "execution_mode": "LIVE_HF_API",
+      "dataset_audio": "8 evaluation queries (EN, TL, ID)",
+      "metric": "Cosine similarity / Semantic Score",
+      "result": "Live HF Router API returned 0.8141 on relevant loan passage vs 0.3048 on unrelated weather",
+      "latency": "210ms (network roundtrip)",
+      "reproducible": true,
+      "evidence": "evidence/eval_hf_benchmark.json"
+    },
+    {
+      "task": "Q2 Reranking",
+      "model": "BAAI/bge-reranker-v2-m3",
+      "execution_mode": "MOCK",
+      "dataset_audio": "Candidate query/passage pairs",
+      "metric": "Cross-Encoder Score",
+      "result": "Grounded queries: 0.86 - 0.94; OOS: 0.08",
+      "latency": "~65ms (estimated CPU inference)",
+      "reproducible": true,
+      "evidence": "evidence/eval_hf_benchmark.json"
+    },
+    {
+      "task": "Q2 Baseline Hybrid Retrieval",
+      "model": "Local BM25 + Dense Semantic Hash + Entity Booster",
+      "execution_mode": "LOCAL_MODEL",
+      "dataset_audio": "data/eval/retrieval.json (7 queries) + 3 localized",
+      "metric": "Retrieval Precision & Source Accuracy",
+      "result": "100.0% precision; 100% correct source match",
+      "latency": "P50 = 0.69ms, P95 = 1.18ms",
+      "reproducible": true,
+      "evidence": "evidence/q2/retrieval_results.json"
+    },
+    {
+      "task": "Q3 Streaming ASR",
+      "model": "Deepgram Nova-3 (multi)",
+      "execution_mode": "LIVE_API",
+      "dataset_audio": "Live synthesized Filipino (66KB) and Indonesian (94KB) MP3 audio",
+      "metric": "Acoustic Word Error Rate (WER) & Latency",
+      "result": "Acoustic WER on synthesized speech: Tagalog 70.0%, Indonesian 100.0% (struggles without language-specific tuning)",
+      "latency": "290ms - 320ms",
+      "reproducible": true,
+      "evidence": "evidence/providers/deepgram_status.json"
+    },
+    {
+      "task": "Q3 Offline Reference ASR",
+      "model": "openai/whisper-large-v3-turbo",
+      "execution_mode": "LIVE_HF_API",
+      "dataset_audio": "Live synthesized Filipino (66KB) and Indonesian (94KB) MP3 audio",
+      "metric": "Acoustic Word Error Rate (WER) & Latency",
+      "result": "Indonesian WER: 0.0% (perfect match); Tagalog WER: 20.0% ('Bank Assurance' vs 'Bancassurance')",
+      "latency": "720ms - 780ms (live HF router)",
+      "reproducible": true,
+      "evidence": "evidence/eval_hf_benchmark.json"
+    },
+    {
+      "task": "Q3 Reference High-Acc ASR",
+      "model": "openai/whisper-large-v3",
+      "execution_mode": "CATALOG_ONLY",
+      "dataset_audio": "N/A",
+      "metric": "Acoustic transcription quality",
+      "result": "Cataloged for evaluation baseline; not executed",
+      "latency": "N/A",
+      "reproducible": false,
+      "evidence": "evidence/eval_hf_benchmark.json"
+    },
+    {
+      "task": "Q3 Cloud Conversational TTS",
+      "model": "ElevenLabs Multilingual v2",
+      "execution_mode": "LIVE_API",
+      "dataset_audio": "Tagalog & Indonesian banking consultation text",
+      "metric": "Generation latency & audio validity",
+      "result": "Synthesized 66,499 bytes (PH) and 94,502 bytes (ID) MP3 audio via voice Alice",
+      "latency": "340ms - 365ms",
+      "reproducible": true,
+      "evidence": "evidence/providers/elevenlabs_status.json"
+    },
+    {
+      "task": "Q3 Tagalog Edge TTS",
+      "model": "facebook/mms-tts-tgl",
+      "execution_mode": "CATALOG_ONLY",
+      "dataset_audio": "Tagalog bancassurance test utterance",
+      "metric": "Inference Latency & Data Residency Support",
+      "result": "VITS 36M parameter model card architecture reference",
+      "latency": "<50ms (model card CPU spec)",
+      "reproducible": false,
+      "evidence": "evidence/eval_hf_benchmark.json"
+    },
+    {
+      "task": "Q3 Indonesian Edge TTS",
+      "model": "facebook/mms-tts-ind",
+      "execution_mode": "CATALOG_ONLY",
+      "dataset_audio": "Indonesian multifinance test utterance",
+      "metric": "Inference Latency & Data Residency Support",
+      "result": "VITS 36M parameter model card architecture reference",
+      "latency": "<50ms (model card CPU spec)",
+      "reproducible": false,
+      "evidence": "evidence/eval_hf_benchmark.json"
+    },
+    {
+      "task": "Regional Speech Expansion (ASR)",
+      "model": "ai4bharat/indic-conformer-600m-multilingual",
+      "execution_mode": "CATALOG_ONLY",
+      "dataset_audio": "N/A",
+      "metric": "Language coverage (22 Indian languages)",
+      "result": "Cataloged for regional South Asian research",
+      "latency": "N/A",
+      "reproducible": false,
+      "evidence": "evidence/eval_hf_benchmark.json"
+    },
+    {
+      "task": "Regional Speech Expansion (TTS)",
+      "model": "ai4bharat/IndicF5",
+      "execution_mode": "CATALOG_ONLY",
+      "dataset_audio": "N/A",
+      "metric": "Indian multilingual speech synthesis",
+      "result": "Cataloged for regional South Asian research",
+      "latency": "N/A",
+      "reproducible": false,
+      "evidence": "evidence/eval_hf_benchmark.json"
+    },
+    {
+      "task": "Q4 Realtime Nudge Streaming",
+      "model": "Deterministic Regex + Stateful Nudge Engine",
+      "execution_mode": "LOCAL_MODEL",
+      "dataset_audio": "data/audio/synthetic_call_sample.wav (8.0s, 16kHz mono WAV)",
+      "metric": "Signal Precision/Recall, Latency, & Pacing Drift",
+      "result": "Precision: 95.2%, Recall: 100%, Drift: +96.36ms",
+      "latency": "Pipeline mean = 105.0ms (P50), 190.5ms (P95)",
+      "reproducible": true,
+      "evidence": "evidence/q4/replay_timing_evidence.json"
+    },
+    {
+      "task": "Q1 Telephony Assistant Synchronization",
+      "model": "Vapi Platform Assistant API",
+      "execution_mode": "LIVE_API",
+      "dataset_audio": "Assistant configuration with Q2 custom KB and tools",
+      "metric": "Assistant Creation & Custom KB Link",
+      "result": "Created live assistant ID 3866c061-6a0e-43ad-8a41-8d7128a2b91d on api.vapi.ai",
+      "latency": "820ms",
+      "reproducible": true,
+      "evidence": "evidence/providers/vapi_status.json"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "test": "404 Not Found Handling",
+    "url": "/api/v1/non_existent_route_12345",
+    "status_code": 404,
+    "no_stack_trace": true,
+    "pass": true
+  },
+  {
+    "test": "405 Method Not Allowed",
+    "url": "/health",
+    "status_code": 405,
+    "pass": true
+  },
+  {
+    "test": "Leads Endpoint PII Verification",
+    "status_code": 200,
+    "no_raw_ssn_exposed": true,
+    "pass": true
+  },
+  {
+    "test": "/health Secret Scrutiny",
+    "no_keys_in_body": true,
+    "pass": true
+  }
+]

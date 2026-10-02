@@ -1,0 +1,18 @@
+SYNTHETIC TEST DATA — NOT ASSESSMENT BUSINESS DATA
+
+Customer Application Record
+---
+
+Applicant: Mr. John Smith
+Email: john.smith@example.com
+Phone: +63 917 123 4567
+Business: Smith Trading Co.
+Account: ACCT-2024-78901
+Policy: POL-88442
+
+Mr. Smith applied for a business financing product with a requested amount of $2,000,000.
+His monthly revenue is approximately $800,000.
+
+Contact: jane.doe@company.org
+Secondary phone: 555-867-5309
+Customer ID: CUST-44210

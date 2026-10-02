@@ -1,0 +1,146 @@
+{
+  "name": "Indonesia Multifinance Assistant",
+  "model": {
+    "provider": "openai",
+    "model": "gpt-4o-mini",
+    "temperature": 0.2,
+    "messages": [
+      {
+        "role": "system",
+        "content": "ROLE: You are a professional, courteous Multifinance Virtual Assistant for consumer credit in Indonesia.\nBEHAVIOR:\n- Respond in the register matching the customer: use formal Indonesian ('Bapak/Ibu') for business inquiries, or polite colloquial ('Kak') for retail consumer inquiries.\n- Naturally use standard Indonesian finance terminology: 'cicilan', 'tenor', 'denda', 'DP', 'jatuh tempo', 'angsuran', 'pembiayaan'.\n- Use the knowledge base tool for all financing criteria, interest rates, tenor maximums, and penalty rules.\n- Never invent financial approval terms or interest rates. Use the deterministic qualification tool.\n- Escalate to customer service if the customer requests a human or has complex payment disputes."
+      }
+    ]
+  },
+  "voice": {
+    "provider": "11labs",
+    "model": "eleven_multilingual_v2",
+    "voiceId": "AZnzlk1XvdvUeBnXmlld"
+  },
+  "transcriber": {
+    "provider": "deepgram",
+    "model": "nova-3",
+    "language": "multi",
+    "smartFormat": true,
+    "keywords": [
+      "cicilan:2.0",
+      "tenor:2.0",
+      "denda:2.0",
+      "DP:2.0",
+      "jatuh tempo:2.0",
+      "angsuran:2.0"
+    ]
+  },
+  "firstMessage": "Selamat pagi Bapak/Ibu, terima kasih telah menghubungi layanan pembiayaan kami. Ada yang bisa kami bantu terkait simulasi cicilan atau pengajuan dana multiguna hari ini?",
+  "knowledgeBase": {
+    "provider": "custom-knowledge-base",
+    "server": {
+      "url": "http://localhost:8000/kb/search"
+    },
+    "description": "Grounded business loan knowledge base with confidence gating and citations."
+  },
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "search_knowledge",
+        "description": "Search official business loan knowledge base for factual information regarding products, interest rates, requirements, processing times, and policies.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "Natural language query about loan terms, documents, eligibility, or policies."
+            }
+          },
+          "required": [
+            "query"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "evaluate_qualification",
+        "description": "Evaluates applicant eligibility against deterministic business rules using collected financial details.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "business_type": {
+              "type": "string",
+              "description": "Type of business or industry."
+            },
+            "years_in_business": {
+              "type": "number",
+              "description": "Operational years in business."
+            },
+            "monthly_revenue": {
+              "type": "number",
+              "description": "Average monthly revenue in dollars."
+            },
+            "requested_amount": {
+              "type": "number",
+              "description": "Loan amount requested in dollars."
+            }
+          },
+          "required": [
+            "business_type",
+            "years_in_business",
+            "monthly_revenue",
+            "requested_amount"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "create_lead",
+        "description": "Creates a commercial loan lead record in the backend for underwriter follow-up.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "contact_permission": {
+              "type": "boolean",
+              "description": "Caller agreed to be contacted."
+            },
+            "notes": {
+              "type": "string",
+              "description": "Summary notes or special underwriter considerations."
+            }
+          },
+          "required": [
+            "contact_permission"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "escalate_to_human",
+        "description": "Transfers call to a human commercial lending specialist when requested or required by policy.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "reason": {
+              "type": "string",
+              "description": "Specific reason for human escalation."
+            }
+          },
+          "required": [
+            "reason"
+          ]
+        }
+      }
+    }
+  ],
+  "serverUrl": "http://localhost:8000/api/v1/vapi/webhook",
+  "recordingEnabled": true,
+  "endCallPhrases": [
+    "goodbye",
+    "bye",
+    "have a good day"
+  ],
+  "_notice": "CONFIG_ONLY \u2014 NOT DEPLOYED (NO VAPI API KEY)"
+}

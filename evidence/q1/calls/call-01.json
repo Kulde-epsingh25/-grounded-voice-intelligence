@@ -1,0 +1,127 @@
+{
+  "scenario_id": "scenario-01",
+  "name": "Cooperative Qualification",
+  "description": "Customer answers qualification questions normally and qualifies for Growth Loan.",
+  "call_id": "sim-scenario-01",
+  "call_type": "SIMULATION \u2014 NOT LIVE CALL",
+  "final_state": "REVIEW",
+  "qualification_state": {
+    "business_type": "retail",
+    "years_in_business": 3.0,
+    "monthly_revenue": 1200000.0,
+    "requested_amount": 2000000.0,
+    "loan_purpose": "inventory expansion",
+    "contact_permission": true
+  },
+  "qualification_status": "ELIGIBLE",
+  "lead_created": true,
+  "lead_record": {
+    "lead_id": "lead_754730b6",
+    "call_id": "sim-scenario-01",
+    "created_at": "2026-10-02T17:56:12.703904Z",
+    "updated_at": "2026-10-02T17:56:12.708626Z",
+    "business_type": "retail",
+    "years_in_business": 3.0,
+    "monthly_revenue": 1200000.0,
+    "requested_amount": 2000000.0,
+    "qualification_status": "ELIGIBLE",
+    "recommended_product": "Growth",
+    "contact_permission": true,
+    "notes": "",
+    "source": "voice_agent",
+    "status": "new"
+  },
+  "escalated": false,
+  "transcript": [
+    {
+      "turn": 1,
+      "caller": "Hello, I run a retail grocery business.",
+      "agent": "How many years has your business been operating?",
+      "state_before": "GREETING",
+      "state_after": "QUALIFICATION",
+      "grounded": true,
+      "citations": [],
+      "actions": [
+        {
+          "action_type": "EVALUATE_QUALIFICATION",
+          "parameters": {},
+          "result_summary": "NEEDS_MORE_INFORMATION"
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "caller": "We have been in business for 3 years.",
+      "agent": "What is your average monthly revenue?",
+      "state_before": "QUALIFICATION",
+      "state_after": "QUALIFICATION",
+      "grounded": true,
+      "citations": [],
+      "actions": [
+        {
+          "action_type": "EVALUATE_QUALIFICATION",
+          "parameters": {},
+          "result_summary": "NEEDS_MORE_INFORMATION"
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "caller": "Our monthly revenue is around 1.2 million dollars.",
+      "agent": "How much loan funding are you looking to secure?",
+      "state_before": "QUALIFICATION",
+      "state_after": "QUALIFICATION",
+      "grounded": true,
+      "citations": [],
+      "actions": [
+        {
+          "action_type": "EVALUATE_QUALIFICATION",
+          "parameters": {},
+          "result_summary": "NEEDS_MORE_INFORMATION"
+        }
+      ]
+    },
+    {
+      "turn": 4,
+      "caller": "We need to borrow 2 million for inventory expansion.",
+      "agent": "Great news! Based on our criteria, you qualify for the Growth loan product with up to $5,000,000 at an interest rate of 10.0%. May I create a specialist follow-up application for you?",
+      "state_before": "QUALIFICATION",
+      "state_after": "REVIEW",
+      "grounded": true,
+      "citations": [],
+      "actions": [
+        {
+          "action_type": "EVALUATE_QUALIFICATION",
+          "parameters": {},
+          "result_summary": "ELIGIBLE"
+        },
+        {
+          "action_type": "CREATE_LEAD",
+          "parameters": {},
+          "result_summary": "created"
+        }
+      ]
+    },
+    {
+      "turn": 5,
+      "caller": "Yes, you have my permission to proceed and contact me.",
+      "agent": "Great news! Based on our criteria, you qualify for the Growth loan product with up to $5,000,000 at an interest rate of 10.0%. May I create a specialist follow-up application for you?",
+      "state_before": "REVIEW",
+      "state_after": "REVIEW",
+      "grounded": true,
+      "citations": [],
+      "actions": [
+        {
+          "action_type": "EVALUATE_QUALIFICATION",
+          "parameters": {},
+          "result_summary": "ELIGIBLE"
+        },
+        {
+          "action_type": "CREATE_LEAD",
+          "parameters": {},
+          "result_summary": "created"
+        }
+      ]
+    }
+  ]
+}

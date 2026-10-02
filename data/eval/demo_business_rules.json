@@ -1,0 +1,56 @@
+{
+  "_notice": "SYNTHETIC DEMO RULES — NOT ASSESSMENT BUSINESS RULES",
+  "version": "1.0",
+  "domain": "business_loan",
+  "products": {
+    "Starter": {
+      "min_monthly_revenue": 500000,
+      "min_years_in_business": 2,
+      "max_loan_amount": 2000000,
+      "term_months": 12,
+      "interest_rate": 12.5,
+      "description": "Working capital loan for small businesses with at least 2 years in operations."
+    },
+    "Growth": {
+      "min_monthly_revenue": 1000000,
+      "min_years_in_business": 2,
+      "max_loan_amount": 5000000,
+      "term_months": 24,
+      "interest_rate": 10.0,
+      "description": "Growth capital for expanding businesses with established positive cash flow."
+    },
+    "Premium": {
+      "min_monthly_revenue": 2500000,
+      "min_years_in_business": 3,
+      "max_loan_amount": 15000000,
+      "term_months": 60,
+      "interest_rate": 8.5,
+      "description": "Flexible medium-term financing for mid-market businesses."
+    },
+    "Enterprise": {
+      "min_monthly_revenue": 5000000,
+      "min_years_in_business": 5,
+      "max_loan_amount": 50000000,
+      "term_months": 84,
+      "interest_rate": 7.0,
+      "description": "Customized corporate facility for large-scale enterprise expansions."
+    }
+  },
+  "mandatory_qualification_fields": [
+    "business_type",
+    "years_in_business",
+    "monthly_revenue",
+    "requested_amount"
+  ],
+  "required_documents": [
+    "Business Registration",
+    "Financial Statements (last 2 years)",
+    "Bank Statements (last 6 months)",
+    "Valid Government ID"
+  ],
+  "policy_thresholds": {
+    "min_years_in_business_absolute": 2,
+    "min_monthly_revenue_absolute": 500000,
+    "max_dti_ratio": 0.50
+  }
+}

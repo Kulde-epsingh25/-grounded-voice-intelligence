@@ -1,0 +1,10 @@
+{
+  "market": "ID",
+  "language": "id",
+  "text_phrase": "Selamat pagi Bapak/Ibu, terima kasih telah menghubungi layanan pembiayaan kami.",
+  "voice_id": "AZnzlk1XvdvUeBnXmlld",
+  "audio_path": null,
+  "observed_pronunciation_issues": [],
+  "generation_latency_ms": 0.0,
+  "status": "MANIFEST RECORDED \u2014 AUDIO NOT GENERATED (NO API KEY)"
+}

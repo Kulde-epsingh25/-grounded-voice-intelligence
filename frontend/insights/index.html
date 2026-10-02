@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Q4 Realtime Call Intelligence Dashboard</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --primary: #38bdf8;
+      --high: #ef4444;
+      --medium: #f59e0b;
+      --low: #10b981;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background-color: var(--bg); color: var(--text); padding: 20px; line-height: 1.5; }
+    header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 16px; border-bottom: 1px solid var(--border); margin-bottom: 20px; }
+    h1 { font-size: 1.25rem; font-weight: 600; color: var(--primary); }
+    .status-badge { padding: 4px 10px; border-radius: 9999px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; background: #22c55e22; color: #22c55e; border: 1px solid #22c55e55; }
+    .grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+    .col { display: flex; flex-direction: column; gap: 20px; }
+    .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+    .card h2 { font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+    
+    /* Transcript */
+    #transcript-box { height: 320px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; }
+    .turn { padding: 8px 12px; border-radius: 6px; border-left: 3px solid var(--border); background: #0f172a55; }
+    .turn.customer { border-left-color: var(--primary); }
+    .turn.agent { border-left-color: #a855f7; }
+    .turn .meta { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 2px; }
+    .turn .text { color: var(--text); }
+    .turn.partial { opacity: 0.6; font-style: italic; }
+
+    /* Nudges */
+    #nudges-box { display: flex; flex-direction: column; gap: 10px; }
+    .nudge-item { padding: 12px; border-radius: 6px; border-left: 4px solid var(--primary); background: #0f172a88; }
+    .nudge-item.HIGH { border-left-color: var(--high); background: #ef444415; }
+    .nudge-item.MEDIUM { border-left-color: var(--medium); background: #f59e0b15; }
+    .nudge-item.LOW { border-left-color: var(--low); background: #10b98115; }
+    .nudge-header { display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 600; margin-bottom: 4px; }
+    .nudge-msg { font-size: 0.9rem; font-weight: 500; }
+    
+    /* Signals & Latency */
+    .metric-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid #33415544; font-size: 0.85rem; }
+    .metric-val { font-weight: 600; font-family: monospace; color: var(--primary); }
+    
+    .session-bar { display: flex; gap: 10px; margin-bottom: 16px; align-items: center; }
+    input { background: #0f172a; border: 1px solid var(--border); color: #fff; padding: 6px 12px; border-radius: 4px; font-size: 0.85rem; }
+    button { background: var(--primary); color: #000; border: none; padding: 6px 14px; border-radius: 4px; font-weight: 600; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Agent Insights & Realtime Nudges (Q4)</h1>
+    <div style="display: flex; gap: 10px; align-items: center;">
+      <span id="session-mode" style="font-size: 0.8rem; color: var(--text-muted);">Mode: REPLAY</span>
+      <span id="ws-status" class="status-badge">Connecting</span>
+    </div>
+  </header>
+
+  <div class="session-bar">
+    <label style="font-size: 0.85rem; color: var(--text-muted);">Session ID:</label>
+    <input type="text" id="input-session-id" value="demo_session_01">
+    <button id="btn-connect" onclick="connectWS()">Connect</button>
+  </div>
+
+  <div class="grid">
+    <!-- Left Column: Live Transcript & Signals -->
+    <div class="col">
+      <div class="card">
+        <h2>Live Transcript (<span id="transcript-count">0</span> turns)</h2>
+        <div id="transcript-box">
+          <div style="color: var(--text-muted); font-size: 0.85rem;">Waiting for streaming audio/transcription events...</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Detected Signals</h2>
+        <div id="signals-box" style="display: flex; flex-direction: column; gap: 6px; font-size: 0.85rem;">
+          <div style="color: var(--text-muted);">No signals detected yet.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Active Nudges & Latency -->
+    <div class="col">
+      <div class="card">
+        <h2>Active Nudges (<span id="active-nudge-count">0</span>)</h2>
+        <div id="nudges-box">
+          <div style="color: var(--text-muted); font-size: 0.85rem;">No active agent coaching cues.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Latency Instrumentation (ms)</h2>
+        <div class="metric-row">
+          <span>End-to-End Latest:</span>
+          <span class="metric-val" id="lat-e2e">--</span>
+        </div>
+        <div class="metric-row">
+          <span>End-to-End P50:</span>
+          <span class="metric-val" id="lat-p50">--</span>
+        </div>
+        <div class="metric-row">
+          <span>End-to-End P95:</span>
+          <span class="metric-val" id="lat-p95">--</span>
+        </div>
+        <div class="metric-row">
+          <span>ASR Latency (T1 - T0):</span>
+          <span class="metric-val" id="lat-asr">--</span>
+        </div>
+        <div class="metric-row">
+          <span>Signal Extraction (T2 - T1):</span>
+          <span class="metric-val" id="lat-sig">--</span>
+        </div>
+        <div class="metric-row">
+          <span>Nudge Decision (T3 - T2):</span>
+          <span class="metric-val" id="lat-ndg">--</span>
+        </div>
+        <div class="metric-row">
+          <span>Sample Measurements:</span>
+          <span class="metric-val" id="lat-samples">0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let ws = null;
+    let turnCount = 0;
+    let activeNudges = [];
+
+    function connectWS() {
+      const sessionId = document.getElementById("input-session-id").value.trim();
+      const statusEl = document.getElementById("ws-status");
+      if (ws) ws.close();
+
+      const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
+      const host = window.location.host || "localhost:8000";
+      const wsUrl = `${protocol}//${host}/ws/realtime/${sessionId}`;
+
+      statusEl.textContent = "Connecting...";
+      statusEl.style.color = "#f59e0b";
+      statusEl.style.borderColor = "#f59e0b55";
+
+      ws = new WebSocket(wsUrl);
+
+      ws.onopen = () => {
+        statusEl.textContent = "Connected";
+        statusEl.style.color = "#22c55e";
+        statusEl.style.borderColor = "#22c55e55";
+      };
+
+      ws.onmessage = (event) => {
+        const msg = JSON.parse(event.data);
+        handleWsEvent(msg);
+      };
+
+      ws.onclose = () => {
+        statusEl.textContent = "Disconnected";
+        statusEl.style.color = "#ef4444";
+        statusEl.style.borderColor = "#ef444455";
+      };
+    }
+
+    function handleWsEvent(msg) {
+      const type = msg.event_type;
+      const data = msg.data || {};
+
+      if (type === "session_snapshot") {
+        document.getElementById("session-mode").textContent = `Mode: ${msg.mode || "LIVE"}`;
+        updateLatencyMetrics(msg.latency_summary || {});
+      } else if (type === "transcript_partial" || type === "transcript_final") {
+        appendTranscript(data);
+      } else if (type === "signal_detected") {
+        appendSignal(data);
+      } else if (type === "nudge_created") {
+        addNudge(data);
+      } else if (type === "latency_update") {
+        document.getElementById("lat-e2e").textContent = `${Math.round(data.end_to_end_ms)} ms`;
+        document.getElementById("lat-asr").textContent = `${Math.round(data.asr_latency_ms || 0)} ms`;
+        document.getElementById("lat-sig").textContent = `${Math.round(data.signal_latency_ms || 0)} ms`;
+        document.getElementById("lat-ndg").textContent = `${Math.round(data.nudge_latency_ms || 0)} ms`;
+      } else if (type === "session_completed") {
+        if (data.latency_summary) updateLatencyMetrics(data.latency_summary);
+      }
+    }
+
+    function appendTranscript(data) {
+      const box = document.getElementById("transcript-box");
+      turnCount++;
+      document.getElementById("transcript-count").textContent = turnCount;
+
+      const div = document.createElement("div");
+      div.className = `turn ${data.speaker.toLowerCase()} ${data.is_final ? '' : 'partial'}`;
+      div.innerHTML = `
+        <div class="meta">${data.speaker} • ${data.timestamp ? data.timestamp.toFixed(1) + 's' : ''}</div>
+        <div class="text">${escapeHtml(data.text)}</div>
+      `;
+      box.appendChild(div);
+      box.scrollTop = box.scrollHeight;
+    }
+
+    function appendSignal(data) {
+      const box = document.getElementById("signals-box");
+      if (box.innerHTML.includes("No signals detected")) box.innerHTML = "";
+
+      const div = document.createElement("div");
+      div.style.cssText = "padding: 6px 10px; background: #0f172a66; border-radius: 4px; display: flex; justify-content: space-between;";
+      div.innerHTML = `
+        <span><strong>${data.type}</strong>: <em>${escapeHtml(data.evidence_text || '')}</em></span>
+        <span style="color: var(--primary); font-family: monospace;">${(data.confidence * 100).toFixed(0)}%</span>
+      `;
+      box.prepend(div);
+    }
+
+    function addNudge(nudge) {
+      activeNudges.push(nudge);
+      renderNudges();
+    }
+
+    function renderNudges() {
+      const box = document.getElementById("nudges-box");
+      document.getElementById("active-nudge-count").textContent = activeNudges.length;
+      if (activeNudges.length === 0) {
+        box.innerHTML = `<div style="color: var(--text-muted); font-size: 0.85rem;">No active agent coaching cues.</div>`;
+        return;
+      }
+      box.innerHTML = "";
+      activeNudges.forEach(n => {
+        const item = document.createElement("div");
+        item.className = `nudge-item ${n.priority}`;
+        item.innerHTML = `
+          <div class="nudge-header">
+            <span style="color: ${n.priority === 'HIGH' ? 'var(--high)' : (n.priority === 'MEDIUM' ? 'var(--medium)' : 'var(--low)')};">${n.priority} • ${n.type}</span>
+            <span style="color: var(--text-muted);">${(n.confidence * 100).toFixed(0)}% conf</span>
+          </div>
+          <div class="nudge-msg">${escapeHtml(n.message)}</div>
+        `;
+        box.appendChild(item);
+      });
+    }
+
+    function updateLatencyMetrics(summary) {
+      if (summary.end_to_end) {
+        document.getElementById("lat-p50").textContent = summary.end_to_end.p50_ms ? `${summary.end_to_end.p50_ms} ms` : "--";
+        document.getElementById("lat-p95").textContent = summary.end_to_end.p95_ms ? `${summary.end_to_end.p95_ms} ms` : "--";
+        document.getElementById("lat-samples").textContent = summary.end_to_end.sample_size || 0;
+      }
+    }
+
+    function escapeHtml(str) {
+      return (str || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    // Connect automatically on load
+    window.addEventListener("DOMContentLoaded", () => {
+      connectWS();
+    });
+  </script>
+</body>
+</html>

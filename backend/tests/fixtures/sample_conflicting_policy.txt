@@ -1,0 +1,21 @@
+SYNTHETIC TEST DATA — NOT ASSESSMENT BUSINESS DATA
+
+Source A — Business Loan Policy v1.0
+
+The minimum monthly revenue for Starter loans is $500,000.
+Maximum loan amount: $2,000,000.
+Processing time: 5 business days.
+Interest rate: 12.5% per annum.
+
+---
+
+Source B — Business Loan Policy v2.0
+
+The minimum monthly revenue for Starter loans is $750,000.
+Maximum loan amount: $3,000,000.
+Processing time: 7 business days.
+Interest rate: 11.0% per annum.
+
+NOTE: These sources intentionally contain conflicting values
+to test conflict detection. The pipeline should FLAG these
+conflicts, not decide which is correct.

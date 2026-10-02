@@ -1,0 +1,33 @@
+{
+  "endpoint": "/health",
+  "method": "GET",
+  "status_code": 200,
+  "latency_ms": 567.29,
+  "response": {
+    "status": "healthy",
+    "timestamp": "2026-10-02T10:56:23.334300+00:00",
+    "version": "0.1.0",
+    "environment": "development",
+    "services": {
+      "openai": {
+        "configured": true,
+        "embedding_model": "text-embedding-3-small",
+        "llm_model": "gpt-4o-mini"
+      },
+      "vapi": {
+        "configured": true
+      },
+      "deepgram": {
+        "configured": true
+      },
+      "elevenlabs": {
+        "configured": true
+      },
+      "qdrant": {
+        "url": "http://localhost:6333",
+        "configured": true
+      }
+    }
+  },
+  "pass": true
+}

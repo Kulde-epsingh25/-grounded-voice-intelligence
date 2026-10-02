@@ -1,0 +1,17 @@
+{
+  "measured_at": "2026-10-02T12:48:41Z",
+  "latencies_ms": {
+    "openai_to_gemini": 21468.58,
+    "deepgram_to_fallback_asr": 2701.25,
+    "elevenlabs_to_gemini_tts": 0.29,
+    "gemini_to_hf_whisper": 1352.22,
+    "gemini_tts_to_hf_mms": 0.26,
+    "vapi_to_gemini_live": 1.8
+  },
+  "target_slas_ms": {
+    "llm_fallback": 1500,
+    "asr_fallback": 800,
+    "tts_fallback": 600,
+    "voice_session_fallback": 1000
+  }
+}

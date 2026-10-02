@@ -1,0 +1,65 @@
+# Environment
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+venv/
+.venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Testing
+.pytest_cache/
+htmlcov/
+.coverage
+coverage.xml
+
+# Docker
+docker-compose.override.yml
+
+# Data (keep structure, ignore large files)
+data/raw/*.pdf
+data/raw/*.docx
+data/raw/*.xlsx
+data/audio/*.wav
+data/audio/*.mp3
+
+# Evidence audio (large files)
+evidence/**/*.wav
+evidence/**/*.mp3
+
+# Logs
+*.log
+logs/
+
+# Qdrant storage (Docker volume, not committed)
+qdrant_storage/
+
+# Claude Code memory and internal state
+.claude/
+.browser-memory/
+memory/
+
+# Graphify internal files
+.graphify*
+graphify-out/

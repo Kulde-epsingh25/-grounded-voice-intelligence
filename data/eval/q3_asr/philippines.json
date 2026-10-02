@@ -1,0 +1,112 @@
+[
+  {
+    "id": "PH-ASR-01",
+    "market": "PH",
+    "category": "normal_speech",
+    "language": "taglish",
+    "register": "formal",
+    "reference_transcript": "Magandang araw po, gusto ko po sanang mag-inquire tungkol sa life insurance package ng inyong partner bank.",
+    "audio": null,
+    "status": "NOT RUN — AUDIO NOT AVAILABLE",
+    "target_terms": ["life insurance", "partner bank", "po"]
+  },
+  {
+    "id": "PH-ASR-02",
+    "market": "PH",
+    "category": "local_terminology",
+    "language": "taglish",
+    "register": "formal",
+    "reference_transcript": "Kasama na po ba ang critical illness rider sa basic policy coverage kapag nag-avail ako?",
+    "audio": null,
+    "status": "NOT RUN — AUDIO NOT AVAILABLE",
+    "target_terms": ["critical illness rider", "policy coverage"]
+  },
+  {
+    "id": "PH-ASR-03",
+    "market": "PH",
+    "category": "numbers",
+    "language": "taglish",
+    "register": "mixed",
+    "reference_transcript": "Ang monthly income ko po ay around sixty-five thousand pesos, tapos target coverage ko is two million pesos.",
+    "audio": null,
+    "status": "NOT RUN — AUDIO NOT AVAILABLE",
+    "target_terms": ["sixty-five thousand", "two million pesos"]
+  },
+  {
+    "id": "PH-ASR-04",
+    "market": "PH",
+    "category": "dates",
+    "language": "taglish",
+    "register": "formal",
+    "reference_transcript": "Kung magbabayad po ako bago mag-October 15, pasok pa rin po ba ako sa 31-day grace period bago mag-lapse ang policy?",
+    "audio": null,
+    "status": "NOT RUN — AUDIO NOT AVAILABLE",
+    "target_terms": ["October 15", "grace period", "mag-lapse"]
+  },
+  {
+    "id": "PH-ASR-05",
+    "market": "PH",
+    "category": "objection",
+    "language": "taglish",
+    "register": "formal",
+    "reference_transcript": "Medyo mabigat po ang quarterly premium na twelve thousand pesos, wala po bang monthly auto-debit option?",
+    "audio": null,
+    "status": "NOT RUN — AUDIO NOT AVAILABLE",
+    "target_terms": ["quarterly premium", "auto-debit"]
+  },
+  {
+    "id": "PH-ASR-06",
+    "market": "PH",
+    "category": "code_switching",
+    "language": "taglish",
+    "register": "mixed",
+    "reference_transcript": "Gusto ko sana i-upgrade yung policy ko kasi parang kulang yung medical coverage if ever ma-hospitalize ako.",
+    "audio": null,
+    "status": "NOT RUN — AUDIO NOT AVAILABLE",
+    "target_terms": ["i-upgrade", "policy", "medical coverage", "ma-hospitalize"]
+  },
+  {
+    "id": "PH-ASR-07",
+    "market": "PH",
+    "category": "colloquial_speech",
+    "language": "taglish",
+    "register": "colloquial",
+    "reference_transcript": "Hello po, ask ko lang if pwede ma-transfer sa anak ko yung designation as primary beneficiary?",
+    "audio": null,
+    "status": "NOT RUN — AUDIO NOT AVAILABLE",
+    "target_terms": ["primary beneficiary", "ma-transfer"]
+  },
+  {
+    "id": "PH-ASR-08",
+    "market": "PH",
+    "category": "clarification",
+    "language": "taglish",
+    "register": "formal",
+    "reference_transcript": "Hindi ko po masyadong nakuha, paki-clarify po kung magkano ang total death benefit kung aksidente ang mangyari.",
+    "audio": null,
+    "status": "NOT RUN — AUDIO NOT AVAILABLE",
+    "target_terms": ["paki-clarify", "death benefit"]
+  },
+  {
+    "id": "PH-ASR-09",
+    "market": "PH",
+    "category": "human_escalation",
+    "language": "taglish",
+    "register": "formal",
+    "reference_transcript": "Pwede po bang pakiusap, paki-connect na lang po ako sa isang Bancassurance Specialist sa branch para makapag-usap kami nang personal?",
+    "audio": null,
+    "status": "NOT RUN — AUDIO NOT AVAILABLE",
+    "target_terms": ["Bancassurance Specialist", "branch"]
+  },
+  {
+    "id": "PH-ASR-10",
+    "market": "PH",
+    "category": "insurance_vocabulary",
+    "language": "taglish",
+    "register": "formal",
+    "reference_transcript": "May insurable interest po ba ako kung kukuhaan ko ng education rider plan ang pamangkin ko?",
+    "audio": null,
+    "status": "NOT RUN — AUDIO NOT AVAILABLE",
+    "target_terms": ["insurable interest", "education rider plan"]
+  }
+]

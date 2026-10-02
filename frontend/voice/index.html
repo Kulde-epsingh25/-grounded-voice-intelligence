@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Q1 Voice Agent — Commercial Lending Qualification</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-left">
+                <span class="badge badge-accent">Q1 Voice Agent</span>
+                <h1>Commercial Loan Qualification</h1>
+            </div>
+            <div class="header-right" style="display:flex; align-items:center; gap:0.75rem;">
+                <div class="provider-selector-wrap" style="display:flex; align-items:center; gap:0.4rem;">
+                    <span style="font-size:0.8rem; color:var(--text-muted);">Provider:</span>
+                    <button id="provider-btn-vapi" class="provider-toggle-btn active" title="Primary Voice Platform (Vapi WebRTC)">Vapi (Primary)</button>
+                    <button id="provider-btn-gemini" class="provider-toggle-btn" title="Fallback 1: Gemini Live">Gemini Live (Fallback 1)</button>
+                    <button id="provider-btn-whisper" class="provider-toggle-btn" title="Fallback 2: Whisper ASR">Whisper (Fallback 2)</button>
+                    <button id="provider-btn-browser" class="provider-toggle-btn" title="Direct Web Speech API (Local Mic/TTS)">Direct Voice</button>
+                </div>
+                <div class="status-indicator">
+                    <span id="call-status-dot" class="dot dot-idle"></span>
+                    <span id="call-status-text">Idle</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="main-grid">
+            <!-- Left: Call Control & Live Transcript -->
+            <section class="card panel-call">
+                <div class="card-header">
+                    <h2>Voice Call Controls</h2>
+                    <span id="agent-state-badge" class="badge">Ready</span>
+                </div>
+
+                <div class="controls-row">
+                    <button id="btn-start-call" class="btn btn-primary">
+                        <span class="icon">📞</span> Start Voice Call
+                    </button>
+                    <button id="btn-end-call" class="btn btn-danger" disabled>
+                        <span class="icon">🛑</span> End Call
+                    </button>
+                    <button id="btn-toggle-mic" class="btn btn-secondary" disabled>
+                        <span class="icon">🎙️</span> Mute
+                    </button>
+                </div>
+
+                <!-- Scenario Quick-Simulators for assessment evaluation -->
+                <div class="scenarios-panel">
+                    <span class="scenarios-label">Quick Test Scenarios:</span>
+                    <div class="scenario-buttons">
+                        <button class="btn-scenario" data-scenario="cooperative">1. Cooperative Applicant</button>
+                        <button class="btn-scenario" data-scenario="objection">2. Objection (2 Years)</button>
+                        <button class="btn-scenario" data-scenario="ambiguous">3. Ambiguous Revenue</button>
+                        <button class="btn-scenario" data-scenario="out_of_scope">4. Out-of-Scope (Safe Abstain)</button>
+                        <button class="btn-scenario" data-scenario="escalation">5. Human Escalation</button>
+                    </div>
+                </div>
+
+                <!-- Transcript Window -->
+                <div class="transcript-header">
+                    <h3>Conversation Transcript</h3>
+                    <span id="turn-counter" class="subtle-text">Turn: 0</span>
+                </div>
+                <div id="transcript-feed" class="transcript-feed">
+                    <div class="chat-bubble bubble-system">
+                        Call session ready. Click <strong>Start Voice Call</strong> or choose a test scenario to evaluate the grounded qualification workflow.
+                    </div>
+                </div>
+
+                <!-- Text query input for testing -->
+                <form id="text-input-form" class="text-input-form">
+                    <input type="text" id="text-utterance" placeholder="Or type a spoken utterance here..." />
+                    <button type="submit" class="btn btn-secondary">Send</button>
+                </form>
+            </section>
+
+            <!-- Right: Qualification State & Grounded Citations -->
+            <section class="side-panel">
+                <!-- Qualification State Card -->
+                <div class="card panel-qualification">
+                    <div class="card-header">
+                        <h2>Qualification State</h2>
+                        <span id="eligibility-badge" class="badge badge-pending">PENDING</span>
+                    </div>
+
+                    <div class="fields-list">
+                        <div class="field-row">
+                            <span class="field-label">Business Type</span>
+                            <span id="field-business-type" class="field-value empty">—</span>
+                        </div>
+                        <div class="field-row">
+                            <span class="field-label">Years in Business</span>
+                            <span id="field-years" class="field-value empty">—</span>
+                        </div>
+                        <div class="field-row">
+                            <span class="field-label">Monthly Revenue</span>
+                            <span id="field-revenue" class="field-value empty">—</span>
+                        </div>
+                        <div class="field-row">
+                            <span class="field-label">Requested Amount</span>
+                            <span id="field-requested" class="field-value empty">—</span>
+                        </div>
+                        <div class="field-row">
+                            <span class="field-label">Recommended Tier</span>
+                            <span id="field-product" class="field-value highlight">—</span>
+                        </div>
+                    </div>
+
+                    <div id="qualification-notes" class="qualification-notes hidden">
+                        <h4>Rule Decision Reasons:</h4>
+                        <ul id="reasons-list"></ul>
+                    </div>
+                </div>
+
+                <!-- Grounded Retrieval & Citations Card -->
+                <div class="card panel-citations">
+                    <div class="card-header">
+                        <h2>Q2 Knowledge Lineage</h2>
+                        <span id="grounding-status" class="badge">No Query Yet</span>
+                    </div>
+
+                    <div id="latest-citation-box" class="citation-box">
+                        <p class="placeholder-text">When a knowledge question or objection is raised, retrieved Q2 source chunks and content hash lineage appear here.</p>
+                    </div>
+                </div>
+
+                <!-- Alert & Escalation Card -->
+                <div id="escalation-alert-card" class="card panel-alert hidden">
+                    <div class="alert-icon">⚠️</div>
+                    <div class="alert-content">
+                        <h4 id="alert-title">Escalation Requested</h4>
+                        <p id="alert-message">Transferring to commercial underwriter...</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Vapi Web SDK script tag for live browser calling -->
+    <script src="https://cdn.jsdelivr.net/npm/@vapi-ai/web@latest/dist/vapi.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

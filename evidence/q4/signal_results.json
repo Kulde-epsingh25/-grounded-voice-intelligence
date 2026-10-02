@@ -1,0 +1,282 @@
+[
+  {
+    "case_id": "CASE-CS-01",
+    "category": "cross_sell",
+    "text": "I also have another vehicle that I might want to insure next month.",
+    "should_alert": true,
+    "predicted_alert": true,
+    "verdict": "TP",
+    "signal_type": "missed_opportunity",
+    "nudge_message": "Customer mentioned a second vehicle. Check multi-vehicle offer."
+  },
+  {
+    "case_id": "CASE-CS-02",
+    "category": "cross_sell",
+    "text": "Can we also add extra coverage for my daughter and family?",
+    "should_alert": true,
+    "predicted_alert": true,
+    "verdict": "TP",
+    "signal_type": "missed_opportunity",
+    "nudge_message": "Customer mentioned family members. Inquire if dependent coverage add-on is desired."
+  },
+  {
+    "case_id": "CASE-CS-03",
+    "category": "cross_sell",
+    "text": "I run a second business in Makati that might need financing too.",
+    "should_alert": true,
+    "predicted_alert": true,
+    "verdict": "TP",
+    "signal_type": "missed_opportunity",
+    "nudge_message": "Customer referenced an additional business or property. Probe for cross-sell eligibility."
+  },
+  {
+    "case_id": "CASE-CS-04",
+    "category": "cross_sell",
+    "text": "Ada mobil lain di rumah yang cicilannya mau selesai.",
+    "should_alert": true,
+    "predicted_alert": true,
+    "verdict": "TP",
+    "signal_type": "missed_opportunity",
+    "nudge_message": "Customer mentioned a second vehicle. Check multi-vehicle offer."
+  },
+  {
+    "case_id": "CASE-CS-05",
+    "category": "cross_sell",
+    "text": "May isa pang sasakyan ang asawa ko na kailangan ng comprehensive insurance.",
+    "should_alert": true,
+    "predicted_alert": true,
+    "verdict": "TP",
+    "signal_type": "missed_opportunity",
+    "nudge_message": "Customer mentioned a second vehicle. Check multi-vehicle offer."
+  },
+  {
+    "case_id": "CASE-CMP-01",
+    "category": "compliance",
+    "text": "Before we proceed, what is your social security number and annual income?",
+    "should_alert": true,
+    "predicted_alert": true,
+    "verdict": "TP",
+    "signal_type": "compliance_gap",
+    "nudge_message": "Required disclosure appears missing. Deliver mandatory call recording disclosure before proceeding."
+  },
+  {
+    "case_id": "CASE-CMP-02",
+    "category": "compliance",
+    "text": "Don't worry, this investment has guaranteed return and zero risk whatsoever.",
+    "should_alert": true,
+    "predicted_alert": true,
+    "verdict": "TP",
+    "signal_type": "compliance_gap",
+    "nudge_message": "Required disclosure appears missing. Deliver mandatory call recording disclosure before proceeding."
+  },
+  {
+    "case_id": "CASE-CMP-03",
+    "category": "compliance",
+    "text": "Bisa sebutkan nomor rekening dan gaji bulanan Bapak sekarang?",
+    "should_alert": true,
+    "predicted_alert": true,
+    "verdict": "TP",
+    "signal_type": "compliance_gap",
+    "nudge_message": "Required disclosure appears missing. Deliver mandatory call recording disclosure before proceeding."
+  },
+  {
+    "case_id": "CASE-CMP-04",
+    "category": "compliance",
+    "text": "Pinjaman ini pasti cair tanpa syarat apa pun besok siang.",
+    "should_alert": true,
+    "predicted_alert": true,
+    "verdict": "TP",
+    "signal_type": "compliance_gap",
+    "nudge_message": "Required disclosure appears missing. Deliver mandatory call recording disclosure before proceeding."
+  },
+  {
+    "case_id": "CASE-FRU-01",
+    "category": "frustration",
+    "text": "I've explained this three times already. Why is this taking so long?",
+    "should_alert": true,
+    "predicted_alert": true,
+    "verdict": "TP",
+    "signal_type": "frustration",
+    "nudge_message": "Customer expressed frustration over delays. Acknowledge concern and clarify the next step."
+  },
+  {
+    "case_id": "CASE-FRU-02",
+    "category": "frustration",
+    "text": "This is ridiculous! Let me speak to your supervisor right now.",
+    "should_alert": true,
+    "predicted_alert": true,
+    "verdict": "TP",
+    "signal_type": "frustration",
+    "nudge_message": "Customer expressed frustration over delays. Acknowledge concern and clarify the next step."
+  },
+  {
+    "case_id": "CASE-FRU-03",
+    "category": "frustration",
+    "text": "Sudah berkali-kali saya jelaskan, lama banget prosesnya! Bikin emosi saja.",
+    "should_alert": true,
+    "predicted_alert": true,
+    "verdict": "TP",
+    "signal_type": "frustration",
+    "nudge_message": "Customer expressed frustration over delays. Acknowledge concern and clarify the next step."
+  },
+  {
+    "case_id": "CASE-FRU-04",
+    "category": "frustration",
+    "text": "Pangatlong beses ko nang paliwanag ito sa inyo, nagsasayang lang kayo ng oras ko.",
+    "should_alert": true,
+    "predicted_alert": true,
+    "verdict": "TP",
+    "signal_type": "frustration",
+    "nudge_message": "Customer expressed frustration over delays. Acknowledge concern and clarify the next step."
+  },
+  {
+    "case_id": "CASE-PAY-01",
+    "category": "payment",
+    "text": "I lost my job last week and I can't pay the full installment this month.",
+    "should_alert": true,
+    "predicted_alert": true,
+    "verdict": "TP",
+    "signal_type": "risk",
+    "nudge_message": "Customer signaled payment difficulty. Inquire about grace period or restructuring options."
+  },
+  {
+    "case_id": "CASE-PAY-02",
+    "category": "payment",
+    "text": "Saya kena PHK kemarin, jadi nggak sanggup bayar cicilan yang jatuh tempo besok.",
+    "should_alert": true,
+    "predicted_alert": true,
+    "verdict": "TP",
+    "signal_type": "risk",
+    "nudge_message": "Customer signaled payment difficulty. Inquire about grace period or restructuring options."
+  },
+  {
+    "case_id": "CASE-PAY-03",
+    "category": "payment",
+    "text": "Hindi ko kayang bayaran ang premium ngayon dahil nagigipit kami sa gastusin.",
+    "should_alert": true,
+    "predicted_alert": true,
+    "verdict": "TP",
+    "signal_type": "risk",
+    "nudge_message": "Customer signaled payment difficulty. Inquire about grace period or restructuring options."
+  },
+  {
+    "case_id": "CASE-CB-01",
+    "category": "callback",
+    "text": "I'm driving right now, can you please call me back in two hours?",
+    "should_alert": true,
+    "predicted_alert": true,
+    "verdict": "TP",
+    "signal_type": "callback_need",
+    "nudge_message": "Customer requested callback. Confirm preferred phone number and callback time."
+  },
+  {
+    "case_id": "CASE-CB-02",
+    "category": "callback",
+    "text": "Saya lagi di jalan dan ada meeting, tolong telepon lagi nanti sore ya.",
+    "should_alert": true,
+    "predicted_alert": true,
+    "verdict": "TP",
+    "signal_type": "callback_need",
+    "nudge_message": "Customer requested callback. Confirm preferred phone number and callback time."
+  },
+  {
+    "case_id": "CASE-CB-03",
+    "category": "callback",
+    "text": "Busy ako ngayon sa trabaho, tumawag na lang kayo mamayang alas-singko.",
+    "should_alert": true,
+    "predicted_alert": true,
+    "verdict": "TP",
+    "signal_type": "callback_need",
+    "nudge_message": "Customer requested callback. Confirm preferred phone number and callback time."
+  },
+  {
+    "case_id": "CASE-BUY-01",
+    "category": "neutral",
+    "text": "I am ready to proceed and sign up today, where do I sign?",
+    "should_alert": true,
+    "predicted_alert": true,
+    "verdict": "TP",
+    "signal_type": "buying_signal",
+    "nudge_message": "Customer indicated intent to proceed. Present enrollment agreement or closing steps."
+  },
+  {
+    "case_id": "CASE-NEU-01",
+    "category": "neutral",
+    "text": "Good morning, thank you for returning my inquiry.",
+    "should_alert": false,
+    "predicted_alert": false,
+    "verdict": "TN",
+    "signal_type": null,
+    "nudge_message": null
+  },
+  {
+    "case_id": "CASE-NEU-02",
+    "category": "neutral",
+    "text": "Yes, my business was established in 2019 and we are based in Chicago.",
+    "should_alert": false,
+    "predicted_alert": false,
+    "verdict": "TN",
+    "signal_type": null,
+    "nudge_message": null
+  },
+  {
+    "case_id": "CASE-NEU-03",
+    "category": "neutral",
+    "text": "Thank you for providing that. Let me look up our standard commercial tiers.",
+    "should_alert": false,
+    "predicted_alert": true,
+    "verdict": "FP",
+    "signal_type": "topic_shift",
+    "nudge_message": "Customer shifted focus to closing. Address questions before returning to qualification."
+  },
+  {
+    "case_id": "CASE-NEU-04",
+    "category": "neutral",
+    "text": "Selamat siang, saya hanya mau mengecek status aplikasi yang kemarin.",
+    "should_alert": false,
+    "predicted_alert": false,
+    "verdict": "TN",
+    "signal_type": null,
+    "nudge_message": null
+  },
+  {
+    "case_id": "CASE-NEU-05",
+    "category": "neutral",
+    "text": "Magandang umaga rin po sa inyo, opo naririnig ko kayo nang malinaw.",
+    "should_alert": false,
+    "predicted_alert": false,
+    "verdict": "TN",
+    "signal_type": null,
+    "nudge_message": null
+  },
+  {
+    "case_id": "CASE-NEU-06",
+    "category": "neutral",
+    "text": "Could you repeat that? The line was a bit crackly for a second.",
+    "should_alert": false,
+    "predicted_alert": false,
+    "verdict": "TN",
+    "signal_type": null,
+    "nudge_message": null
+  },
+  {
+    "case_id": "CASE-NEU-07",
+    "category": "neutral",
+    "text": "Please note that this call is recorded for quality assurance and training purposes.",
+    "should_alert": false,
+    "predicted_alert": false,
+    "verdict": "TN",
+    "signal_type": null,
+    "nudge_message": null
+  },
+  {
+    "case_id": "CASE-NEU-08",
+    "category": "neutral",
+    "text": "Understood, that sounds completely reasonable to me.",
+    "should_alert": false,
+    "predicted_alert": false,
+    "verdict": "TN",
+    "signal_type": null,
+    "nudge_message": null
+  }
+]

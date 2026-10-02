@@ -1,0 +1,16 @@
+[
+  {
+    "scenario": "Incomplete and Ambiguous Information",
+    "caller_query": "Our monthly revenue is around fifty.",
+    "agent_response": "Could you clarify if you mean fifty thousand, fifty million, or another amount?",
+    "grounded": true,
+    "state": "QUALIFICATION"
+  },
+  {
+    "scenario": "Out of Scope Knowledge Question",
+    "caller_query": "Do you offer collateralized Bitcoin and crypto business loans?",
+    "agent_response": "I don't have verified information about that. Would you like me to connect you with a representative who can look into this?",
+    "grounded": false,
+    "state": "KNOWLEDGE_QUESTION"
+  }
+]

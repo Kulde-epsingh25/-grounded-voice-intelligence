@@ -1,0 +1,21 @@
+{
+  "module": "Q4 — Real-Time Call Intelligence & Agent Nudges",
+  "status": "PASS (WITH TIMING VS BENCHMARK RECONCILIATION)",
+  "reason": "1.0x real-time audio chunking, measured replay drift (+96.36ms), all 4 required scenarios, suppression logic, and 28-case false-positive evaluation are verified. Live provider streaming ASR requires external Deepgram credentials.",
+  "demo_files": {
+    "real_audio_source": "data/audio/synthetic_call_sample.wav",
+    "replay_results": "evidence/q4/replay_results.json",
+    "replay_metadata": "evidence/q4/replay_metadata.json",
+    "required_scenarios": "evidence/q4/required_scenarios.json",
+    "nudge_results": "evidence/q4/nudge_results.json",
+    "false_positive_audit": "evidence/q4/final_false_positive_audit.json",
+    "metric_reconciliation": "evidence/q4/metric_reconciliation.json",
+    "latency_measurements": "evidence/q4/latency_results.json"
+  },
+  "endpoints": {
+    "dashboard": "http://localhost:8000/insights",
+    "websocket": "ws://localhost:8000/ws/realtime/{session_id}",
+    "create_session": "POST http://localhost:8000/api/v1/realtime/sessions",
+    "session_stats": "GET http://localhost:8000/api/v1/realtime/sessions/{session_id}/stats"
+  }
+}

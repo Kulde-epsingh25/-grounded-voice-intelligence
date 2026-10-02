@@ -1,0 +1,112 @@
+[
+  {
+    "id": "ID-ASR-01",
+    "market": "ID",
+    "category": "normal_speech",
+    "language": "id_formal",
+    "register": "formal",
+    "reference_transcript": "Selamat siang, saya ingin menanyakan persyaratan pengajuan fasilitas pembiayaan multiguna untuk modal usaha.",
+    "audio": null,
+    "status": "NOT RUN — AUDIO NOT AVAILABLE",
+    "target_terms": ["pembiayaan multiguna", "modal usaha"]
+  },
+  {
+    "id": "ID-ASR-02",
+    "market": "ID",
+    "category": "local_terminology",
+    "language": "id_formal",
+    "register": "formal",
+    "reference_transcript": "Berapa estimasi cicilan per bulan dan berapa persen denda keterlambatan jika melewati tanggal jatuh tempo?",
+    "audio": null,
+    "status": "NOT RUN — AUDIO NOT AVAILABLE",
+    "target_terms": ["cicilan", "denda", "jatuh tempo"]
+  },
+  {
+    "id": "ID-ASR-03",
+    "market": "ID",
+    "category": "numbers",
+    "language": "id_colloquial",
+    "register": "colloquial",
+    "reference_transcript": "Kalau penghasilan bulanan saya sekitar dua puluh lima juta, bisa nggak ambil plafon pinjaman seratus lima puluh juta?",
+    "audio": null,
+    "status": "NOT RUN — AUDIO NOT AVAILABLE",
+    "target_terms": ["dua puluh lima juta", "seratus lima puluh juta"]
+  },
+  {
+    "id": "ID-ASR-04",
+    "market": "ID",
+    "category": "dates",
+    "language": "id_formal",
+    "register": "formal",
+    "reference_transcript": "Apakah tanggal jatuh tempo angsuran pertama bisa ditentukan setiap tanggal 25 setelah gajian?",
+    "audio": null,
+    "status": "NOT RUN — AUDIO NOT AVAILABLE",
+    "target_terms": ["jatuh tempo", "angsuran", "tanggal 25"]
+  },
+  {
+    "id": "ID-ASR-05",
+    "market": "ID",
+    "category": "objection",
+    "language": "id_colloquial",
+    "register": "colloquial",
+    "reference_transcript": "Wah, DP dua puluh persen kemahalan banget Kak, ada opsi DP sepuluh persen nggak buat kredit mobil bekas?",
+    "audio": null,
+    "status": "NOT RUN — AUDIO NOT AVAILABLE",
+    "target_terms": ["DP", "kemahalan", "kredit"]
+  },
+  {
+    "id": "ID-ASR-06",
+    "market": "ID",
+    "category": "code_switching",
+    "language": "id_colloquial",
+    "register": "colloquial",
+    "reference_transcript": "Bisa tolong di-reschedule nggak tenornya jadi tiga puluh enam bulan biar cashflow usaha saya tetap aman?",
+    "audio": null,
+    "status": "NOT RUN — AUDIO NOT AVAILABLE",
+    "target_terms": ["di-reschedule", "tenor", "cashflow"]
+  },
+  {
+    "id": "ID-ASR-07",
+    "market": "ID",
+    "category": "colloquial_speech",
+    "language": "id_colloquial",
+    "register": "colloquial",
+    "reference_transcript": "Halo Kak, mau nanya dong, proses survei dan approval pembiayaan biasanya butuh waktu berapa hari kerja ya?",
+    "audio": null,
+    "status": "NOT RUN — AUDIO NOT AVAILABLE",
+    "target_terms": ["survei", "approval", "pembiayaan"]
+  },
+  {
+    "id": "ID-ASR-08",
+    "market": "ID",
+    "category": "clarification",
+    "language": "id_formal",
+    "register": "formal",
+    "reference_transcript": "Mohon maaf, tolong jelaskan kembali rincian biaya provisi dan administrasi pada lembar simulasi angsuran ini.",
+    "audio": null,
+    "status": "NOT RUN — AUDIO NOT AVAILABLE",
+    "target_terms": ["provisi", "administrasi", "angsuran"]
+  },
+  {
+    "id": "ID-ASR-09",
+    "market": "ID",
+    "category": "human_escalation",
+    "language": "id_formal",
+    "register": "formal",
+    "reference_transcript": "Saya ingin berbicara langsung dengan staf customer service atau kredit analis untuk membicarakan restrukturisasi pinjaman.",
+    "audio": null,
+    "status": "NOT RUN — AUDIO NOT AVAILABLE",
+    "target_terms": ["customer service", "kredit analis", "restrukturisasi pinjaman"]
+  },
+  {
+    "id": "ID-ASR-10",
+    "market": "ID",
+    "category": "finance_vocabulary",
+    "language": "id_formal",
+    "register": "formal",
+    "reference_transcript": "Bagaimana prosedur pelunasan dipercepat dan apakah ada penalti jika sisa pokok pinjaman dilunasi sebelum akhir tenor?",
+    "audio": null,
+    "status": "NOT RUN — AUDIO NOT AVAILABLE",
+    "target_terms": ["pelunasan dipercepat", "pokok pinjaman", "tenor"]
+  }
+]

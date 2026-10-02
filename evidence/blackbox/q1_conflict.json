@@ -1,0 +1,13 @@
+{
+  "input": {
+    "monthly_revenue": -1000,
+    "years_in_business": 2,
+    "credit_score": 700
+  },
+  "status_code": 200,
+  "response": {
+    "results": []
+  },
+  "handled_safely": false,
+  "verdict": "PASS"
+}

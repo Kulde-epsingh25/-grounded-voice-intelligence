@@ -1,0 +1,126 @@
+{
+  "scenario_id": "CALL-PH-02",
+  "name": "Sector-Specific Objection (Lapse & Grace Period)",
+  "description": "Customer worries about policy lapse if premium payment is delayed. Agent resolves via Q2 KB.",
+  "call_id": "sim-ph-CALL-PH-02",
+  "call_type": "SIMULATION \u2014 NOT LIVE CALL",
+  "market": "PH",
+  "final_language": "taglish",
+  "final_register": "formal",
+  "final_state": "OBJECTION",
+  "qualification_state": {
+    "business_type": "technology",
+    "years_in_business": 3.0,
+    "contact_permission": true
+  },
+  "lead_created": false,
+  "escalated": false,
+  "detected_terminology": [
+    "policy",
+    "lapse",
+    "grace_period"
+  ],
+  "transcript": [
+    {
+      "turn": 1,
+      "caller": "Hello po, interested po ako sa life plan pero worried ako baka mag-lapse agad kapag na-delay ang sweldo ko.",
+      "agent": "Pasensya na po, wala po akong verified na impormasyon tungkol diyan sa aming official guidelines. Gusto niyo po bang ikonekta ko kayo sa ating Bancassurance Specialist?",
+      "detected_language": "taglish",
+      "detected_register": "formal",
+      "code_switch_detected": true,
+      "state_before": "GREETING",
+      "state_after": "OBJECTION",
+      "grounded": false,
+      "citations": [],
+      "actions": [
+        {
+          "action_type": "SEARCH_KB",
+          "parameters": {
+            "query": "Hello po, interested po ako sa life plan pero worried ako baka mag-lapse agad kapag na-delay ang sweldo ko"
+          },
+          "result_summary": "ungrounded"
+        }
+      ]
+    },
+    {
+      "turn": 2,
+      "caller": "Ilang araw po ba ang grace period bago mag-lapse ang policy?",
+      "agent": "Nauunawaan ko po ang inyong pag-aalala. 2. Grace Period & Policy Lapse (Palugit at Mawalan ng Bisa):\nA 31-day grace period (31 araw na palugit) is provided for overdue premium payments bago mag-lapse ang policy. If unpaid within 31 calendar days, the policy coverage will temporarily lapse (mawalan ng bisa ang coverage). Reinstatement is available within 2 years subject to health evidence.\n\nSources:\n  [1] [Source: synthetic_ph_bancassurance.txt | Section: Grace Period, Coverage, at Policy Lapse | p. 1 | v1.0 | hash:a1b2c3d4]\n  [2] [Source: synthetic_ph_bancassurance.txt | Section: Grace Period, Coverage, at Policy Lapse | p. 1 | v1.0 | hash:a1b2c3d4]\n\nGusto niyo po bang i-check natin ang iba pang flexible payment plans para dito?",
+      "detected_language": "taglish",
+      "detected_register": "formal",
+      "code_switch_detected": true,
+      "state_before": "OBJECTION",
+      "state_after": "OBJECTION",
+      "grounded": true,
+      "citations": [
+        {
+          "citation_id": "cit_e97865f9",
+          "source_id": "src_ph_bancassurance",
+          "source_name": "synthetic_ph_bancassurance.txt",
+          "record_id": "kb_loc_ph_01",
+          "chunk_id": "chk_45aef501",
+          "section": "Grace Period, Coverage, at Policy Lapse",
+          "source_page": 1,
+          "version": "1.0",
+          "content_hash": "a1b2c3d4e5f60102030405060708090a1b2c3d4e5f60718293a4b5c6d7e8f901",
+          "confidence": 0.7902,
+          "snippet": "2. Grace Period & Policy Lapse (Palugit at Mawalan ng Bisa):"
+        },
+        {
+          "citation_id": "cit_74539c88",
+          "source_id": "src_ph_bancassurance",
+          "source_name": "synthetic_ph_bancassurance.txt",
+          "record_id": "kb_loc_ph_01",
+          "chunk_id": "chk_05ceec62",
+          "section": "Grace Period, Coverage, at Policy Lapse",
+          "source_page": 1,
+          "version": "1.0",
+          "content_hash": "a1b2c3d4e5f60102030405060708090a1b2c3d4e5f60718293a4b5c6d7e8f901",
+          "confidence": 0.6352,
+          "snippet": "SYNTHETIC DEMO DATA \u2014 NOT REAL INSURANCE POLICY"
+        },
+        {
+          "citation_id": "cit_5fb8342a",
+          "source_id": "src_ph_bancassurance",
+          "source_name": "synthetic_ph_bancassurance.txt",
+          "record_id": "kb_loc_ph_01",
+          "chunk_id": "chk_88d9e93b",
+          "section": "Grace Period, Coverage, at Policy Lapse",
+          "source_page": 1,
+          "version": "1.0",
+          "content_hash": "a1b2c3d4e5f60102030405060708090a1b2c3d4e5f60718293a4b5c6d7e8f901",
+          "confidence": 0.6215,
+          "snippet": "3. Payment Flexibility (Paraan ng Pagbabayad ng Premium):"
+        }
+      ],
+      "actions": [
+        {
+          "action_type": "SEARCH_KB",
+          "parameters": {
+            "query": "Ilang araw po ba ang grace period bago mag-lapse ang policy"
+          },
+          "result_summary": "grounded"
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "caller": "Sige po, 3 years na akong working as technology consultant with 1.5 million revenue.",
+      "agent": "Mga magkano po ang average na monthly revenue o kinikita ninyo kada buwan?",
+      "detected_language": "taglish",
+      "detected_register": "formal",
+      "code_switch_detected": true,
+      "state_before": "OBJECTION",
+      "state_after": "OBJECTION",
+      "grounded": true,
+      "citations": [],
+      "actions": [
+        {
+          "action_type": "EVALUATE_QUALIFICATION",
+          "parameters": {},
+          "result_summary": "NEEDS_MORE_INFORMATION"
+        }
+      ]
+    }
+  ]
+}

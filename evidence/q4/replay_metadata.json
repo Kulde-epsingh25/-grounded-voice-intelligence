@@ -1,0 +1,15 @@
+{
+  "audio_file": "data\\audio\\synthetic_call_sample.wav",
+  "duration_seconds": 8.0,
+  "sample_rate": 16000,
+  "mode": "MODE B \u2014 REAL-TIME WAV REPLAY",
+  "provider": "Deepgram Nova 3 (live streaming)",
+  "asr_status": "SIMULATION \u2014 NOT PROVIDER ASR",
+  "started_at": "2026-10-02T10:51:32.028676+00:00",
+  "completed_at": "2026-10-02T10:51:32.028690+00:00",
+  "replay_timing": {
+    "expected_ms": 8000.0,
+    "actual_ms": 8145.74,
+    "drift_ms": 145.74
+  }
+}

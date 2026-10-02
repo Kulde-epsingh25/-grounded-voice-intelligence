@@ -1,0 +1,7 @@
+SYNTHETIC TEST DATA — NOT ASSESSMENT BUSINESS DATA
+
+Business Loan Eligibility Criteria
+
+The minimum monthly revenue requirement for the Starter business loan is $500,000.
+Applicants must have been in business for at least 2 years.
+The maximum loan amount for Starter tier is $2,000,000.

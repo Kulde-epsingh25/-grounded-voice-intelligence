@@ -1,0 +1,254 @@
+[
+  {
+    "id": "CASE-CS-01",
+    "category": "cross_sell",
+    "speaker": "CUSTOMER",
+    "text": "I also have another vehicle that I might want to insure next month.",
+    "should_alert": true,
+    "expected_signal_type": "missed_opportunity",
+    "expected_priority": "LOW"
+  },
+  {
+    "id": "CASE-CS-02",
+    "category": "cross_sell",
+    "speaker": "CUSTOMER",
+    "text": "Can we also add extra coverage for my daughter and family?",
+    "should_alert": true,
+    "expected_signal_type": "missed_opportunity",
+    "expected_priority": "LOW"
+  },
+  {
+    "id": "CASE-CS-03",
+    "category": "cross_sell",
+    "speaker": "CUSTOMER",
+    "text": "I run a second business in Makati that might need financing too.",
+    "should_alert": true,
+    "expected_signal_type": "missed_opportunity",
+    "expected_priority": "LOW"
+  },
+  {
+    "id": "CASE-CS-04",
+    "category": "cross_sell",
+    "speaker": "CUSTOMER",
+    "text": "Ada mobil lain di rumah yang cicilannya mau selesai.",
+    "should_alert": true,
+    "expected_signal_type": "missed_opportunity",
+    "expected_priority": "LOW"
+  },
+  {
+    "id": "CASE-CS-05",
+    "category": "cross_sell",
+    "speaker": "CUSTOMER",
+    "text": "May isa pang sasakyan ang asawa ko na kailangan ng comprehensive insurance.",
+    "should_alert": true,
+    "expected_signal_type": "missed_opportunity",
+    "expected_priority": "LOW"
+  },
+  {
+    "id": "CASE-CMP-01",
+    "category": "compliance",
+    "speaker": "AGENT",
+    "text": "Before we proceed, what is your social security number and annual income?",
+    "should_alert": true,
+    "expected_signal_type": "compliance_gap",
+    "expected_priority": "HIGH"
+  },
+  {
+    "id": "CASE-CMP-02",
+    "category": "compliance",
+    "speaker": "AGENT",
+    "text": "Don't worry, this investment has guaranteed return and zero risk whatsoever.",
+    "should_alert": true,
+    "expected_signal_type": "compliance_gap",
+    "expected_priority": "HIGH"
+  },
+  {
+    "id": "CASE-CMP-03",
+    "category": "compliance",
+    "speaker": "AGENT",
+    "text": "Bisa sebutkan nomor rekening dan gaji bulanan Bapak sekarang?",
+    "should_alert": true,
+    "expected_signal_type": "compliance_gap",
+    "expected_priority": "HIGH"
+  },
+  {
+    "id": "CASE-CMP-04",
+    "category": "compliance",
+    "speaker": "AGENT",
+    "text": "Pinjaman ini pasti cair tanpa syarat apa pun besok siang.",
+    "should_alert": true,
+    "expected_signal_type": "compliance_gap",
+    "expected_priority": "HIGH"
+  },
+  {
+    "id": "CASE-FRU-01",
+    "category": "frustration",
+    "speaker": "CUSTOMER",
+    "text": "I've explained this three times already. Why is this taking so long?",
+    "should_alert": true,
+    "expected_signal_type": "frustration",
+    "expected_priority": "HIGH"
+  },
+  {
+    "id": "CASE-FRU-02",
+    "category": "frustration",
+    "speaker": "CUSTOMER",
+    "text": "This is ridiculous! Let me speak to your supervisor right now.",
+    "should_alert": true,
+    "expected_signal_type": "frustration",
+    "expected_priority": "HIGH"
+  },
+  {
+    "id": "CASE-FRU-03",
+    "category": "frustration",
+    "speaker": "CUSTOMER",
+    "text": "Sudah berkali-kali saya jelaskan, lama banget prosesnya! Bikin emosi saja.",
+    "should_alert": true,
+    "expected_signal_type": "frustration",
+    "expected_priority": "HIGH"
+  },
+  {
+    "id": "CASE-FRU-04",
+    "category": "frustration",
+    "speaker": "CUSTOMER",
+    "text": "Pangatlong beses ko nang paliwanag ito sa inyo, nagsasayang lang kayo ng oras ko.",
+    "should_alert": true,
+    "expected_signal_type": "frustration",
+    "expected_priority": "HIGH"
+  },
+  {
+    "id": "CASE-PAY-01",
+    "category": "payment",
+    "speaker": "CUSTOMER",
+    "text": "I lost my job last week and I can't pay the full installment this month.",
+    "should_alert": true,
+    "expected_signal_type": "risk",
+    "expected_priority": "HIGH"
+  },
+  {
+    "id": "CASE-PAY-02",
+    "category": "payment",
+    "speaker": "CUSTOMER",
+    "text": "Saya kena PHK kemarin, jadi nggak sanggup bayar cicilan yang jatuh tempo besok.",
+    "should_alert": true,
+    "expected_signal_type": "risk",
+    "expected_priority": "HIGH"
+  },
+  {
+    "id": "CASE-PAY-03",
+    "category": "payment",
+    "speaker": "CUSTOMER",
+    "text": "Hindi ko kayang bayaran ang premium ngayon dahil nagigipit kami sa gastusin.",
+    "should_alert": true,
+    "expected_signal_type": "risk",
+    "expected_priority": "HIGH"
+  },
+  {
+    "id": "CASE-CB-01",
+    "category": "callback",
+    "speaker": "CUSTOMER",
+    "text": "I'm driving right now, can you please call me back in two hours?",
+    "should_alert": true,
+    "expected_signal_type": "callback_need",
+    "expected_priority": "MEDIUM"
+  },
+  {
+    "id": "CASE-CB-02",
+    "category": "callback",
+    "speaker": "CUSTOMER",
+    "text": "Saya lagi di jalan dan ada meeting, tolong telepon lagi nanti sore ya.",
+    "should_alert": true,
+    "expected_signal_type": "callback_need",
+    "expected_priority": "MEDIUM"
+  },
+  {
+    "id": "CASE-CB-03",
+    "category": "callback",
+    "speaker": "CUSTOMER",
+    "text": "Busy ako ngayon sa trabaho, tumawag na lang kayo mamayang alas-singko.",
+    "should_alert": true,
+    "expected_signal_type": "callback_need",
+    "expected_priority": "MEDIUM"
+  },
+  {
+    "id": "CASE-BUY-01",
+    "category": "neutral",
+    "speaker": "CUSTOMER",
+    "text": "I am ready to proceed and sign up today, where do I sign?",
+    "should_alert": true,
+    "expected_signal_type": "buying_signal",
+    "expected_priority": "MEDIUM"
+  },
+  {
+    "id": "CASE-NEU-01",
+    "category": "neutral",
+    "speaker": "CUSTOMER",
+    "text": "Good morning, thank you for returning my inquiry.",
+    "should_alert": false,
+    "expected_signal_type": null,
+    "expected_priority": null
+  },
+  {
+    "id": "CASE-NEU-02",
+    "category": "neutral",
+    "speaker": "CUSTOMER",
+    "text": "Yes, my business was established in 2019 and we are based in Chicago.",
+    "should_alert": false,
+    "expected_signal_type": null,
+    "expected_priority": null
+  },
+  {
+    "id": "CASE-NEU-03",
+    "category": "neutral",
+    "speaker": "AGENT",
+    "text": "Thank you for providing that. Let me look up our standard commercial tiers.",
+    "should_alert": false,
+    "expected_signal_type": null,
+    "expected_priority": null
+  },
+  {
+    "id": "CASE-NEU-04",
+    "category": "neutral",
+    "speaker": "CUSTOMER",
+    "text": "Selamat siang, saya hanya mau mengecek status aplikasi yang kemarin.",
+    "should_alert": false,
+    "expected_signal_type": null,
+    "expected_priority": null
+  },
+  {
+    "id": "CASE-NEU-05",
+    "category": "neutral",
+    "speaker": "CUSTOMER",
+    "text": "Magandang umaga rin po sa inyo, opo naririnig ko kayo nang malinaw.",
+    "should_alert": false,
+    "expected_signal_type": null,
+    "expected_priority": null
+  },
+  {
+    "id": "CASE-NEU-06",
+    "category": "neutral",
+    "speaker": "CUSTOMER",
+    "text": "Could you repeat that? The line was a bit crackly for a second.",
+    "should_alert": false,
+    "expected_signal_type": null,
+    "expected_priority": null
+  },
+  {
+    "id": "CASE-NEU-07",
+    "category": "neutral",
+    "speaker": "AGENT",
+    "text": "Please note that this call is recorded for quality assurance and training purposes.",
+    "should_alert": false,
+    "expected_signal_type": null,
+    "expected_priority": null
+  },
+  {
+    "id": "CASE-NEU-08",
+    "category": "neutral",
+    "speaker": "CUSTOMER",
+    "text": "Understood, that sounds completely reasonable to me.",
+    "should_alert": false,
+    "expected_signal_type": null,
+    "expected_priority": null
+  }
+]

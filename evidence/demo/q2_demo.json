@@ -1,0 +1,17 @@
+{
+  "module": "Q2 — Production-Ready Knowledge Base & Hybrid Retrieval",
+  "status": "PASS (WITH PROTOTYPE RETRIEVAL BACKEND NOTE)",
+  "reason": "Full ingestion, extraction, cleaning, deduplication, terminology, PII masking, chunking, hybrid retrieval, confidence gating, and citations are verified. Local dense+BM25 store is utilized for the prototype; Qdrant is the documented production migration path.",
+  "demo_files": {
+    "retrieval_evaluation": "evidence/q2/retrieval_results.json",
+    "processed_statistics": "evidence/q2/processed_stats.json",
+    "raw_evaluation_dataset": "data/eval/retrieval.json",
+    "normalized_kb_records": "data/processed/clean_records.json",
+    "localized_kb_records": "data/processed/localized_kb_records.json"
+  },
+  "endpoints": {
+    "search": "POST http://localhost:8000/api/v1/kb/search",
+    "vapi_custom_kb": "POST http://localhost:8000/kb/search",
+    "stats": "GET http://localhost:8000/api/v1/kb/stats"
+  }
+}
