@@ -1,6 +1,6 @@
 # AI Engineer Assessment: Production-Style Voice & Real-Time Intelligence
 
-[![Tests](https://img.shields.io/badge/tests-153%20passed-brightgreen.svg)]()
+[![Tests](https://img.shields.io/badge/tests-177%20passed-brightgreen.svg)]()
 [![Python](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13%20%7C%203.14-blue.svg)]()
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688.svg)]()
 [![License](https://img.shields.io/badge/license-MIT-green.svg)]()
@@ -9,9 +9,9 @@
 
 ## 1. Executive Summary
 
-This repository delivers a unified, production-style architecture for knowledge-grounded voice agents, culturally localized multilingual bots, and streaming call intelligence. Built during a focused 24-hour sprint, it prioritizes **architectural honesty, strict grounding boundaries, sub-second streaming latency, and alert fatigue suppression** over unverified claims.
+This repository delivers working prototypes for knowledge-grounded voice agents, culturally localized multilingual bots, and streaming call intelligence. It prioritizes **architectural honesty, strict grounding boundaries, sub-second streaming latency, and alert fatigue suppression** over unverified claims.
 
-All four core assessment areas are fully implemented, accompanied by **153 passing automated tests**, structured evidence manifests, live browser interfaces, and reproducible evaluation harnesses.
+All four assessment areas have runnable prototypes, accompanied by **177 passing automated tests**, structured evidence manifests, browser interfaces, and reproducible evaluation harnesses. Carrier calls, provider-backed speech recognition/synthesis, and recorded regional-accent evidence still require external credentials and audio.
 
 ---
 
@@ -28,9 +28,9 @@ Financial services voice interactions (commercial lending, bancassurance, consum
 
 | Assessment Requirement | Module | Implementation | Evidence Artifact | Verification Status |
 |------------------------|--------|----------------|-------------------|---------------------|
-| **Q1: Grounded Voice Agent** | `backend/app/agents/` | Intelligence-driven conversational loop + Q2 search | `evidence/q1/calls/` | **IMPLEMENTING — LIVE VERIFICATION** |
+| **Q1: Grounded Voice Agent** | `backend/app/agents/` | Deterministic rules engine + Q2 search | `evidence/q1/calls/` | **PARTIAL — SIMULATION ONLY** |
 | **Q2: Production Knowledge Base** | `backend/app/kb/` | Ingestion, PII scrubbing, hybrid RRF | `evidence/q2/retrieval_results.json` | **PASS (PROTOTYPE STORE)** |
-| **Q3: Multilingual Voice Bots** | `backend/app/localization/` | PH Bancassurance & ID Multifinance | `evidence/q3/` | **PARTIAL — SIMULATION ONLY** |
+| **Q3: Multilingual Voice Bots** | `backend/app/localization/` | Interactive PH & ID text/browser-speech demos | `evidence/q3/` | **PARTIAL — PROVIDER AUDIO UNVERIFIED** |
 | **Q4: Real-Time Call Intelligence** | `backend/app/realtime/` | 1.0x WAV chunk streaming + Nudges | `evidence/q4/replay_results.json` | **PASS (REAL WAV REPLAY)** |
 
 *For complete requirement-by-requirement traceability, see [`docs/REQUIREMENTS.md`](docs/REQUIREMENTS.md).*
@@ -180,6 +180,7 @@ The Q2 pipeline converts heterogeneous raw documents into structured, searchable
 - **Deterministic Rules Engine**: Commercial loan qualification evaluates four tiers (`Starter`, `Growth`, `Premium`, `Enterprise`) against business revenue, operating years, and credit scores without generative drift.
 - **Grounded Objection Handling**: Objections regarding rates or document requirements query `/kb/search` directly and return verifiable citations (`[Source: commercial_loan_policy, Chunk: 0]`).
 - **Browser Client**: Fully functional browser test phone interface at `http://localhost:8000/voice`.
+- **Offline behavior**: When live provider credentials are absent, the voice page uses its stateful deterministic browser demo instead of presenting the session as a live carrier call.
 
 ---
 
@@ -194,6 +195,7 @@ Built on top of the shared core agent rather than duplicating code:
   - Deploys formal (`Bapak/Ibu`) vs colloquial digital app (`Kak`) registers.
   - Standardizes retail finance loanwords: `cicilan`, `tenor`, `denda`, `DP`, `jatuh tempo`, `angsuran`.
 - **Localized Fallback Policy**: The agent strictly preserves caller language and register when handling unexpected turns, preventing unintended reversion to English.
+- **Interactive Demo**: `/markets/` exposes both localized agents through a text interface, optional browser microphone input, and optional speech synthesis from installed browser voices. Provider-backed ASR/TTS and regional accent accuracy remain unverified.
 
 ---
 
@@ -219,7 +221,7 @@ python -m venv venv
 source venv/bin/activate  # On Windows PowerShell: .\venv\Scripts\Activate.ps1
 
 # 3. Install dependencies
-pip install -r backend/requirements.txt
+pip install -r requirements.txt
 ```
 
 ---
@@ -236,9 +238,14 @@ cp .env.example .env
 | `APP_ENV` | `development` | Application runtime environment |
 | `APP_PORT` | `8000` | Port for FastAPI server |
 | `RETRIEVAL_CONFIDENCE_THRESHOLD` | `0.60` | Minimum score required for grounded answers |
-| `VAPI_API_KEY` | *(Optional)* | Private Vapi key for live telephone calls |
-| `DEEPGRAM_API_KEY` | *(Optional)* | Deepgram API key for live streaming ASR |
-| `OPENAI_API_KEY` | *(Optional)* | OpenAI API key for live GPT/embeddings |
+| `VAPI_PUBLIC_KEY` | *(Required for browser calls)* | Public key from your existing Vapi account |
+| `VAPI_ASSISTANT_ID` | *(Required for browser calls)* | ID of the assistant created in Vapi |
+| `VAPI_API_KEY` | *(Optional)* | Private key for server-side Vapi REST management; not needed by the browser SDK |
+| `VAPI_WEBHOOK_SECRET` | *(Required for production webhooks)* | Shared secret sent in the `X-Vapi-Secret` header |
+| `PUBLIC_BASE_URL` | *(Required for production webhooks)* | Published app URL used by Vapi to reach the webhook |
+| `OPENAI_API_KEY` | *(Optional)* | Backend LLM/embedding provider key; does not make the deterministic Q1 demo generative |
+| `DEEPGRAM_API_KEY` | *(Optional; adapter incomplete)* | Not sufficient by itself to enable Q4 streaming ASR |
+| `ELEVENLABS_API_KEY` | *(Optional; UI not wired)* | TTS client key; not currently used by the localized browser page |
 
 ---
 
@@ -252,14 +259,17 @@ python -m uvicorn app.main:app --app-dir backend --host 0.0.0.0 --port 8000 --re
 Endpoints:
 - **Service Health Check**: `http://localhost:8000/health`
 - **Q1 Voice UI**: `http://localhost:8000/voice`
+- **Q3 Localized Bot UI**: `http://localhost:8000/markets/`
 - **Q4 Live Insights Dashboard**: `http://localhost:8000/insights`
 - **Q2 Knowledge Base Search**: `POST http://localhost:8000/kb/search`
+- **Q3 Market Catalog**: `GET http://localhost:8000/api/v1/localization/markets`
+- **Q3 Agent Turn**: `POST http://localhost:8000/api/v1/localization/{market}/turn` (`market` is `PH` or `ID`)
 
 ---
 
 ## 13. Running Tests
 
-Run all 153 unit and integration tests:
+Run all 177 unit and integration tests:
 ```bash
 python -m pytest backend/tests/ -v
 ```
@@ -324,7 +334,7 @@ python scripts/replay_transcript.py
 
 | Evaluation Area | Key Metric | Measured Result | Evidence Source |
 |-----------------|------------|-----------------|-----------------|
-| **Test Suite** | Pass Rate | **153 / 153 (100%)** | `evidence/final_test_results.json` |
+| **Test Suite** | Pass Rate | **177 / 177 (100%)** | `evidence/final_test_results.json` |
 | **Q2 Retrieval** | Grounded Precision | **100.0%** (5/5 queries) | `evidence/q2/retrieval_results.json` |
 | **Q4 Signal Precision** | Precision | **95.2%** (20/21 alerts) | `evidence/q4/final_false_positive_audit.json` |
 | **Q4 Signal Recall** | Recall | **100.0%** (20/20 targets) | `evidence/q4/final_false_positive_audit.json` |
@@ -349,12 +359,13 @@ python scripts/replay_transcript.py
 1. **Carrier Telephony Audio**: Call evidence currently consists of verified multi-turn simulation traces generated via the state machine runner. Actual live telephone recordings have not yet been produced due to absent external telephony credentials.
 2. **Prototype Retrieval Backend**: Q2 hybrid search operates against a high-performance in-memory dense+BM25 store; deployment to managed Qdrant clusters is documented as the production roadmap.
 3. **Regional Accent Benchmark**: Prepared phonetic manifests exist for Surabaya, Sundanese, and Medan dialects, but empirical acoustic Word Error Rate benchmarks require recorded field audio.
+4. **Provider Wiring**: The browser Vapi SDK can use an existing Vapi assistant after credentials are configured. The Gemini session remains deterministic, Deepgram audio streaming is incomplete, and the localized page currently uses browser speech rather than provider-backed TTS.
 
 ---
 
 ## 22. Production Improvement Plan (NOW / NEXT / LATER)
 
-- **NOW (Prototype)**: In-memory store, 1.0x real-time WAV replay, deterministic rules, 153 passing unit tests.
+- **NOW (Prototype)**: In-memory store, 1.0x real-time WAV replay, deterministic rules, 177 passing unit tests.
 - **NEXT (Weeks 1–4)**: Managed Qdrant vector cloud, PostgreSQL metadata DB, live Vapi/Deepgram carrier onboarding, Redis state and pub/sub.
 - **LATER (Months 2+)**: Edge audio proxies, Kubernetes worker autoscaling, regional speech corpus fine-tuning, SOC2 / HIPAA / PII audit trails.
 *(See full plan in [`docs/PRODUCTION_PLAN.md`](docs/PRODUCTION_PLAN.md)).*

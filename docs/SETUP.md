@@ -27,7 +27,7 @@ python -m venv venv
 .\venv\Scripts\Activate.ps1
 
 # 4. Install dependencies
-pip install -r backend/requirements.txt
+pip install -r requirements.txt
 ```
 
 ### Linux / macOS (Bash)
@@ -36,7 +36,7 @@ pip install -r backend/requirements.txt
 cd ai-engineer-assessment
 python3 -m venv venv
 source venv/bin/activate
-pip install -r backend/requirements.txt
+pip install -r requirements.txt
 ```
 
 ---
@@ -75,7 +75,9 @@ python -m uvicorn app.main:app --app-dir backend --host 0.0.0.0 --port 8000 --re
 
 ### Accessible Interfaces & Endpoints:
 - **Service Health Check**: [http://localhost:8000/health](http://localhost:8000/health)
+- **Application Home**: [http://localhost:8000/](http://localhost:8000/) (redirects to the voice demo)
 - **Q1 Voice Agent Browser UI**: [http://localhost:8000/voice](http://localhost:8000/voice)
+- **Q3 Localized Bots UI**: [http://localhost:8000/markets/](http://localhost:8000/markets/)
 - **Q4 Live Insights Dashboard**: [http://localhost:8000/insights](http://localhost:8000/insights)
 - **Q2 Custom Knowledge Base Search**: `POST http://localhost:8000/kb/search`
 - **Q1 Lead Management API**: `GET http://localhost:8000/api/v1/leads`
@@ -85,7 +87,7 @@ python -m uvicorn app.main:app --app-dir backend --host 0.0.0.0 --port 8000 --re
 
 ## 5. Running the Complete Test Suite (REQUIRED)
 
-Execute all 153 unit and integration tests:
+Execute all 177 unit and integration tests:
 
 ```powershell
 python -m pytest backend/tests/ -v
@@ -93,7 +95,7 @@ python -m pytest backend/tests/ -v
 
 Expected output:
 ```text
-============================= 153 passed in 1.25s =============================
+============================= 177 passed =============================
 ```
 
 ---

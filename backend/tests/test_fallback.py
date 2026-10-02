@@ -28,6 +28,7 @@ class TestFallbackAndResilience:
         agent = VoiceAgent()
         turn = agent.process_turn("Our monthly revenue is around fifty.")
         assert "fifty thousand" in turn.assistant_response.lower()
+        assert agent.qualification_manager.state.monthly_revenue.is_ambiguous is True
         # Should not approve or decline yet
         assert not agent.lead_created
 

@@ -25,11 +25,13 @@ def test_q4_evaluation_dataset_structure():
         assert isinstance(c["should_alert"], bool)
 
 
-def test_q4_evaluation_metrics_execution():
-    summary = evaluate_q4_signals()
+def test_q4_evaluation_metrics_execution(tmp_path):
+    summary = evaluate_q4_signals(output_dir=tmp_path)
     assert summary["total_cases"] >= 20
     assert summary["true_positives"] > 0
     assert summary["true_negatives"] > 0
     assert summary["metrics"]["precision"] >= 0.85
     assert summary["metrics"]["recall"] >= 0.85
     assert "failures" in summary
+    assert (tmp_path / "false_positive_results.json").exists()
+    assert (tmp_path / "signal_results.json").exists()

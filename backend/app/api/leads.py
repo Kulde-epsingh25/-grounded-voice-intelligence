@@ -11,9 +11,16 @@ from typing import Any, Optional
 from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel
 
+from app.core.config import get_config
 from app.services.leads import get_lead_service
 
 router = APIRouter()
+
+
+def _require_development_mode() -> None:
+    """Keep the unauthenticated demo lead API unavailable in published mode."""
+    if get_config().is_production:
+        raise HTTPException(status_code=404, detail="Not found")
 
 
 class CreateLeadRequest(BaseModel):
@@ -28,6 +35,7 @@ class CreateLeadRequest(BaseModel):
 @router.get("")
 async def list_leads() -> list[dict[str, Any]]:
     """List all commercial loan leads."""
+    _require_development_mode()
     service = get_lead_service()
     return [l.model_dump(mode="json") for l in service.list_leads()]
 
@@ -35,6 +43,7 @@ async def list_leads() -> list[dict[str, Any]]:
 @router.get("/{lead_id}")
 async def get_lead(lead_id: str) -> dict[str, Any]:
     """Get single lead by lead_id."""
+    _require_development_mode()
     service = get_lead_service()
     lead = service.get_lead(lead_id)
     if not lead:
@@ -45,6 +54,7 @@ async def get_lead(lead_id: str) -> dict[str, Any]:
 @router.post("")
 async def create_lead(request: CreateLeadRequest) -> dict[str, Any]:
     """Create or update a lead."""
+    _require_development_mode()
     service = get_lead_service()
     lead = service.create_or_update_lead(
         call_id=request.call_id,

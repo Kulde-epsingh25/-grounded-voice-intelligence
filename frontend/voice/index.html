@@ -20,11 +20,12 @@
             <div class="header-right" style="display:flex; align-items:center; gap:0.75rem;">
                 <div class="provider-selector-wrap" style="display:flex; align-items:center; gap:0.4rem;">
                     <span style="font-size:0.8rem; color:var(--text-muted);">Provider:</span>
-                    <button id="provider-btn-vapi" class="provider-toggle-btn active" title="Primary Voice Platform (Vapi WebRTC)">Vapi (Primary)</button>
+                    <button id="provider-btn-vapi" class="provider-toggle-btn" title="Primary Voice Platform (Vapi WebRTC)">Vapi (Primary)</button>
                     <button id="provider-btn-gemini" class="provider-toggle-btn" title="Fallback 1: Gemini Live">Gemini Live (Fallback 1)</button>
                     <button id="provider-btn-whisper" class="provider-toggle-btn" title="Fallback 2: Whisper ASR">Whisper (Fallback 2)</button>
-                    <button id="provider-btn-browser" class="provider-toggle-btn" title="Direct Web Speech API (Local Mic/TTS)">Direct Voice</button>
+                    <button id="provider-btn-browser" class="provider-toggle-btn active" title="Direct Web Speech API (Local Mic/TTS)">Direct Voice</button>
                 </div>
+                <a class="provider-toggle-btn" href="/markets/">Localized Bots</a>
                 <div class="status-indicator">
                     <span id="call-status-dot" class="dot dot-idle"></span>
                     <span id="call-status-text">Idle</span>
@@ -145,11 +146,8 @@
         </main>
     </div>
 
-    <!-- Vapi Web SDK - loaded as ES module via esm.sh CDN -->
-    <script type="module">
-        import Vapi from 'https://esm.sh/@vapi-ai/web@2.7.1';
-        window.Vapi = Vapi;
-    </script>
-    <script src="app.js" defer></script>
+    <!-- Vapi Web SDK script tag for live browser calling -->
+    <script src="https://cdn.jsdelivr.net/npm/@vapi-ai/web@latest/dist/vapi.min.js"></script>
+    <script src="app.js?v=local-default"></script>
 </body>
 </html>

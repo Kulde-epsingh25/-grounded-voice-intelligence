@@ -12,6 +12,7 @@ from typing import Any
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
 
 from app.core.config import get_config
 from app.core.logging import setup_logging, get_logger
@@ -49,14 +50,17 @@ app.add_middleware(
 )
 
 from app.api.kb import router as kb_router
+from app.api.agent import router as agent_router
+from app.api.localization import router as localization_router
 from app.api.leads import router as leads_router
 from app.api.vapi import router as vapi_router
 from app.api.realtime import router as realtime_router
 from app.api.gemini import router as gemini_router
 from app.api.providers import router as providers_router
-from app.api.agent import router as agent_router
 
 app.include_router(kb_router, prefix="/api/v1/kb", tags=["Knowledge Base"])
+app.include_router(agent_router, prefix="/api/v1/agent", tags=["Browser Voice Agent"])
+app.include_router(localization_router, prefix="/api/v1/localization", tags=["Localized Voice Bots"])
 app.include_router(kb_router, prefix="/kb", tags=["Knowledge Base (Vapi)"])
 app.include_router(leads_router, prefix="/api/v1/leads", tags=["Leads"])
 app.include_router(vapi_router, prefix="/api/v1/vapi", tags=["Vapi Integration"])
@@ -65,7 +69,6 @@ app.include_router(gemini_router, prefix="/api/v1/gemini", tags=["Gemini Live Fa
 app.include_router(providers_router, prefix="/api/v1/providers", tags=["Provider Strategy"])
 app.include_router(realtime_router, prefix="/api/v1/realtime", tags=["Realtime Call Intelligence"])
 app.include_router(realtime_router, tags=["Realtime WebSocket"])
-app.include_router(agent_router, prefix="/api/v1/agent", tags=["Voice Agent"])
 
 from fastapi.staticfiles import StaticFiles
 from pathlib import Path
@@ -78,7 +81,14 @@ insights_frontend_dir = Path(__file__).resolve().parents[2] / "frontend" / "insi
 if insights_frontend_dir.exists():
     app.mount("/insights", StaticFiles(directory=str(insights_frontend_dir), html=True), name="insights")
 
+markets_frontend_dir = Path(__file__).resolve().parents[2] / "frontend" / "markets"
+if markets_frontend_dir.exists():
+    app.mount("/markets", StaticFiles(directory=str(markets_frontend_dir), html=True), name="markets")
 
+@app.get("/", include_in_schema=False)
+async def home() -> RedirectResponse:
+    """Send the Replit preview and published root URL to the voice demo."""
+    return RedirectResponse(url="/voice/")
 
 
 @app.get("/health")

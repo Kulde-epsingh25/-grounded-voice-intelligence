@@ -38,7 +38,7 @@ class ProviderRegistry:
         elif p == "elevenlabs":
             return bool(config.elevenlabs.api_key and len(config.elevenlabs.api_key) > 5)
         elif p == "vapi":
-            return bool(config.vapi.api_key and len(config.vapi.api_key) > 5)
+            return bool(config.vapi.public_key and config.vapi.assistant_id)
         elif p in ("hf_whisper", "hf_mms", "hf_local", "piper"):
             return True
         return False
@@ -66,7 +66,7 @@ class ProviderRegistry:
                 "piper": "available",
             },
             "voice": {
-                "vapi": "configured" if bool(config.vapi.api_key) else "not_configured",
+                "vapi": "configured" if bool(config.vapi.public_key and config.vapi.assistant_id) else "not_configured",
                 "gemini_live": "configured" if bool(config.gemini.api_key) else "not_configured",
             },
         }

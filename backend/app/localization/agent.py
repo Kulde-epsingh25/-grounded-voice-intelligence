@@ -54,6 +54,7 @@ class LocalizedVoiceAgent(BaseLocalizedAgent):
         self.escalated = False
         self.lead_created = False
         self.detected_terms: list[TerminologyItem] = []
+        self.last_detection = None
 
         # Log call start
         get_call_event_service().log_event(
@@ -76,6 +77,7 @@ class LocalizedVoiceAgent(BaseLocalizedAgent):
 
         # 1. Detect language, register, and code-switching
         detection = self.detect_language(clean_utterance)
+        self.last_detection = detection
 
         # 2. Extract domain terminology
         dict_registry = PH_TERMINOLOGY if self.market_config.market == Market.PH else ID_TERMINOLOGY

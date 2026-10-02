@@ -1,9 +1,9 @@
 [
   {
-    "lead_id": "lead_6afc4c54",
+    "lead_id": "lead_01d0d4f6",
     "call_id": "call_same_1",
-    "created_at": "2026-10-02T21:44:23.216993Z",
-    "updated_at": "2026-10-02T21:44:23.218001Z",
+    "created_at": "2026-10-02T16:19:22.560509Z",
+    "updated_at": "2026-10-02T16:19:22.561535Z",
     "business_type": "Tech",
     "years_in_business": null,
     "monthly_revenue": 1200000.0,
@@ -16,10 +16,10 @@
     "status": "new"
   },
   {
-    "lead_id": "lead_e03bdd86",
+    "lead_id": "lead_32866050",
     "call_id": "test-ph-coop",
-    "created_at": "2026-10-02T21:44:23.228291Z",
-    "updated_at": "2026-10-02T21:44:23.232147Z",
+    "created_at": "2026-10-02T16:19:22.568359Z",
+    "updated_at": "2026-10-02T16:19:22.570269Z",
     "business_type": "retail",
     "years_in_business": 3.0,
     "monthly_revenue": 1200000.0,
@@ -32,10 +32,10 @@
     "status": "new"
   },
   {
-    "lead_id": "lead_b9d59c7b",
+    "lead_id": "lead_1d005afd",
     "call_id": "test-id-coop",
-    "created_at": "2026-10-02T21:44:25.544300Z",
-    "updated_at": "2026-10-02T21:44:25.547127Z",
+    "created_at": "2026-10-02T16:19:22.584517Z",
+    "updated_at": "2026-10-02T16:19:22.586324Z",
     "business_type": "kuliner",
     "years_in_business": 3.0,
     "monthly_revenue": 1200000.0,
@@ -44,6 +44,22 @@
     "recommended_product": "Growth",
     "contact_permission": true,
     "notes": "Qualified via localized bot (ID)\nQualified via localized bot (ID)",
+    "source": "voice_agent",
+    "status": "new"
+  },
+  {
+    "lead_id": "lead_754730b6",
+    "call_id": "sim-scenario-01",
+    "created_at": "2026-10-02T17:56:12.703904Z",
+    "updated_at": "2026-10-02T17:56:12.708626Z",
+    "business_type": "retail",
+    "years_in_business": 3.0,
+    "monthly_revenue": 1200000.0,
+    "requested_amount": 2000000.0,
+    "qualification_status": "ELIGIBLE",
+    "recommended_product": "Growth",
+    "contact_permission": true,
+    "notes": "",
     "source": "voice_agent",
     "status": "new"
   }

@@ -9,20 +9,12 @@ Tests:
 
 from __future__ import annotations
 
-import pytest
-
 from app.services.leads import get_lead_service
 
 
 class TestLeads:
-    @pytest.fixture(autouse=True)
-    def clean_leads(self):
+    def test_create_and_get_lead(self):
         service = get_lead_service()
-        service.clear()
-        return service
-
-    def test_create_and_get_lead(self, clean_leads):
-        service = clean_leads
         lead = service.create_or_update_lead(
             call_id="call_lead_1",
             qualification_data={
@@ -43,8 +35,8 @@ class TestLeads:
         assert retrieved is not None
         assert retrieved.business_type == "Retail"
 
-    def test_lead_idempotency(self, clean_leads):
-        service = clean_leads
+    def test_lead_idempotency(self):
+        service = get_lead_service()
         lead1 = service.create_or_update_lead(
             call_id="call_same_1",
             qualification_data={"business_type": "Tech", "monthly_revenue": 1000000.0},

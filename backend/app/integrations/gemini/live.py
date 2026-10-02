@@ -76,7 +76,7 @@ class GeminiLiveSession:
             "state_after": turn.state_after.value if hasattr(turn.state_after, "value") else str(turn.state_after),
             "grounded": turn.grounded,
             "citations": turn.citations_used,
-            "qualification_state": self.agent.qualification_manager.state.to_dict(),
+            "qualification_state": self.agent.public_state(),
             "lead_created": self.agent.lead_created,
             "escalated": self.agent.escalated,
             "provider": "gemini_live",

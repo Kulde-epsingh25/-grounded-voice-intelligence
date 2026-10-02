@@ -39,7 +39,7 @@ const btnVapi = document.getElementById("provider-btn-vapi");
 const btnGemini = document.getElementById("provider-btn-gemini");
 const btnWhisper = document.getElementById("provider-btn-whisper");
 
-let activeProvider = "vapi";
+let activeProvider = "browser";
 let geminiSessionId = null;
 let speechRecognizer = null;
 let isMicMuted = false;
@@ -115,8 +115,9 @@ const alertCard = document.getElementById("escalation-alert-card");
 // Initialize
 document.addEventListener("DOMContentLoaded", async () => {
     speechRecognizer = initSpeechRecognition();
-    await setupVapiIfAvailable();
+    setActiveProvider("browser");
     setupEventListeners();
+    await setupVapiIfAvailable();
 });
 
 function setActiveProvider(provider) {
@@ -137,6 +138,11 @@ async function setupVapiIfAvailable() {
             if (resp.ok) {
                 const data = await resp.json();
                 const VapiCtor = window.Vapi?.default || window.Vapi;
+
+                if (!data.configured) {
+                    console.info("Vapi is not configured; the local browser demo will be used.");
+                    return;
+                }
 
                 if (data.configured && data.public_key && data.assistant_id && VapiCtor) {
                     vapiAssistantId = data.assistant_id;
@@ -315,19 +321,13 @@ async function startCall() {
                 }
             }
         } else {
-            addMessage("system", "Vapi credentials not found. Moving to Fallback 1 (Gemini Live)...");
-            setActiveProvider("gemini_live");
-            try {
-                await startGeminiLiveSession();
-                if (speechRecognizer) speechRecognizer.start();
-                return;
-            } catch (geminiErr) {
-                addMessage("system", "Moving to Fallback 2 (Whisper ASR)...");
-                setActiveProvider("whisper");
-                if (speechRecognizer) speechRecognizer.start();
-                addMessage("assistant", "Hello! Connected via Whisper ASR backup. How can I help you today?");
-                return;
+            addMessage("system", "Live Vapi credentials are not configured. Using the local browser demo; typed tests work without provider keys.");
+            setActiveProvider("browser");
+            if (speechRecognizer) {
+                try { speechRecognizer.start(); } catch (err) {}
             }
+            addMessage("assistant", "Hello, thank you for calling commercial lending. I can answer verified loan questions or collect business details for preliminary qualification. How can I help?");
+            return;
         }
     }
 
@@ -369,6 +369,9 @@ function endCall() {
     if (geminiSessionId) {
         fetch(`${API_BASE}/api/v1/gemini/session/${geminiSessionId}/end`, { method: "POST" }).catch(() => {});
         geminiSessionId = null;
+    }
+    if (currentCallId) {
+        fetch(`${API_BASE}/api/v1/agent/sessions/${encodeURIComponent(currentCallId)}`, { method: "DELETE" }).catch(() => {});
     }
     setCallActive(false);
     addMessage("system", "Call session concluded.");
@@ -417,11 +420,15 @@ async function processUserTurn(text) {
                 }
                 if (data.qualification_state) {
                     const qs = data.qualification_state;
-                    if (qs.business_type && qs.business_type.value) qualificationState.business_type = qs.business_type.value;
-                    if (qs.years_in_business && qs.years_in_business.value) qualificationState.years_in_business = qs.years_in_business.value;
-                    if (qs.monthly_revenue && qs.monthly_revenue.value) qualificationState.monthly_revenue = qs.monthly_revenue.value;
-                    if (qs.requested_amount && qs.requested_amount.value) qualificationState.requested_amount = qs.requested_amount.value;
+                    qualificationState = { ...qualificationState, ...qs };
                     updateQualificationUI();
+                    if (qs.eligibility === "ELIGIBLE") {
+                        eligibilityBadge.textContent = "ELIGIBLE";
+                        eligibilityBadge.className = "badge badge-eligible";
+                    } else if (qs.eligibility === "INELIGIBLE") {
+                        eligibilityBadge.textContent = "INELIGIBLE";
+                        eligibilityBadge.className = "badge badge-ineligible";
+                    }
                 }
                 agentBadge.textContent = "Listening";
                 return;

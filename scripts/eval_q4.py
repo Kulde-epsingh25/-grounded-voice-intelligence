@@ -21,7 +21,7 @@ EVIDENCE_DIR = ROOT_DIR / "evidence" / "q4"
 EVIDENCE_DIR.mkdir(parents=True, exist_ok=True)
 
 
-def evaluate_q4_signals():
+def evaluate_q4_signals(output_dir: Path = EVIDENCE_DIR):
     with open(CASES_FILE, "r", encoding="utf-8") as f:
         cases = json.load(f)
 
@@ -125,18 +125,20 @@ def evaluate_q4_signals():
         "failures": failures,
     }
 
-    # Save evidence
-    with open(EVIDENCE_DIR / "false_positive_results.json", "w", encoding="utf-8") as f:
+    # Save evidence to the requested location. Tests pass a temporary directory
+    # so routine test runs never rewrite tracked submission artifacts.
+    output_dir.mkdir(parents=True, exist_ok=True)
+    with open(output_dir / "false_positive_results.json", "w", encoding="utf-8") as f:
         json.dump(summary, f, indent=2)
 
-    with open(EVIDENCE_DIR / "signal_results.json", "w", encoding="utf-8") as f:
+    with open(output_dir / "signal_results.json", "w", encoding="utf-8") as f:
         json.dump(case_results, f, indent=2)
 
     print("=== Q4 False-Positive & Signal Evaluation ===")
     print(f"Total Cases: {total}")
     print(f"TP: {tp} | TN: {tn} | FP: {fp} | FN: {fn}")
     print(f"Precision: {precision*100:.1f}% | Recall: {recall*100:.1f}% | FPR: {fpr*100:.1f}% | F1: {f1*100:.1f}%")
-    print(f"Results saved to {EVIDENCE_DIR / 'false_positive_results.json'}")
+    print(f"Results saved to {output_dir / 'false_positive_results.json'}")
 
     return summary
 

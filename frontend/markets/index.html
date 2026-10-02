@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Localized Voice Bots — Philippines & Indonesia</title>
+  <link rel="stylesheet" href="/voice/style.css">
+  <style>
+    .market-grid { display:grid; grid-template-columns:minmax(0, 1.35fr) minmax(280px, .65fr); gap:1.25rem; }
+    .market-controls { display:flex; flex-wrap:wrap; gap:.75rem; align-items:center; margin:1rem 0; }
+    .market-controls select, .market-input { background:#0b1220; color:#f8fafc; border:1px solid rgba(255,255,255,.15); border-radius:8px; padding:.75rem; font:inherit; }
+    .market-controls select { min-width:220px; }
+    .market-input { width:100%; min-height:88px; resize:vertical; }
+    .market-feed { min-height:300px; max-height:50vh; overflow:auto; display:flex; flex-direction:column; gap:.65rem; padding:.75rem; background:#0b1220; border-radius:8px; }
+    .market-message { max-width:88%; padding:.7rem .85rem; border-radius:10px; white-space:pre-wrap; overflow-wrap:anywhere; }
+    .market-message.user { align-self:flex-end; background:#1d4ed8; }
+    .market-message.assistant { align-self:flex-start; background:#1e293b; }
+    .market-message.system { align-self:center; color:#94a3b8; font-size:.85rem; text-align:center; }
+    .market-meta { display:grid; grid-template-columns:1fr 1fr; gap:.6rem; margin-top:.8rem; }
+    .market-meta div { background:#0b1220; border-radius:8px; padding:.7rem; }
+    .market-meta dt { color:#94a3b8; font-size:.75rem; text-transform:uppercase; }
+    .market-meta dd { margin:.2rem 0 0; overflow-wrap:anywhere; }
+    .market-note { color:#94a3b8; font-size:.9rem; margin:.75rem 0; }
+    .market-nav { display:flex; flex-wrap:wrap; gap:.6rem; }
+    .market-nav a { color:#93c5fd; }
+    .market-label { color:#94a3b8; font-size:.85rem; }
+    @media (max-width:850px) { .market-grid { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="app-header">
+      <div class="header-left">
+        <span class="badge badge-accent">Q3 Localized Voice Bots</span>
+        <h1>Philippines & Indonesia</h1>
+      </div>
+      <nav class="market-nav" aria-label="Assessment demos">
+        <a href="/voice/">Q1 Voice Agent</a>
+        <a href="/insights/">Q4 Live Insights</a>
+      </nav>
+    </header>
+
+    <main class="market-grid">
+      <section class="card">
+        <div class="card-header">
+          <h2>Conversation demo</h2>
+          <span class="badge badge-pending" id="session-status">READY</span>
+        </div>
+        <div class="market-controls">
+          <label for="market-select" class="market-label">Market and sector</label>
+          <select id="market-select" aria-label="Market and sector">
+            <option value="PH">Philippines — Bancassurance</option>
+            <option value="ID">Indonesia — Multifinance</option>
+          </select>
+          <button class="btn btn-secondary" id="mic-button" type="button">Use microphone</button>
+          <button class="btn btn-secondary" id="end-button" type="button">New session</button>
+          <label class="market-label"><input id="speak-replies" type="checkbox"> Speak replies with an installed browser voice</label>
+        </div>
+        <p id="market-greeting" class="market-note" aria-live="polite"></p>
+        <div id="transcript-feed" class="market-feed" aria-live="polite"></div>
+        <form id="turn-form">
+          <label for="transcript-input" class="market-label">Type a customer utterance, including natural code-switching</label>
+          <textarea id="transcript-input" class="market-input" maxlength="4000" required placeholder="Example: Magandang araw po. Gusto ko pong magtanong tungkol sa premium ng policy."></textarea>
+          <div class="market-controls">
+            <button class="btn btn-primary" type="submit">Send utterance</button>
+            <button class="btn btn-secondary sample-button" type="button">Use sample utterance</button>
+          </div>
+        </form>
+      </section>
+
+      <aside class="card">
+        <div class="card-header"><h2>Language & grounding</h2></div>
+        <p id="market-sector" class="market-note"></p>
+        <dl class="market-meta">
+          <div><dt>Detected language</dt><dd id="detected-language">—</dd></div>
+          <div><dt>Register</dt><dd id="detected-register">—</dd></div>
+          <div><dt>Code-switching</dt><dd id="code-switch">—</dd></div>
+          <div><dt>Language confidence</dt><dd id="language-confidence">—</dd></div>
+          <div><dt>Grounding</dt><dd id="grounding">—</dd></div>
+          <div><dt>Detected terms</dt><dd id="detected-terms">—</dd></div>
+        </dl>
+        <p class="market-note">Language detection is a local text heuristic. Microphone recognition and spoken replies use browser-installed speech services/voices; provider ASR/TTS and regional-accent quality are not live-verified here.</p>
+        <p class="market-note">Test cases and transcripts remain prototypes; do not enter real customer or account information.</p>
+      </aside>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

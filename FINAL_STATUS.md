@@ -8,11 +8,11 @@ DATE: October 2026
 --------------------------------------------------------------------------------
 TEST SUITE
 --------------------------------------------------------------------------------
-Total Tests:       153
-Passed:            153
+Total Tests:       177
+Passed:            177
 Failed:            0
 Skipped:           0
-Duration:          1.25s
+Duration:          1.78s
 Pass Rate:         100.0%
 
 --------------------------------------------------------------------------------
@@ -50,6 +50,7 @@ Simulated Calls:   6 Scenarios Verified (3 PH calls + 3 ID calls)
 ASR Config:        Deepgram Nova 3 (language: "multi") Configured
 TTS Config:        ElevenLabs Multilingual v2 Configured (Not Live Verified)
 Regional Accent:   TEST CASE PREPARED — AUDIO NOT YET AVAILABLE (Surabaya, Sundanese, Medan)
+Interactive Demo:  PASS (Text + optional browser speech at /markets; provider audio unverified)
 
 --------------------------------------------------------------------------------
 Q4 — REAL-TIME CALL INTELLIGENCE & AGENT NUDGES

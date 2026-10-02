@@ -200,6 +200,9 @@ async def search_kb(request: SearchRequest) -> SearchResponse:
 @router.post("/index", response_model=IndexResponse)
 async def index_records(request: IndexRequest) -> IndexResponse:
     """Index records into vector store."""
+    if get_config().is_production:
+        raise HTTPException(status_code=403, detail="Knowledge-base indexing is disabled in production.")
+
     records_to_process: list[KBRecord] = []
 
     if request.records:
