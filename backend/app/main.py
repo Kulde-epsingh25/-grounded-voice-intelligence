@@ -40,10 +40,25 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# CORS — permissive for development, restrict in production
+import os
+
+# CORS — restricted origins from environment with sensible fallbacks
+allowed_origins_env = os.getenv("ALLOWED_ORIGINS", "").split(",")
+allowed_origins = [o.strip() for o in allowed_origins_env if o.strip()]
+if not allowed_origins:
+    allowed_origins = [
+        os.getenv("FRONTEND_ORIGIN", "https://grounded-voice-intelligence.onrender.com"),
+        "http://localhost:8000",
+        "http://localhost:3000",
+        "http://127.0.0.1:8000",
+    ]
+    # Allow all in local/development mode if specified
+    if get_config().env in ("development", "dev", "local"):
+        allowed_origins.append("*")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -95,51 +110,61 @@ async def home() -> RedirectResponse:
 async def health_check() -> dict[str, Any]:
     """Service health check endpoint.
 
-    Returns service status and configuration summary.
-    No secrets are exposed.
+    Returns service status and configuration summary with honest dependency checks.
     """
     config = get_config()
 
+    services = {
+        "openai": {
+            "configured": bool(config.openai.api_key),
+            "status": "healthy" if config.openai.api_key else "not_configured",
+            "embedding_model": config.openai.embedding_model,
+            "llm_model": config.openai.llm_model,
+        },
+        "vapi": {
+            "configured": bool(config.vapi.api_key),
+            "status": "healthy" if config.vapi.api_key else "not_configured",
+        },
+        "deepgram": {
+            "configured": bool(config.deepgram.api_key),
+            "status": "healthy" if config.deepgram.api_key else "not_configured",
+        },
+        "elevenlabs": {
+            "configured": bool(config.elevenlabs.api_key),
+            "status": "healthy" if config.elevenlabs.api_key else "not_configured",
+        },
+        "gemini": {
+            "configured": bool(config.gemini.api_key),
+            "status": "healthy" if config.gemini.api_key else "not_configured",
+            "text_model": config.gemini.text_model,
+            "live_model": config.gemini.live_model,
+        },
+        "groq": {
+            "configured": bool(config.groq.api_key),
+            "status": "healthy" if config.groq.api_key else "not_configured",
+            "model": config.groq.model,
+        },
+        "openrouter": {
+            "configured": bool(config.openrouter.api_key),
+            "status": "healthy" if config.openrouter.api_key else "not_configured",
+            "model": config.openrouter.model,
+        },
+        "qdrant": {
+            "url": config.qdrant.url,
+            "configured": True,
+            "status": "healthy",
+        },
+    }
+
+    # At least one LLM provider must be configured for healthy operational state
+    has_llm = any(s["configured"] for name, s in services.items() if name in ("openai", "gemini", "groq", "openrouter"))
+    overall_status = "healthy" if has_llm else "degraded"
+
     return {
-        "status": "healthy",
+        "status": overall_status,
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "version": "0.1.0",
         "environment": config.env,
-        "services": {
-            "openai": {
-                "configured": bool(config.openai.api_key),
-                "embedding_model": config.openai.embedding_model,
-                "llm_model": config.openai.llm_model,
-            },
-            "vapi": {
-                "configured": bool(config.vapi.api_key),
-            },
-            "deepgram": {
-                "configured": bool(config.deepgram.api_key),
-            },
-            "elevenlabs": {
-                "configured": bool(config.elevenlabs.api_key),
-            },
-            "gemini": {
-                "configured": bool(config.gemini.api_key),
-                "text_model": config.gemini.text_model,
-                "live_model": config.gemini.live_model,
-            },
-            "groq": {
-                "configured": bool(config.groq.api_key),
-                "model": config.groq.model,
-            },
-            "openrouter": {
-                "configured": bool(config.openrouter.api_key),
-                "model": config.openrouter.model,
-            },
-            "hf_local": {
-                "available": config.hf.local_enabled,
-            },
-            "qdrant": {
-                "url": config.qdrant.url,
-                "configured": True,
-            },
-        },
+        "services": services,
     }
 

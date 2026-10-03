@@ -64,3 +64,8 @@ memory/
 # Graphify internal files
 .graphify*
 graphify-out/
+
+# Node (frontend Vapi SDK bundling)
+node_modules/
+frontend/voice/package-lock.json
+frontend/voice/vapi-entry.js

@@ -29,6 +29,16 @@ class LLMService:
 
     def __init__(self):
         self.config = get_config()
+        self._client: Optional[httpx.AsyncClient] = None
+
+    def _get_client(self) -> httpx.AsyncClient:
+        if self._client is None or self._client.is_closed:
+            self._client = httpx.AsyncClient(timeout=15.0, limits=httpx.Limits(max_connections=20, max_keepalive_connections=10))
+        return self._client
+
+    async def close(self):
+        if self._client and not self._client.is_closed:
+            await self._client.aclose()
 
     async def _call_openai(
         self,
@@ -54,11 +64,11 @@ class LLMService:
             "max_tokens": max_tokens,
             "temperature": temperature,
         }
-        async with httpx.AsyncClient(timeout=15.0) as client:
-            resp = await client.post("https://api.openai.com/v1/chat/completions", headers=headers, json=payload)
-            resp.raise_for_status()
-            data = resp.json()
-            return data["choices"][0]["message"]["content"]
+        client = self._get_client()
+        resp = await client.post("https://api.openai.com/v1/chat/completions", headers=headers, json=payload)
+        resp.raise_for_status()
+        data = resp.json()
+        return data["choices"][0]["message"]["content"]
 
     async def _call_gemini(
         self,
@@ -84,15 +94,15 @@ class LLMService:
                 "temperature": temperature,
             },
         }
-        async with httpx.AsyncClient(timeout=15.0) as client:
-            resp = await client.post(url, json=payload)
-            resp.raise_for_status()
-            data = resp.json()
-            candidates = data.get("candidates", [])
-            if candidates and "content" in candidates[0]:
-                parts = candidates[0]["content"].get("parts", [])
-                return "".join(p.get("text", "") for p in parts)
-            return ""
+        client = self._get_client()
+        resp = await client.post(url, json=payload)
+        resp.raise_for_status()
+        data = resp.json()
+        candidates = data.get("candidates", [])
+        if candidates and "content" in candidates[0]:
+            parts = candidates[0]["content"].get("parts", [])
+            return "".join(p.get("text", "") for p in parts)
+        return ""
 
     async def _call_groq(
         self,
@@ -118,11 +128,11 @@ class LLMService:
             "max_tokens": max_tokens,
             "temperature": temperature,
         }
-        async with httpx.AsyncClient(timeout=15.0) as client:
-            resp = await client.post("https://api.groq.com/openai/v1/chat/completions", headers=headers, json=payload)
-            resp.raise_for_status()
-            data = resp.json()
-            return data["choices"][0]["message"]["content"]
+        client = self._get_client()
+        resp = await client.post("https://api.groq.com/openai/v1/chat/completions", headers=headers, json=payload)
+        resp.raise_for_status()
+        data = resp.json()
+        return data["choices"][0]["message"]["content"]
 
     async def _call_openrouter(
         self,
@@ -148,11 +158,11 @@ class LLMService:
             "max_tokens": max_tokens,
             "temperature": temperature,
         }
-        async with httpx.AsyncClient(timeout=15.0) as client:
-            resp = await client.post("https://openrouter.ai/api/v1/chat/completions", headers=headers, json=payload)
-            resp.raise_for_status()
-            data = resp.json()
-            return data["choices"][0]["message"]["content"]
+        client = self._get_client()
+        resp = await client.post("https://openrouter.ai/api/v1/chat/completions", headers=headers, json=payload)
+        resp.raise_for_status()
+        data = resp.json()
+        return data["choices"][0]["message"]["content"]
 
     async def generate(
         self,

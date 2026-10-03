@@ -84,7 +84,7 @@ def create_lead_tool(
     fields: dict[str, Any],
     qualification_status: str = "PENDING",
     recommended_product: Optional[str] = None,
-    contact_permission: bool = True,
+    contact_permission: Optional[bool] = None,
     notes: str = "",
 ) -> dict[str, Any]:
     """Create a persistent lead record for qualified applicant."""
@@ -94,7 +94,7 @@ def create_lead_tool(
         qualification_data=fields,
         qualification_status=qualification_status,
         recommended_product=recommended_product,
-        contact_permission=contact_permission,
+        contact_permission=contact_permission if contact_permission is not None else False,
         notes=notes,
     )
 
@@ -120,7 +120,10 @@ def escalate_to_human_tool(call_id: str, reason: str) -> dict[str, Any]:
         "call_id": call_id,
         "reason": reason,
         "status": "requested",
-        "message": "Transferring you to a human commercial lending specialist.",
+        "message": (
+            "I'll arrange for a lending specialist to follow up with you. "
+            "This demo will record the handoff request and prepare your case for callback."
+        ),
     }
 
     get_call_event_service().log_event(

@@ -146,8 +146,8 @@
         </main>
     </div>
 
-    <!-- Vapi Web SDK script tag for live browser calling -->
-    <script src="https://cdn.jsdelivr.net/npm/@vapi-ai/web@latest/dist/vapi.min.js"></script>
-    <script src="app.js?v=local-default"></script>
+    <!-- Vapi Web SDK — locally bundled for browser compatibility (no CommonJS exports issue) -->
+    <script src="vapi-bundle.js"></script>
+    <script src="app.js?v=2.0-durable"></script>
 </body>
 </html>

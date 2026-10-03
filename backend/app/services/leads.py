@@ -35,7 +35,7 @@ class LeadRecord(BaseModel):
     requested_amount: Optional[float] = None
     qualification_status: str = "PENDING"
     recommended_product: Optional[str] = None
-    contact_permission: bool = True
+    contact_permission: Optional[bool] = None
     notes: str = ""
     source: str = "voice_agent"
     status: str = "new"
