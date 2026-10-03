@@ -38,11 +38,16 @@ class GeminiLiveSession:
     retrieval, and qualification decisions to existing Q1 tools.
     """
 
-    def __init__(self, session_id: Optional[str] = None):
+    def __init__(self, session_id: Optional[str] = None, initial_state: Optional[Dict[str, Any]] = None):
         self.session_id = session_id or f"gemini_live_{uuid4().hex[:8]}"
         self.config = get_config()
         self.agent = VoiceAgent(call_id=self.session_id)
         self.is_configured = bool(self.config.gemini.api_key and len(self.config.gemini.api_key) > 5)
+
+        if initial_state:
+            for k, v in initial_state.items():
+                if v is not None and k not in ("eligibility", "product"):
+                    self.agent.qualification_manager.update_field(k, v)
 
         get_call_event_service().log_event(
             call_id=self.session_id,
@@ -51,9 +56,50 @@ class GeminiLiveSession:
                 "transport": "gemini_live",
                 "model": self.config.gemini.live_model,
                 "role": "fallback_voice_provider",
+                "has_initial_state": bool(initial_state),
             },
         )
         get_health_tracker().register_provider("gemini_live", category="voice", initial_status="standby")
+
+    def get_initial_greeting(self) -> str:
+        """Generate a context-aware greeting when fallback activates."""
+        pub_state = self.agent.public_state()
+        has_fields = any(pub_state.get(k) for k in ("business_type", "years_in_business", "monthly_revenue", "requested_amount"))
+        if not has_fields:
+            return "Hello! I am your backup voice assistant powered by Gemini Live. I can help answer questions or qualify your business for a loan. How can I help you today?"
+
+        details = []
+        if pub_state.get("business_type"):
+            details.append(f"business type: {pub_state['business_type']}")
+        if pub_state.get("years_in_business"):
+            details.append(f"{pub_state['years_in_business']} years operating")
+        if pub_state.get("monthly_revenue"):
+            rev = pub_state['monthly_revenue']
+            details.append(f"monthly revenue: ${rev:,.0f}" if isinstance(rev, (int, float)) else f"monthly revenue: {rev}")
+        if pub_state.get("requested_amount"):
+            req = pub_state['requested_amount']
+            details.append(f"requested loan: ${req:,.0f}" if isinstance(req, (int, float)) else f"requested loan: {req}")
+
+        summary_str = ", ".join(details)
+        eval_res = evaluate_qualification_tool(self.agent.qualification_manager.state.to_dict())
+        status = eval_res.get("status")
+
+        if status == "ELIGIBLE":
+            prod = eval_res.get("recommended_product")
+            return f"Connected to Gemini Live backup. I have retrieved your qualification details ({summary_str}). Great news — your business qualifies for the {prod} loan! How would you like to proceed?"
+        elif status == "NEEDS_MORE_INFORMATION":
+            missing = eval_res.get("missing_fields", [])
+            next_field = missing[0] if missing else "more details"
+            prompts = {
+                "business_type": "what type of business or industry you operate in?",
+                "years_in_business": "how many years has your business been operating?",
+                "monthly_revenue": "what is your average monthly revenue?",
+                "requested_amount": "how much loan funding are you looking to secure?",
+            }
+            prompt_text = prompts.get(next_field, "could you tell me more about your business?")
+            return f"Connected to Gemini Live backup. I have saved your details so far ({summary_str}). To complete your qualification, could you tell me {prompt_text}"
+        else:
+            return f"Connected to Gemini Live backup. I have your details ({summary_str}). How can I assist you further?"
 
     def process_utterance(self, text: str) -> Dict[str, Any]:
         """

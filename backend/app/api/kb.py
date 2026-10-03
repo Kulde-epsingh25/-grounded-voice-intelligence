@@ -101,7 +101,12 @@ def ensure_kb_loaded() -> None:
         return
 
     processed_file = Path("data/processed/kb_records.json")
+    if not processed_file.exists():
+        processed_file = Path(__file__).resolve().parents[2] / "data/processed/kb_records.json"
+
     localized_file = Path("data/processed/localized_kb_records.json")
+    if not localized_file.exists():
+        localized_file = Path(__file__).resolve().parents[2] / "data/processed/localized_kb_records.json"
 
     all_records: list[KBRecord] = []
 

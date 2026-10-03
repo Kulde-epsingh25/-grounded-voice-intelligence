@@ -22,6 +22,8 @@ from app.retrieval import HybridRetriever, KBVectorStore, SectionChunker
 def indexed_evaluation_retriever():
     """Load processed KB records and initialize retriever for evaluation."""
     kb_file = Path("data/processed/kb_records.json")
+    if not kb_file.exists():
+        kb_file = Path(__file__).resolve().parents[2] / "data/processed/kb_records.json"
     assert kb_file.exists(), "Processed KB records not found. Ingest must run first."
 
     with open(kb_file, "r", encoding="utf-8") as f:
@@ -42,6 +44,8 @@ class TestRetrievalEvaluation:
     @pytest.fixture(autouse=True)
     def load_eval_cases(self):
         eval_file = Path("data/eval/retrieval.json")
+        if not eval_file.exists():
+            eval_file = Path(__file__).resolve().parents[2] / "data/eval/retrieval.json"
         assert eval_file.exists()
         with open(eval_file, "r", encoding="utf-8") as f:
             self.test_cases = json.load(f)

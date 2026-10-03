@@ -96,7 +96,12 @@ class VoiceAgent:
             return self._finalize_turn(clean_utterance, assistant_response, state_before, actions_taken, citations_used, grounded)
 
         # 3. KB GROUNDED RESPONSES (Objections/FAQs)
-        if any(phrase in lower_utt for phrase in ["too long", "too high", "why", "how", "rate", "document", "requirement", "can i"]) or "?" in clean_utterance:
+        kb_triggers = [
+            "too long", "too high", "why", "how", "rate", "document", "requirement",
+            "can i", "what", "which", "product", "offer", "interest", "collateral",
+            "penalty", "grace period", "fee", "approval", "question", "faq", "policy"
+        ]
+        if any(phrase in lower_utt for phrase in kb_triggers) or "?" in clean_utterance:
             self.state_machine.transition(
                 ConversationState.KNOWLEDGE_QUESTION,
                 reason="Caller asked a knowledge-base question",

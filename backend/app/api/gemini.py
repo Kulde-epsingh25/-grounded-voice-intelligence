@@ -23,6 +23,11 @@ router = APIRouter()
 _sessions: Dict[str, GeminiLiveSession] = {}
 
 
+class StartSessionPayload(BaseModel):
+    call_id: Optional[str] = None
+    state: Optional[Dict[str, Any]] = None
+
+
 class MessagePayload(BaseModel):
     text: str
 
@@ -40,15 +45,19 @@ async def get_gemini_live_config() -> Dict[str, Any]:
 
 
 @router.post("/session/start")
-async def start_gemini_session() -> Dict[str, Any]:
-    """Initialize a new Gemini Live backup voice session."""
-    session = GeminiLiveSession()
+async def start_gemini_session(payload: Optional[StartSessionPayload] = None) -> Dict[str, Any]:
+    """Initialize a new Gemini Live backup voice session with preserved context/state."""
+    call_id = payload.call_id if payload else None
+    initial_state = payload.state if payload else None
+
+    session = GeminiLiveSession(session_id=call_id, initial_state=initial_state)
     _sessions[session.session_id] = session
     return {
         "session_id": session.session_id,
         "status": "connected",
         "provider": "gemini_live",
-        "greeting": "Hello! I am your backup voice assistant powered by Gemini Live. I can help answer questions or qualify your business for a loan. How can I help you today?",
+        "greeting": session.get_initial_greeting(),
+        "qualification_state": session.agent.public_state(),
     }
 
 

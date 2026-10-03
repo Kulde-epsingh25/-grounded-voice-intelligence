@@ -384,8 +384,14 @@ async function triggerFallbackToGemini() {
 }
 
 async function startGeminiLiveSession() {
+  const payload = {
+    call_id: currentCallId,
+    state: qualificationState,
+  };
   const resp = await fetch(`${API_BASE}/api/v1/gemini/session/start`, {
     method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
   });
   if (resp.ok) {
     const data = await resp.json();
@@ -395,6 +401,11 @@ async function startGeminiLiveSession() {
       data.greeting ||
         "Hello! Connected to Gemini voice assistant. How can I help you?"
     );
+    if (data.qualification_state) {
+      qualificationState = { ...qualificationState, ...data.qualification_state };
+      updateQualificationUI();
+      updateEligibilityBadge(data.qualification_state.eligibility);
+    }
     return;
   }
   throw new Error(`Gemini session start failed: HTTP ${resp.status}`);
@@ -626,6 +637,8 @@ async function processUserTurn(text) {
             confidence: 0.95,
             citations: data.citations,
           });
+        } else if (data.grounded === false) {
+          renderCitations({ grounded: false, confidence: 0, citations: [] });
         }
         if (data.escalated) {
           triggerEscalation(
