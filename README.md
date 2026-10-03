@@ -213,8 +213,8 @@ Processes audio **while the call is underway**, delivering actionable coaching c
 
 ```bash
 # 1. Clone & enter repository
-git clone https://github.com/your-org/ai-engineer-assessment.git
-cd ai-engineer-assessment
+git clone https://github.com/Kulde-epsingh25/-grounded-voice-intelligence.git
+cd -grounded-voice-intelligence
 
 # 2. Set up virtual environment
 python -m venv venv
@@ -256,14 +256,24 @@ Start the unified backend server:
 python -m uvicorn app.main:app --app-dir backend --host 0.0.0.0 --port 8000 --reload
 ```
 
-Endpoints:
-- **Service Health Check**: `http://localhost:8000/health`
-- **Q1 Voice UI**: `http://localhost:8000/voice`
-- **Q3 Localized Bot UI**: `http://localhost:8000/markets/`
-- **Q4 Live Insights Dashboard**: `http://localhost:8000/insights`
-- **Q2 Knowledge Base Search**: `POST http://localhost:8000/kb/search`
-- **Q3 Market Catalog**: `GET http://localhost:8000/api/v1/localization/markets`
-- **Q3 Agent Turn**: `POST http://localhost:8000/api/v1/localization/{market}/turn` (`market` is `PH` or `ID`)
+### Endpoints & Live Deployment URLs (Localhost vs Render)
+
+| Feature / Task | Localhost URL (`http://localhost:8000`) | Render URL (`https://grounded-voice-intelligence.onrender.com`) |
+|---|---|---|
+| **Health Check** | `http://localhost:8000/health` | `https://grounded-voice-intelligence.onrender.com/health` |
+| **Q1: Voice Agent UI** | `http://localhost:8000/voice/` | `https://grounded-voice-intelligence.onrender.com/voice/` |
+| **Q1: Agent Turn API** | `POST http://localhost:8000/api/v1/agent/turn` | `POST https://grounded-voice-intelligence.onrender.com/api/v1/agent/turn` |
+| **Q1: Vapi Webhook** | `POST http://localhost:8000/api/v1/vapi/webhook` | `POST https://grounded-voice-intelligence.onrender.com/api/v1/vapi/webhook` |
+| **Q2: KB Search (Vapi)** | `POST http://localhost:8000/kb/search` | `POST https://grounded-voice-intelligence.onrender.com/kb/search` |
+| **Q2: KB Search API** | `POST http://localhost:8000/api/v1/kb/search` | `POST https://grounded-voice-intelligence.onrender.com/api/v1/kb/search` |
+| **Q2: KB Stats API** | `GET http://localhost:8000/api/v1/kb/stats` | `GET https://grounded-voice-intelligence.onrender.com/api/v1/kb/stats` |
+| **Q3: Localized Bot UI** | `http://localhost:8000/markets/` | `https://grounded-voice-intelligence.onrender.com/markets/` |
+| **Q3: Market Catalog** | `GET http://localhost:8000/api/v1/localization/markets` | `GET https://grounded-voice-intelligence.onrender.com/api/v1/localization/markets` |
+| **Q3: PH Turn API** | `POST http://localhost:8000/api/v1/localization/PH/turn` | `POST https://grounded-voice-intelligence.onrender.com/api/v1/localization/PH/turn` |
+| **Q3: ID Turn API** | `POST http://localhost:8000/api/v1/localization/ID/turn` | `POST https://grounded-voice-intelligence.onrender.com/api/v1/localization/ID/turn` |
+| **Q4: Insights Dashboard** | `http://localhost:8000/insights` | `https://grounded-voice-intelligence.onrender.com/insights` |
+| **Q4: WebSocket Feed** | `ws://localhost:8000/ws/insights` | `wss://grounded-voice-intelligence.onrender.com/ws/insights` |
+| **Q4: Stream Audio API** | `POST http://localhost:8000/api/v1/realtime/stream` | `POST https://grounded-voice-intelligence.onrender.com/api/v1/realtime/stream` |
 
 ---
 
